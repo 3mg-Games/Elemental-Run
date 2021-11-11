@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float horizontalSpeed = 4f;
 
-    private float gravity = 0;//-9.8f;
+    private float gravity = -9.8f;
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
