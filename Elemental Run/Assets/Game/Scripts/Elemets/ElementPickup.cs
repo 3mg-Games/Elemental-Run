@@ -16,11 +16,7 @@ public class ElementPickup : MonoBehaviour
         pickupSystem = FindObjectOfType<PickupSystem>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 
     private void OnTriggerEnter(Collider other)
     {
