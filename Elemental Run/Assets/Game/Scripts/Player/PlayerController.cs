@@ -22,12 +22,19 @@ public class PlayerController : MonoBehaviour
     bool isTouchActive = false;
 
     Animator animator;
+    GameSession gameSession;
 
     // Start is called before the first frame update
     void Start()
     {
+        gameSession = FindObjectOfType<GameSession>();
         characterController = GetComponent<CharacterController>();
+
+        transform.position = gameSession.lastCheckPointPos;
+
+       // transform.rotation = gameSession.lastCheckPointTransform.rotation;
         animator = GetComponent<Animator>();
+        //this.animator.enabled = true;
     }
 
     // Update is called once per frame

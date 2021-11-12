@@ -8,7 +8,7 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] float percentageConsumptionInElement = 0.25f;
     [SerializeField] float lowerLimitOfContainers = 0.0001f;
     [SerializeField] float upperLimitOfContainers = 1f;
-    [SerializeField] float startingCapacityOfContainers = 0.1f;
+    //[SerializeField] float startingCapacityOfContainers = 0.1f;
     [SerializeField] Transform fireFluid;
     [SerializeField] Transform waterFluid;
     [SerializeField] Transform earthFluid;
@@ -19,15 +19,22 @@ public class PickupSystem : MonoBehaviour
 
 
     PlayerController player;
+   // float startingCapacityOfContainers;
+    GameSession gameSession;
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
-
+        gameSession = FindObjectOfType<GameSession>();
+        /*
+        startingCapacityOfContainers = gameSession
+        */
         for (int i = 0; i < 3; i++)
         {
-            elements[i] = startingCapacityOfContainers;
+            elements[i] = gameSession.lastElementsCapacity[i];
         }
+
+        //elements = gameSession.lastElementsCapacity;
 
         IncrementFire();
         IncrementWater();
@@ -156,6 +163,11 @@ public class PickupSystem : MonoBehaviour
         // 2 - earth
         var scale = earthFluid.localScale;
         earthFluid.localScale = new Vector3(scale.x, elements[2], scale.z);
+    }
+
+    public float[] GetElements()
+    {
+        return elements;
     }
 
 

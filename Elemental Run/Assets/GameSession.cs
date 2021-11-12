@@ -10,9 +10,10 @@ public class GameSession : MonoBehaviour
     // 2 - earth
     [SerializeField] GameObject elemntSelectionPanel;
     [SerializeField] float choiceWaitTime = 10f;
+    [SerializeField] float startingCapacityOfContainers = 0.02f;
 
     PickupSystem pickupSystem;
-    PlayerController player;
+    public PlayerController player;
 
     int currTerrainElementId;
 
@@ -20,12 +21,35 @@ public class GameSession : MonoBehaviour
     bool isChoiceWaitTimerActive = false;
 
     float choiceWaitTimer;
+    LevelLoader levelLoader;
+    private static GameSession instance;
+    public Vector3 lastCheckPointPos;
+    public float[] lastElementsCapacity = new float[3];
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(instance);
+            for (int i = 0; i < 3; i++)
+            {
+                lastElementsCapacity[i] = startingCapacityOfContainers;
+            }
+        }
+
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
+        levelLoader = FindObjectOfType<LevelLoader>();
+        elemntSelectionPanel.SetActive(false);
         choiceWaitTimer = choiceWaitTime;
     }
 
@@ -83,7 +107,7 @@ public class GameSession : MonoBehaviour
                 if (elementSelectedId == 2)
                 {
                     isPlayerAlive = false;
-                    Kill();
+                    StartCoroutine(Kill());
                 }
 
                 break;
@@ -92,7 +116,7 @@ public class GameSession : MonoBehaviour
                 if (elementSelectedId == 0)
                 {
                     isPlayerAlive = false;
-                    Kill();
+                    StartCoroutine(Kill());
                 }
 
                 break;
@@ -101,7 +125,8 @@ public class GameSession : MonoBehaviour
                 if (elementSelectedId == 1)
                 {
                     isPlayerAlive = false;
-                    Kill();
+                    StartCoroutine(Kill());
+                    
                 }
 
                 break;
@@ -122,8 +147,26 @@ public class GameSession : MonoBehaviour
        
     }
 
-    private void Kill()
+    private IEnumerator Kill()
     {
         player.KillPlayer();
+
+        yield return new WaitForSeconds(2f);
+
+        levelLoader.LoadScene(0);
+        pickupSystem = FindObjectOfType<PickupSystem>();
+        player = FindObjectOfType<PlayerController>();
+        levelLoader = FindObjectOfType<LevelLoader>();
+    }
+
+    private void OnLevelWasLoaded()
+    {
+        pickupSystem = FindObjectOfType<PickupSystem>();
+        player = FindObjectOfType<PlayerController>();
+        levelLoader = FindObjectOfType<LevelLoader>();
+        elemntSelectionPanel = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(0).gameObject;
+        elemntSelectionPanel.SetActive(false);
+        isChoiceWaitTimerActive = false;
+        choiceWaitTimer = choiceWaitTime;
     }
 }
