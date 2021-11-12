@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private float verticalInput;
 
     bool drag;
-    bool isPlayerAlive = true;
+    bool isPlayerMoving = true;
     bool isTouchActive = false;
 
     Animator animator;
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPlayerAlive)
+        if (isPlayerMoving)
         {
 
             verticalInput = 1;
@@ -83,9 +83,25 @@ public class PlayerController : MonoBehaviour
     public void KillPlayer()
     {
         animator.enabled = false;
-        isPlayerAlive = false;
-        Destroy(characterController);
+        isPlayerMoving = false;
+        
         transform.GetChild(2).gameObject.SetActive(false);
         gameObject.AddComponent<Rigidbody>();
+        //characterController.
+        Destroy(characterController);
+    }
+
+    public void SetIsPlayerMoving(bool val)
+    {
+        isPlayerMoving = val;
+        if(!val)
+        {
+            animator.enabled = false;
+        }
+
+        else
+        {
+            animator.enabled = true;
+        }
     }
 }

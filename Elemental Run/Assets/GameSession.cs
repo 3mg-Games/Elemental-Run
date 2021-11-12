@@ -9,6 +9,7 @@ public class GameSession : MonoBehaviour
     // 1 - water
     // 2 - earth
     [SerializeField] GameObject elemntSelectionPanel;
+    [SerializeField] float choiceWaitTime = 10f;
 
     PickupSystem pickupSystem;
     PlayerController player;
@@ -16,24 +17,49 @@ public class GameSession : MonoBehaviour
     int currTerrainElementId;
 
     bool isPlayerAlive = true;
+    bool isChoiceWaitTimerActive = false;
+
+    float choiceWaitTimer;
+
     // Start is called before the first frame update
     void Start()
     {
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
+        choiceWaitTimer = choiceWaitTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(isChoiceWaitTimerActive)
+        {
+            choiceWaitTimer -= Time.deltaTime;
+
+            if(choiceWaitTimer < 0f)
+            {
+                
+
+                ChooseElementRandomly();
+                
+            }
+        }
+    }
+
+    private void ChooseElementRandomly()
+    {
+        int randomElement = UnityEngine.Random.Range(0, 3);
+       // Debug.Log(randomElement);
+        DeactivateElementSelectionPanel(randomElement);
     }
 
     public void ActivateElementSelectionPanel(int elementTerrainId)
     {
         currTerrainElementId = elementTerrainId;
-        Time.timeScale = 0; //stop the player
+        //Time.timeScale = 0; //stop the player
+        player.SetIsPlayerMoving(false);
         elemntSelectionPanel.SetActive(true);
+        isChoiceWaitTimerActive = true;
     }
 
     public void DeactivateElementSelectionPanel(int elementSelectedId)
@@ -41,12 +67,16 @@ public class GameSession : MonoBehaviour
         // 0 - fire
         // 1 - water
         // 2 - earth
+
+        isChoiceWaitTimerActive = false;
+        choiceWaitTimer = choiceWaitTime;
+
         elemntSelectionPanel.SetActive(false);
 
-
+        //Time.timeScale = 0;
         //also check if wrong fuel to kill player
 
-        switch(currTerrainElementId)
+        switch (currTerrainElementId)
         {
 
             case 0: //fire
@@ -79,10 +109,14 @@ public class GameSession : MonoBehaviour
         }
 
         //code for decreasing fuel level
-        if(isPlayerAlive)
-        pickupSystem.ConsumeFuel(elementSelectedId);
+        if (isPlayerAlive)
+        {
+            pickupSystem.ConsumeFuel(elementSelectedId);
+            player.SetIsPlayerMoving(true);
+        }
 
-        Time.timeScale = 1;    //enable player
+        //Time.timeScale = 1;    //enable player
+       
 
         
        

@@ -2527,6 +2527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elemntSelectionPanel: {fileID: 476873567}
+  choiceWaitTime: 10
 --- !u!4 &1222898347
 Transform:
   m_ObjectHideFlags: 0
