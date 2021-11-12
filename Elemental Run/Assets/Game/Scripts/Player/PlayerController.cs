@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] LayerMask groundLayer;
     [SerializeField] float runSpeed = 8f;
+    [SerializeField] float mobileHorizontalRunSpeed = 2f;
     [SerializeField] float horizontalSpeed = 4f;
 
     private float gravity = -9.8f;
@@ -18,8 +19,10 @@ public class PlayerController : MonoBehaviour
 
     bool drag;
     bool isPlayerAlive = true;
+    bool isTouchActive = false;
 
     Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,8 +39,12 @@ public class PlayerController : MonoBehaviour
             verticalInput = 1;
             horizontalInput = Input.GetAxis("Horizontal");
 
-            if(Input.touchCount > 0)
+            if (Input.touchCount > 0)
+            {
+                if (!isTouchActive)
+                    isTouchActive = true;
                 horizontalInput = Input.GetTouch(0).deltaPosition.x;
+            }
 
 
 
@@ -57,12 +64,19 @@ public class PlayerController : MonoBehaviour
             }
             // MovementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
+            var movement = Vector3.zero;
+            if(isTouchActive)
+                 movement = new Vector3(verticalInput * runSpeed, 0, horizontalInput * -1 * mobileHorizontalRunSpeed);
 
-            var movement = new Vector3(verticalInput * runSpeed, 0, horizontalInput * -1 * horizontalSpeed);
+            else
+                 movement = new Vector3(verticalInput * runSpeed, 0, horizontalInput * -1 * horizontalSpeed);
+
             //Mathf.Clamp(movement.z, -1.5f, 1.5f);
             characterController.Move(movement * Time.deltaTime);
             characterController.Move(velocity * Time.deltaTime);
-            transform.position = new Vector3(transform.position.x, transform.position.y, Mathf.Clamp(transform.position.z, -1.5f, 1.5f));
+            transform.position = new Vector3(transform.position.x,
+                transform.position.y,
+                Mathf.Clamp(transform.position.z, -1.5f, 1.5f));
         }
     }
 

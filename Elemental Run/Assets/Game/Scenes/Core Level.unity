@@ -4573,6 +4573,16 @@ PrefabInstance:
       propertyPath: startingCapacityOfContainers
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 4726026816456271687, guid: 8815833d8642fda41870a017e30e4397,
+        type: 3}
+      propertyPath: mobileRunSpeed
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 4726026816456271687, guid: 8815833d8642fda41870a017e30e4397,
+        type: 3}
+      propertyPath: mobileHorizontalRunSpeed
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4726026816653536542, guid: 8815833d8642fda41870a017e30e4397,
         type: 3}
       propertyPath: m_Enabled
