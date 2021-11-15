@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     private float jumpHeight;
+    private float jumpDistance;
 
     bool drag;
     bool isPlayerMoving = true;
@@ -123,9 +124,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump(float jumpHeight)
+    public void Jump(float jumpHeight, float jumpDistance)
     {
         this.jumpHeight = jumpHeight;
+        this.jumpDistance = jumpDistance;
         isJump = true;
 
     }

@@ -3900,6 +3900,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpHeight: 2
+  jumpDistance: 2
 --- !u!65 &1682096820
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4206,7 +4207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783125744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.014959, y: 0.0037635, z: 88.722}
+  m_LocalPosition: {x: 0.01, y: 0.0037635, z: 91.94}
   m_LocalScale: {x: 1, y: 1, z: 0.46308637}
   m_Children:
   - {fileID: 1259361361}
