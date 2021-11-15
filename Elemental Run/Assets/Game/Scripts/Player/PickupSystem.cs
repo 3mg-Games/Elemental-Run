@@ -13,6 +13,14 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] Transform waterFluid;
     [SerializeField] Transform earthFluid;
 
+    [SerializeField] TrailRenderer fireTerrainSpray;
+    [SerializeField] TrailRenderer waterTerrainSpray;
+    [SerializeField] TrailRenderer earthTerrainSpray;
+
+    [SerializeField] Vector3 deltaTerrainSprayPos;
+
+   
+
     float[] elements = new float[3];     // 0 - fire
                                          // 1 - water
                                          // 2 - earth
@@ -21,11 +29,16 @@ public class PickupSystem : MonoBehaviour
     PlayerController player;
    // float startingCapacityOfContainers;
     GameSession gameSession;
+
+    bool isFireTerrainSpray = false;
+    bool isWaterTerrainSpray = false;
+    bool isEarthTerrainSpray = false;
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
         gameSession = FindObjectOfType<GameSession>();
+
         /*
         startingCapacityOfContainers = gameSession
         */
@@ -36,16 +49,35 @@ public class PickupSystem : MonoBehaviour
 
         //elements = gameSession.lastElementsCapacity;
 
-        IncrementFire();
-        IncrementWater();
-        IncrementEarth();
+        SetFire();
+        SetWater();
+        SetEarth();
+        ResetAllTerrainSpray();
+
+        
     }
 
    
     // Update is called once per frame
     void Update()
     {
-        
+        if(isFireTerrainSpray)
+        {
+            fireTerrainSpray.gameObject.transform.position = deltaTerrainSprayPos +
+                transform.position;
+        }
+
+        if(isWaterTerrainSpray)
+        {
+            waterTerrainSpray.gameObject.transform.position = deltaTerrainSprayPos +
+                transform.position;
+        }
+
+        if(isEarthTerrainSpray)
+        {
+            earthTerrainSpray.gameObject.transform.position = deltaTerrainSprayPos +
+                transform.position;
+        }
     }
 
     public void AddNewElementPickup(int elementId)
@@ -64,20 +96,20 @@ public class PickupSystem : MonoBehaviour
         switch (elementId)
         {
             case 0:
-                IncrementFire();
+                SetFire();
                 break;
 
             case 1:
-                IncrementWater();
+                SetWater();
                 break;
 
             case 2:
-                IncrementEarth();
+                SetEarth();
                 break;
         }
     }
 
-    void IncrementFire()
+    void SetFire()
     {
         // 0 - fire
         // 1 - water
@@ -87,7 +119,7 @@ public class PickupSystem : MonoBehaviour
        
     }
 
-    void IncrementWater()
+    void SetWater()
     {
         // 0 - fire
         // 1 - water
@@ -97,7 +129,7 @@ public class PickupSystem : MonoBehaviour
        
     }
 
-    void IncrementEarth()
+    void SetEarth()
     {
         // 0 - fire
         // 1 - water
@@ -125,19 +157,86 @@ public class PickupSystem : MonoBehaviour
         switch(elementId)
         {
             case 0:
-                ConsumeFire();
+                isFireTerrainSpray = true;
+                isWaterTerrainSpray = false;
+                isEarthTerrainSpray = false;
+
+                SetFire();
+                ActivateFireTerrainSpray(true);
+                
                 break;
 
             case 1:
-                ConsumeWater();
+                isFireTerrainSpray = false;
+                isWaterTerrainSpray = true;
+                isEarthTerrainSpray = false;
+
+                SetWater();
+                ActivateWaterTerrainSpray(true);
+
                 break;
 
             case 2:
-                ConsumeEarth();
+                isFireTerrainSpray = false;
+                isWaterTerrainSpray = false;
+                isEarthTerrainSpray = true;
+
+                SetEarth();
+                ActivateEarthTerrainSpray(true);
+
                 break;
         }
     }
 
+    void ActivateFireTerrainSpray(bool val)
+    {
+        fireTerrainSpray.gameObject.SetActive(val);
+        
+        if(!val)
+        {
+            fireTerrainSpray.Clear();
+            isFireTerrainSpray = false;
+            
+        }
+    }
+
+    void ActivateWaterTerrainSpray(bool val)
+    {
+        waterTerrainSpray.gameObject.SetActive(val);
+
+        if (!val)
+        {
+            waterTerrainSpray.Clear();
+            
+            isWaterTerrainSpray = false;
+            
+        }
+    }
+
+    void ActivateEarthTerrainSpray(bool val)
+    {
+        earthTerrainSpray.gameObject.SetActive(val);
+
+        if (!val)
+        {
+            earthTerrainSpray.Clear();
+            
+            isEarthTerrainSpray = false;
+        }
+    }
+
+   
+
+    public void ResetAllTerrainSpray()
+    {
+        //code for reseting all terrain sprays and disabling them
+        ActivateFireTerrainSpray(false);
+        ActivateWaterTerrainSpray(false);
+        ActivateEarthTerrainSpray(false);
+    }
+
+
+    /*
     void ConsumeFire()
     {
         // 0 - fire
@@ -163,7 +262,7 @@ public class PickupSystem : MonoBehaviour
         // 2 - earth
         var scale = earthFluid.localScale;
         earthFluid.localScale = new Vector3(scale.x, elements[2], scale.z);
-    }
+    }*/
 
     public float[] GetElements()
     {
