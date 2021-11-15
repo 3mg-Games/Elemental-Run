@@ -16,13 +16,17 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalInput;
     private float verticalInput;
+    private float jumpHeight;
 
     bool drag;
     bool isPlayerMoving = true;
     bool isTouchActive = false;
+    bool isJump = false;
 
     Animator animator;
     GameSession gameSession;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +75,13 @@ public class PlayerController : MonoBehaviour
             }
             // MovementDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
+            if(isGrounded && isJump)
+            {
+                isJump = false;
+                velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
+            }
+
+
             var movement = Vector3.zero;
             if(isTouchActive)
                  movement = new Vector3(verticalInput * runSpeed, 0, horizontalInput * -1 * mobileHorizontalRunSpeed);
@@ -111,4 +122,13 @@ public class PlayerController : MonoBehaviour
             animator.enabled = true;
         }
     }
+
+    public void Jump(float jumpHeight)
+    {
+        this.jumpHeight = jumpHeight;
+        isJump = true;
+
+    }
+
+
 }

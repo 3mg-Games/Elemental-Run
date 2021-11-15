@@ -356,6 +356,7 @@ GameObject:
   - component: {fileID: 1419981671311906709}
   - component: {fileID: 2601693395077535792}
   - component: {fileID: 288200767419149562}
+  - component: {fileID: 5365278767909555981}
   m_Layer: 8
   m_Name: Road Curve
   m_TagString: Untagged
@@ -424,6 +425,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &5365278767909555981
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801186285082955055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2, y: 1.9999999, z: 2.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1801186286130053230
 GameObject:
   m_ObjectHideFlags: 0
@@ -435,6 +449,7 @@ GameObject:
   - component: {fileID: 1419981672579209940}
   - component: {fileID: 2601693394131031409}
   - component: {fileID: 288200768286745019}
+  - component: {fileID: 4323651032991291655}
   m_Layer: 8
   m_Name: Road Curve (1)
   m_TagString: Untagged
@@ -503,3 +518,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &4323651032991291655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801186286130053230}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.000001, y: 2.000001, z: 2.000001}
+  m_Center: {x: -0.0000076293945, y: 0, z: 0.00000011920929}

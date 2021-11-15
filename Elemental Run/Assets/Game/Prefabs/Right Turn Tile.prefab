@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8076691081836173054}
   - component: {fileID: 5168426112365500763}
   - component: {fileID: 6943714324430384529}
+  - component: {fileID: 6707198052407374965}
   m_Layer: 8
   m_Name: Right Turn Tile
   m_TagString: Untagged
@@ -79,3 +80,16 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6707198052407374965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8889537301606648900}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.000001, y: 2.0000007, z: 2.0000012}
+  m_Center: {x: 0, y: 0, z: 0}
