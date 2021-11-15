@@ -8,6 +8,7 @@ public class GameSession : MonoBehaviour
     // 0 - fire
     // 1 - water
     // 2 - earth
+    [SerializeField] bool test1 = true;
     [SerializeField] GameObject elemntSelectionPanel;
     [SerializeField] float choiceWaitTime = 10f;
     [SerializeField] float startingCapacityOfContainers = 0.02f;
@@ -100,38 +101,79 @@ public class GameSession : MonoBehaviour
         //Time.timeScale = 0;
         //also check if wrong fuel to kill player
 
-        switch (currTerrainElementId)
+        if (test1)
         {
 
-            case 0: //fire
-                if (elementSelectedId == 2)
-                {
-                    isPlayerAlive = false;
-                    StartCoroutine(Kill());
-                }
+            switch (currTerrainElementId)
+            {
 
-                break;
+                case 0: //fire
+                    if (elementSelectedId == 2)
+                    {
+                        isPlayerAlive = false;
+                        StartCoroutine(Kill());
+                    }
 
-            case 1: //water
-                if (elementSelectedId == 0)
-                {
-                    isPlayerAlive = false;
-                    StartCoroutine(Kill());
-                }
+                    break;
+
+                case 1: //water
+                    if (elementSelectedId == 0)
+                    {
+                        isPlayerAlive = false;
+                        StartCoroutine(Kill());
+                    }
 
 
-                break;
+                    break;
 
-            case 2:   //earth
-                if (elementSelectedId == 1)
-                {
-                    isPlayerAlive = false;
-                    StartCoroutine(Kill());
-                    
-                }
+                case 2:   //earth
+                    if (elementSelectedId == 1)
+                    {
+                        isPlayerAlive = false;
+                        StartCoroutine(Kill());
 
-                break;
-                   
+                    }
+
+                    break;
+
+            }
+        }
+
+        else
+        {
+            switch (currTerrainElementId)
+            {
+
+                case 0: //fire
+                    if (elementSelectedId == 1 || elementSelectedId == 2)
+                    {
+                        isPlayerAlive = false;
+                        StartCoroutine(Kill());
+                    }
+
+                    break;
+
+                case 1: //water
+                    if (elementSelectedId == 0 || elementSelectedId == 2)
+                    {
+                        isPlayerAlive = false;
+                        StartCoroutine(Kill());
+                    }
+
+
+                    break;
+
+                case 2:   //earth
+                    if (elementSelectedId == 0 || elementSelectedId == 1)
+                    {
+                        isPlayerAlive = false;
+                        StartCoroutine(Kill());
+
+                    }
+
+                    break;
+
+            }
         }
 
         //code for decreasing fuel level
@@ -140,7 +182,7 @@ public class GameSession : MonoBehaviour
           //  Debug.Log()
             if(currTerrainElementId == 1)
             {
-                Debug.Log(elementSelectedId);
+                //Debug.Log(elementSelectedId);
             }
             pickupSystem.ConsumeFuel(elementSelectedId);
             player.SetIsPlayerMoving(true);

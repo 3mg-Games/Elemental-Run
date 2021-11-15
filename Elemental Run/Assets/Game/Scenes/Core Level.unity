@@ -3221,6 +3221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c07afddb439175441bf7b6b7b147e51f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test1: 1
   elemntSelectionPanel: {fileID: 476873567}
   choiceWaitTime: 10
   startingCapacityOfContainers: 0.02
