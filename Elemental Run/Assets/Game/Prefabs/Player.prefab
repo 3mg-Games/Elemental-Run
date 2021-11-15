@@ -713,7 +713,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4726026816653536536}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -807,7 +807,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4726026817088306378}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -902,7 +902,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4726026817107180393}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -1058,7 +1058,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4726026817306661250}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -1152,7 +1152,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 4726026817729798882}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -1373,6 +1373,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   runSpeed: 5
+  mobileHorizontalRunSpeed: 0.8
   horizontalSpeed: 3
 --- !u!114 &4726026816456271685
 MonoBehaviour:
@@ -1386,10 +1387,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a4eac5a5e03f854b81ab9913501e6d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  percentageIncreaseInElement: 0.1
+  percentageIncreaseInElement: 0.25
+  percentageConsumptionInElement: 0.25
+  lowerLimitOfContainers: 0.01
+  upperLimitOfContainers: 1
   fireFluid: {fileID: 4726026818019394787}
   waterFluid: {fileID: 4726026817165441484}
   earthFluid: {fileID: 4726026817115427217}
+  fireTerrainSpray: {fileID: 0}
+  waterTerrainSpray: {fileID: 0}
+  earthTerrainSpray: {fileID: 0}
+  deltaTerrainSprayPos: {x: 0.5400001, y: 0.15, z: 0}
 --- !u!1 &6010797218670125044
 GameObject:
   m_ObjectHideFlags: 0
