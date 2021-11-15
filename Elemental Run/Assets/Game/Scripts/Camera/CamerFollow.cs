@@ -15,7 +15,7 @@ public class CamerFollow : MonoBehaviour
         delta.x = player.position.x - transform.position.x;
         delta.y = player.position.y - transform.position.y;
         delta.z = player.position.z - transform.position.z;*/
-        Debug.Log(delta);
+       // Debug.Log(delta);
 
     }
 

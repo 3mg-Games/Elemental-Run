@@ -119,6 +119,7 @@ public class GameSession : MonoBehaviour
                     StartCoroutine(Kill());
                 }
 
+
                 break;
 
             case 2:   //earth
@@ -136,6 +137,11 @@ public class GameSession : MonoBehaviour
         //code for decreasing fuel level
         if (isPlayerAlive)
         {
+          //  Debug.Log()
+            if(currTerrainElementId == 1)
+            {
+                Debug.Log(elementSelectedId);
+            }
             pickupSystem.ConsumeFuel(elementSelectedId);
             player.SetIsPlayerMoving(true);
         }
@@ -168,5 +174,6 @@ public class GameSession : MonoBehaviour
         elemntSelectionPanel.SetActive(false);
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
+        isPlayerAlive = true;
     }
 }
