@@ -27,6 +27,8 @@ public class CheckPoint : MonoBehaviour
             {
                 gameSession.lastElementsCapacity[i] = elements[i];
             }
+
+            gameSession.playerDir = player.GetDir();
            
         }
     }

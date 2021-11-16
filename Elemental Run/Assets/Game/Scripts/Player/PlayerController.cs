@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     int camPriority = 2;
 
-
+    int dir;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,12 +57,48 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
 
         transform.position = gameSession.lastCheckPointPos;
+        dir = gameSession.playerDir;
 
+        switch(dir)
+        {
+            case 1:
+                isNorth = true;
+                isEast = false;
+                isWest = false;
+                isSouth = false;
+
+                break;
+
+            case 2:
+                isNorth = false;
+                isEast = false;
+                isWest = true;
+                isSouth = false;
+
+                //westCam.Priority = westCam.Priority + ++camPriority;
+                break;
+
+            case 3:
+                isNorth = false;
+                isEast = true;
+                isWest = false;
+                isSouth = false;
+                break;
+
+            case 4:
+                isNorth = false;
+                isEast = false;
+                isWest = false;
+                isSouth = true;
+                break;
+        }
        // transform.rotation = gameSession.lastCheckPointTransform.rotation;
         animator = GetComponent<Animator>();
 
         turnWaypoints = new List<Transform>();
         turnWayPointIdx = 0;
+
+
         //this.animator.enabled = true;
     }
 
@@ -301,5 +337,10 @@ public class PlayerController : MonoBehaviour
         turnWayPointIdx = 0;
         turnWayPointsCount = path.transform.childCount;
         isTurn = true;
+    }
+
+    public int GetDir()
+    {
+        return dir;
     }
 }

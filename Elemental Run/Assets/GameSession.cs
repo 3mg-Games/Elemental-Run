@@ -12,6 +12,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] GameObject elemntSelectionPanel;
     [SerializeField] float choiceWaitTime = 10f;
     [SerializeField] float startingCapacityOfContainers = 0.02f;
+    [SerializeField] GameObject conitnueButton;
 
     PickupSystem pickupSystem;
     public PlayerController player;
@@ -26,6 +27,7 @@ public class GameSession : MonoBehaviour
     private static GameSession instance;
     public Vector3 lastCheckPointPos;
     public float[] lastElementsCapacity = new float[3];
+    public int playerDir;
     private void Awake()
     {
         if(instance == null)
@@ -36,6 +38,7 @@ public class GameSession : MonoBehaviour
             {
                 lastElementsCapacity[i] = startingCapacityOfContainers;
             }
+            playerDir = 1;
         }
 
         else
@@ -218,4 +221,17 @@ public class GameSession : MonoBehaviour
         choiceWaitTimer = choiceWaitTime;
         isPlayerAlive = true;
     }
+
+    public void Win()
+    {
+        conitnueButton.SetActive(true);
+    }
+
+    public void Continue()
+    {
+        levelLoader.LoadScene(0);
+        Destroy(gameObject);
+    }
+
+    
 }
