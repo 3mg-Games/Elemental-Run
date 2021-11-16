@@ -27,7 +27,7 @@ public class CamerFollow : MonoBehaviour
         delta.y = player.position.y - transform.position.y;
         delta.z = player.position.z - transform.position.z;*/
         // Debug.Log(delta);
-
+        /*
         switch (dir)
         {
             case 1:
@@ -46,13 +46,14 @@ public class CamerFollow : MonoBehaviour
             case 4:
                 delta = deltaS;
                 break;
-        }
+        }*/
 
+        delta = deltaN;
     }
 
     private void LateUpdate()
     {
-        transform.position = new Vector3(player.position.x - deltaN.x, player.position.y - deltaN.y, player.position.z - deltaN.z);
+        transform.position = new Vector3(player.position.x - delta.x, player.position.y - delta.y, player.position.z - delta.z);
     }
 
     // Update is called once per frame

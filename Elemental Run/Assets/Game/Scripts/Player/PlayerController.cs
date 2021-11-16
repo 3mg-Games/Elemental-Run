@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float mobileHorizontalRunSpeed = 2f;
     [SerializeField] float horizontalSpeed = 4f;
+
+    //turn them off
     [SerializeField] CinemachineVirtualCamera northCam;
     [SerializeField] CinemachineVirtualCamera westCam;
     [SerializeField] CinemachineVirtualCamera eastCam;
@@ -94,11 +96,14 @@ public class PlayerController : MonoBehaviour
 
 
         if(isNorth)
-         transform.forward = new Vector3(-verticalInput, 0, Mathf.Abs(verticalInput) - 1);
+            transform.forward = new Vector3(-verticalInput, 0, Mathf.Abs(verticalInput) - 1);
 
         //code for west
         if(isWest)
             transform.forward = new Vector3(Mathf.Abs(verticalInput) - 1, 0, -verticalInput);
+
+        if(isEast)
+            transform.forward = new Vector3(Mathf.Abs(verticalInput) - 1, 0, verticalInput);
 
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayer, QueryTriggerInteraction.Ignore);
 
@@ -125,6 +130,12 @@ public class PlayerController : MonoBehaviour
         {
             if(isNorth)
                 movement = new Vector3(verticalInput * runSpeed, 0, horizontalInput * -1 * mobileHorizontalRunSpeed);
+
+            else if (isWest)
+                movement = new Vector3(horizontalInput * mobileHorizontalRunSpeed, 0, verticalInput * runSpeed);
+
+            else if (isEast)
+                movement = new Vector3(horizontalInput * -1 * mobileHorizontalRunSpeed, 0, -verticalInput * runSpeed);
         }
 
         else
@@ -133,7 +144,10 @@ public class PlayerController : MonoBehaviour
                 movement = new Vector3(verticalInput * runSpeed, 0, horizontalInput * -1 * horizontalSpeed);
 
             else if(isWest)
-                movement = new Vector3(horizontalInput * -1 * horizontalSpeed, 0, verticalInput * runSpeed);
+                movement = new Vector3(horizontalInput * horizontalSpeed, 0, verticalInput * runSpeed);
+
+            else if(isEast)
+                movement = new Vector3(horizontalInput * -1* horizontalSpeed, 0, -verticalInput * runSpeed);
         }
 
         //Mathf.Clamp(movement.z, -1.5f, 1.5f);
@@ -255,7 +269,7 @@ public class PlayerController : MonoBehaviour
                 isWest = true;
                 isSouth = false;
 
-                westCam.Priority = westCam.Priority + ++camPriority;
+                //westCam.Priority = westCam.Priority + ++camPriority;
                 break;
 
             case 3:
@@ -273,6 +287,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
+        turnWaypoints.Clear();
         for(int i = 0; i < path.transform.childCount; i++)
         {
            //Debug.Log(path.transform.childCount);
