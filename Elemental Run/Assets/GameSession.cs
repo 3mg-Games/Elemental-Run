@@ -222,6 +222,8 @@ public class GameSession : MonoBehaviour
         levelLoader = FindObjectOfType<LevelLoader>();
     }
 
+    
+
     private void OnLevelWasLoaded()
     {
         pickupSystem = FindObjectOfType<PickupSystem>();

@@ -192,6 +192,7 @@ public class PickupSystem : MonoBehaviour
         }
     }
 
+
     void ActivateFireTerrainSpray(bool val)
     {
         fireTerrainSpray.gameObject.SetActive(val);
@@ -240,38 +241,46 @@ public class PickupSystem : MonoBehaviour
     }
 
 
-    /*
-    void ConsumeFire()
-    {
-        // 0 - fire
-        // 1 - water
-        // 2 - earth
-        var scale = fireFluid.localScale;
-        fireFluid.localScale = new Vector3(scale.x, elements[0], scale.z);
-    }
-
-    void ConsumeWater()
-    {
-        // 0 - fire
-        // 1 - water
-        // 2 - earth
-        var scale = waterFluid.localScale;
-        waterFluid.localScale = new Vector3(scale.x, elements[1], scale.z);
-    }
-
-    void ConsumeEarth()
-    {
-        // 0 - fire
-        // 1 - water
-        // 2 - earth
-        var scale = earthFluid.localScale;
-        earthFluid.localScale = new Vector3(scale.x, elements[2], scale.z);
-    }*/
+   
 
     public float[] GetElements()
     {
         return elements;
     }
 
+    public void ElementalWallCheck(int elementalWallId,
+        int counterElementNeededId,
+        GameObject elementalWall)
+    {
+        // 0 - fire
+        // 1 - water
+        // 2 - earth
+
+
+        elements[counterElementNeededId] = elements[counterElementNeededId] - percentageConsumptionInElement;
+        if (elements[counterElementNeededId] < lowerLimitOfContainers)
+        {
+            elements[counterElementNeededId] = lowerLimitOfContainers;
+            
+            StartCoroutine(gameSession.Kill());
+            return;
+        }
+        switch (elementalWallId)
+        {
+            case 0:   //need water - 1
+                SetWater();
+                break;
+
+            case 1:  //need green - 2
+                SetEarth();
+                break;
+
+            case 2:  //nee fire - 0
+                SetFire();
+                break;
+        }
+
+        Destroy(elementalWall);
+    }
 
 }
