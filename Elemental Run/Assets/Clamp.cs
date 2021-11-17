@@ -26,7 +26,7 @@ public class Clamp : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-
+            //Debug.Log("Clamp happened");
             player.SetClamp(clampLowerLimit, clampUpperLmit, isClampX, isClampZ);
         }
     }
