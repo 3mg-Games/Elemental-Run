@@ -29,6 +29,13 @@ public class CheckPoint : MonoBehaviour
             }
 
             gameSession.playerDir = player.GetDir();
+
+            gameSession.isClampX = player.GetIsClampX();
+            gameSession.isClampZ = player.GetIsClampZ();
+
+            var clampLimits = player.GetClampLimits();
+            gameSession.clampLowerLimit = clampLimits.x;
+            gameSession.clampUpperLimit = clampLimits.y;
            
         }
     }

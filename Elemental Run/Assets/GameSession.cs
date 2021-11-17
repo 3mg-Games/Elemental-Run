@@ -14,8 +14,17 @@ public class GameSession : MonoBehaviour
     [SerializeField] float startingCapacityOfContainers = 0.02f;
     [SerializeField] GameObject conitnueButton;
 
-    PickupSystem pickupSystem;
     public PlayerController player;
+    public Vector3 lastCheckPointPos;
+    public float[] lastElementsCapacity = new float[3];
+    public int playerDir;
+    public float clampLowerLimit;
+    public float clampUpperLimit;
+    public bool isClampZ;
+    public bool isClampX;
+
+    PickupSystem pickupSystem;
+    
 
     int currTerrainElementId;
 
@@ -25,9 +34,7 @@ public class GameSession : MonoBehaviour
     float choiceWaitTimer;
     LevelLoader levelLoader;
     private static GameSession instance;
-    public Vector3 lastCheckPointPos;
-    public float[] lastElementsCapacity = new float[3];
-    public int playerDir;
+    
     private void Awake()
     {
         if(instance == null)
@@ -39,7 +46,11 @@ public class GameSession : MonoBehaviour
                 lastElementsCapacity[i] = startingCapacityOfContainers;
             }
             playerDir = 1;
-        }
+            clampLowerLimit = -1.5f;
+            clampUpperLimit = 1.5f;
+            isClampZ = true;
+            isClampX = false;
+}
 
         else
         {
@@ -198,8 +209,9 @@ public class GameSession : MonoBehaviour
        
     }
 
-    private IEnumerator Kill()
+    public IEnumerator Kill()
     {
+        isPlayerAlive = false;
         player.KillPlayer();
 
         yield return new WaitForSeconds(2f);

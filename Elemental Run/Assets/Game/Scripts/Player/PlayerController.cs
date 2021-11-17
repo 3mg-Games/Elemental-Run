@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float horizontalSpeed = 4f;
 
     //turn them off
-    [SerializeField] CinemachineVirtualCamera northCam;
+    /*[SerializeField] CinemachineVirtualCamera northCam;
     [SerializeField] CinemachineVirtualCamera westCam;
     [SerializeField] CinemachineVirtualCamera eastCam;
-    [SerializeField] CinemachineVirtualCamera southCam;
+    [SerializeField] CinemachineVirtualCamera southCam;*/
+
+    public int dir;
 
     private float gravity = -9.8f;
     private CharacterController characterController;
@@ -39,6 +41,9 @@ public class PlayerController : MonoBehaviour
     bool isEast = false;
     bool isSouth = false;
 
+    bool isClampZ;
+    bool isClampX;
+
     Animator animator;
     GameSession gameSession;
 
@@ -49,7 +54,10 @@ public class PlayerController : MonoBehaviour
 
     int camPriority = 2;
 
-    public int dir;
+    float clampLowerLimit;
+    float clampUpperLimit;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -92,6 +100,12 @@ public class PlayerController : MonoBehaviour
                 isSouth = true;
                 break;
         }
+
+        isClampZ = gameSession.isClampZ;
+        isClampX = gameSession.isClampX;
+        clampLowerLimit = gameSession.clampLowerLimit;
+        clampUpperLimit = gameSession.clampUpperLimit;
+
        // transform.rotation = gameSession.lastCheckPointTransform.rotation;
         animator = GetComponent<Animator>();
 
@@ -192,9 +206,22 @@ public class PlayerController : MonoBehaviour
 
         //code for clamping the left and right of player
 
-       /* transform.position = new Vector3(transform.position.x,
-            transform.position.y,                     
-            Mathf.Clamp(transform.position.z, -1.5f, 1.5f));*/
+        if (isClampZ)
+        {
+            transform.position = new Vector3(
+                transform.position.x,
+                transform.position.y,
+                Mathf.Clamp(transform.position.z, clampLowerLimit, clampUpperLimit));
+                //Mathf.Clamp(transform.position.z, -1.5f, 1.5f));
+        }
+
+        else if(isClampX)
+        {
+            transform.position = new Vector3(
+                Mathf.Clamp(transform.position.x, clampLowerLimit, clampUpperLimit),
+                transform.position.y,
+                transform.position.z);
+        }
     }
 
     private void Turn()
@@ -239,8 +266,9 @@ public class PlayerController : MonoBehaviour
         
         transform.GetChild(2).gameObject.SetActive(false);
         gameObject.AddComponent<Rigidbody>();
+        //characterController.enabled = false;
         //characterController.
-        Destroy(characterController);
+        //Destroy(characterController);
     }
 
     public void SetIsPlayerMoving(bool val)
@@ -348,5 +376,32 @@ public class PlayerController : MonoBehaviour
     public int GetDir()
     {
         return dir;
+    }
+
+    public void SetClamp(float clampLowerLimit, 
+        float clampUpperLimit, bool isClampX, bool isClampZ)
+    {
+        this.clampLowerLimit = clampLowerLimit;
+        this.clampUpperLimit = clampUpperLimit;
+        this.isClampX = isClampX;
+        this.isClampZ = isClampZ;
+
+        //Debug.Log(this.clampLowerLimit + " , " + this.clampUpperLimit + " , " + this.isClampX + " , " + this.isClampZ);
+    }
+
+    public bool GetIsClampX()
+    {
+        return isClampX;
+    }
+
+    public bool GetIsClampZ()
+    {
+        return isClampZ;
+    }
+
+    public Vector2 GetClampLimits()
+    {
+        var clampLimits = new Vector2(clampLowerLimit, clampUpperLimit);
+        return clampLimits;
     }
 }

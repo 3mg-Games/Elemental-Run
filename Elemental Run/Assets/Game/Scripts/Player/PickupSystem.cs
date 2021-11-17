@@ -152,8 +152,12 @@ public class PickupSystem : MonoBehaviour
         {
             elements[elementId] = lowerLimitOfContainers;
             //Debug.Log("empty container");
-            player.KillPlayer();
+            //player.KillPlayer();
+            StartCoroutine(gameSession.Kill());
+            return;
         }
+
+        //Debug.Log("consume");
         switch(elementId)
         {
             case 0:
