@@ -11265,7 +11265,7 @@ MonoBehaviour:
   - 0
   - 0
   - 0
-  playerDir: 0
+  playerDir: 1
 --- !u!4 &1222898347
 Transform:
   m_ObjectHideFlags: 0

@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour
 
     int camPriority = 2;
 
-    int dir;
+    public int dir;
     // Start is called before the first frame update
     void Start()
     {
@@ -323,6 +323,7 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
+        SetDir(turnDirection);
         turnWaypoints.Clear();
         for(int i = 0; i < path.transform.childCount; i++)
         {
@@ -337,6 +338,11 @@ public class PlayerController : MonoBehaviour
         turnWayPointIdx = 0;
         turnWayPointsCount = path.transform.childCount;
         isTurn = true;
+    }
+
+    void SetDir(int direction)
+    {
+        dir = direction;
     }
 
     public int GetDir()
