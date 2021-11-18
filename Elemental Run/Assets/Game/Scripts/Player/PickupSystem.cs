@@ -283,7 +283,44 @@ public class PickupSystem : MonoBehaviour
                 break;
         }
 
-        Destroy(elementalWall);
+        elementalWall.GetComponent<ElementalWall>().Destroy();
+        //Destroy(elementalWall);
+    }
+
+    public void ElementalEnemyCheck(int elementalEnemyId,
+        int counterElementNeededId,
+        GameObject elementalEnemy)
+    {
+        // 0 - fire
+        // 1 - water
+        // 2 - earth
+
+
+        elements[counterElementNeededId] = elements[counterElementNeededId] - percentageConsumptionInElement;
+        if (elements[counterElementNeededId] < lowerLimitOfContainers)
+        {
+            elements[counterElementNeededId] = lowerLimitOfContainers;
+
+            StartCoroutine(gameSession.Kill());
+            return;
+        }
+        switch (elementalEnemyId)
+        {
+            case 0:   //need water - 1
+                SetWater();
+                break;
+
+            case 1:  //need green - 2
+                SetEarth();
+                break;
+
+            case 2:  //nee fire - 0
+                SetFire();
+                break;
+        }
+
+        elementalEnemy.GetComponent<ElementalEnemy>().Destroy();
+        //Destroy(elementalWall);
     }
 
 }

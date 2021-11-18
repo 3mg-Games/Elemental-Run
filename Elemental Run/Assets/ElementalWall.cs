@@ -33,4 +33,9 @@ public class ElementalWall : MonoBehaviour
 
         }
     }
+
+    public void Destroy()
+    {
+        Destroy(gameObject);
+    }
 }
