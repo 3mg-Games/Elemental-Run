@@ -7,7 +7,9 @@ public class ElementalWall : MonoBehaviour
     // 0 - fire
     // 1 - water
     // 2 - earth
+    [Tooltip("Fire - 0, Water - 1, Earth - 2")]
     [SerializeField] int elementId = 0;
+    [Tooltip("Fire - 0, Water - 1, Earth - 2")]
     [SerializeField] int counterElementNeededId = 0;
 
     PickupSystem pickupSystem;

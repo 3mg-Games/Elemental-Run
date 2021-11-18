@@ -17,14 +17,15 @@ public class GameSession : MonoBehaviour
     public PlayerController player;
     public Vector3 lastCheckPointPos;
     public float[] lastElementsCapacity = new float[3];
+    [Tooltip("North - 1, West - 2, East - 3, South - 4")]
     public int playerDir;
+    
     public float clampLowerLimit;
     public float clampUpperLimit;
     public bool isClampZ;
     public bool isClampX;
 
     PickupSystem pickupSystem;
-    
 
     int currTerrainElementId;
 
