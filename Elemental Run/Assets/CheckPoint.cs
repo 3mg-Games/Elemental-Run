@@ -9,12 +9,14 @@ public class CheckPoint : MonoBehaviour
     GameSession gameSession;
     PlayerController player;
     PickupSystem pickupSystem;
+    Animator animator;
     
     private void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
         player = FindObjectOfType<PlayerController>();
         pickupSystem = FindObjectOfType<PickupSystem>();
+        animator = GetComponent<Animator>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,7 +38,8 @@ public class CheckPoint : MonoBehaviour
             var clampLimits = player.GetClampLimits();
             gameSession.clampLowerLimit = clampLimits.x;
             gameSession.clampUpperLimit = clampLimits.y;
-           
+
+            animator.SetTrigger("Activate");
         }
     }
 }
