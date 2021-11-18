@@ -61,7 +61,10 @@ public class Disc : MonoBehaviour
 
         else
         {
-            transform.position = initialPos;
+            Transform temp;
+            temp = waypoints[0];
+            waypoints[0] = waypoints[1];
+            waypoints[1] = temp;
             wayPointsIndex = 0;
         }
     }
