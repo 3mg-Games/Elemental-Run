@@ -65,18 +65,21 @@ public class PickupSystem : MonoBehaviour
         {
             fireTerrainSpray.gameObject.transform.position = deltaTerrainSprayPos +
                 transform.position;
+            //fireTerrainSpray.gameObject.transform.rotation = transform.rotation;
         }
 
         if(isWaterTerrainSpray)
         {
             waterTerrainSpray.gameObject.transform.position = deltaTerrainSprayPos +
                 transform.position;
+            //waterTerrainSpray.gameObject.transform.rotation = transform.rotation;
         }
 
         if(isEarthTerrainSpray)
         {
             earthTerrainSpray.gameObject.transform.position = deltaTerrainSprayPos +
                 transform.position;
+            //earthTerrainSpray.gameObject.transform.rotation = transform.rotation;
         }
     }
 
