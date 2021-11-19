@@ -13,6 +13,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] float choiceWaitTime = 10f;
     [SerializeField] float startingCapacityOfContainers = 0.02f;
     [SerializeField] GameObject conitnueButton;
+    [SerializeField] bool is2Choices = false;
+    [SerializeField] bool isLevel1 = true;
 
     public PlayerController player;
     public Vector3 lastCheckPointPos;
@@ -35,6 +37,8 @@ public class GameSession : MonoBehaviour
     float choiceWaitTimer;
     LevelLoader levelLoader;
     private static GameSession instance;
+
+    int choice = 0;
     
     private void Awake()
     {
@@ -99,6 +103,24 @@ public class GameSession : MonoBehaviour
         //Time.timeScale = 0; //stop the player
         player.SetIsPlayerMoving(false);
         elemntSelectionPanel.SetActive(true);
+       /* if(is2Choices)
+        {
+            choice++;
+            if(isLevel1)
+            {
+                switch(choice)
+                {
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+                        break;
+                }
+            }
+        }*/
         isChoiceWaitTimerActive = true;
     }
 
