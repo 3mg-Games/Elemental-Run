@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public int dir;
 
-    private float gravity = -9.8f;
+    private float gravity = -12.8f;
     private CharacterController characterController;
     private Vector3 velocity;
     private bool isGrounded;
@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     float clampLowerLimit;
     float clampUpperLimit;
 
+    private float initialRunSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -112,6 +113,7 @@ public class PlayerController : MonoBehaviour
         turnWaypoints = new List<Transform>();
         turnWayPointIdx = 0;
 
+        initialRunSpeed = runSpeed;
 
         //this.animator.enabled = true;
     }
@@ -403,5 +405,18 @@ public class PlayerController : MonoBehaviour
     {
         var clampLimits = new Vector2(clampLowerLimit, clampUpperLimit);
         return clampLimits;
+    }
+
+    public void Slant(float percentageChangeInSpeed, bool isEntry)
+    {
+        if(isEntry)
+        {
+            runSpeed = runSpeed + initialRunSpeed * percentageChangeInSpeed / 100f;
+        }
+
+        else
+        {
+            runSpeed = runSpeed - initialRunSpeed * percentageChangeInSpeed / 100f;
+        }
     }
 }
