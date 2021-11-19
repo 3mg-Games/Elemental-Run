@@ -232,6 +232,10 @@ public class GameSession : MonoBehaviour
         levelLoader = FindObjectOfType<LevelLoader>();
         elemntSelectionPanel = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(0).gameObject;
         elemntSelectionPanel.SetActive(false);
+
+        conitnueButton = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(1).gameObject;
+        conitnueButton.SetActive(false);
+
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
         isPlayerAlive = true;

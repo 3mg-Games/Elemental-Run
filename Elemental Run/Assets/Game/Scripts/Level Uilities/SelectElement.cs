@@ -23,5 +23,10 @@ public class SelectElement : MonoBehaviour
         gameSession.DeactivateElementSelectionPanel(id);
     }
 
+    public void Continue()
+    {
+        gameSession.Continue();
+    }
+
 
 }
