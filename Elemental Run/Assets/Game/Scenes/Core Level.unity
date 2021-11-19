@@ -19080,7 +19080,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1164169995}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0.2, y: 0.98, z: -1.1}
+  m_LocalPosition: {x: 54.9, y: 0.98, z: -1.1}
   m_LocalScale: {x: 0.8000002, y: 0.8, z: 0.8000002}
   m_Children:
   - {fileID: 1057591878235054570}
@@ -40900,6 +40900,7 @@ GameObject:
   - component: {fileID: 426676963}
   - component: {fileID: 426676962}
   - component: {fileID: 426676961}
+  - component: {fileID: 527898079216948387}
   m_Layer: 0
   m_Name: Fire Elemental Enemy
   m_TagString: Untagged
@@ -40907,6 +40908,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &527898079216948387
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527898079216948386}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a94dad58c50f3c4eaa329aef12979fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &543450653310188001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7408011818570690641, guid: df7c9f8fb4af34540bbb6aa152c8bbe9,
@@ -46458,6 +46478,7 @@ GameObject:
   - component: {fileID: 547437442}
   - component: {fileID: 547437441}
   - component: {fileID: 547437440}
+  - component: {fileID: 4979338059150983621}
   m_Layer: 0
   m_Name: Water Elemental Enemy
   m_TagString: Untagged
@@ -46465,6 +46486,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &4979338059150983621
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4979338059150983620}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6a94dad58c50f3c4eaa329aef12979fd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4984730331531761781
 PrefabInstance:
   m_ObjectHideFlags: 0

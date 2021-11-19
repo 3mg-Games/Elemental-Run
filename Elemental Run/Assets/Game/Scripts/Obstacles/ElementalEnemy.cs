@@ -40,6 +40,6 @@ public class ElementalEnemy : MonoBehaviour
     {
         GameObject explosionVfx = Instantiate(explosionVfxPrefab, transform.position, Quaternion.identity);
         Destroy(explosionVfx, 1.5f);
-        Destroy(gameObject);
+        Destroy(gameObject.transform.parent.gameObject);
     }
 }
