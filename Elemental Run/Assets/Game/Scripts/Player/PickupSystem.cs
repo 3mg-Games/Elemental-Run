@@ -17,7 +17,9 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] TrailRenderer waterTerrainSpray;
     [SerializeField] TrailRenderer earthTerrainSpray;
 
-    [SerializeField] Vector3 deltaTerrainSprayPos;
+    [SerializeField] Vector3 deltaTerrainSprayPosN;
+    [SerializeField] Vector3 deltaTerrainSprayPosW;
+    [SerializeField] Vector3 deltaTerrainSprayPosE;
 
    
 
@@ -33,6 +35,8 @@ public class PickupSystem : MonoBehaviour
     bool isFireTerrainSpray = false;
     bool isWaterTerrainSpray = false;
     bool isEarthTerrainSpray = false;
+
+    Vector3 deltaTerrainSprayPos;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,15 +58,38 @@ public class PickupSystem : MonoBehaviour
         SetEarth();
         ResetAllTerrainSpray();
 
-        
+        deltaTerrainSprayPos = deltaTerrainSprayPosN;
     }
 
    
     // Update is called once per frame
     void Update()
     {
-        if(isFireTerrainSpray)
+        /* North - 1
+        * West - 2
+        * East - 3 
+        * South - 4*/
+
+        int dir = player.GetDir();
+        switch (dir)
         {
+            case 1:
+                deltaTerrainSprayPos = deltaTerrainSprayPosN;
+                break;
+
+            case 2:
+                deltaTerrainSprayPos = deltaTerrainSprayPosW;
+                break;
+
+            case 3:
+                deltaTerrainSprayPos = deltaTerrainSprayPosE;
+                break;
+
+        }
+
+        if (isFireTerrainSpray)
+        {
+            
             fireTerrainSpray.gameObject.transform.position = deltaTerrainSprayPos +
                 transform.position;
             //fireTerrainSpray.gameObject.transform.rotation = transform.rotation;
