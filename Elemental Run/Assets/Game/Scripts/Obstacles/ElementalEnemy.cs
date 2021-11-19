@@ -12,6 +12,8 @@ public class ElementalEnemy : MonoBehaviour
     [Tooltip("Fire - 0, Water - 1, Earth - 2")]
     [SerializeField] int counterElementNeededId = 0;
 
+    [SerializeField] GameObject explosionVfxPrefab;
+
     PickupSystem pickupSystem;
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,8 @@ public class ElementalEnemy : MonoBehaviour
 
     public void Destroy()
     {
+        GameObject explosionVfx = Instantiate(explosionVfxPrefab, transform.position, Quaternion.identity);
+        Destroy(explosionVfx, 1.5f);
         Destroy(gameObject);
     }
 }
