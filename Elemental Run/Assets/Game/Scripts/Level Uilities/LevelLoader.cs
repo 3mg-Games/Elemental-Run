@@ -17,9 +17,21 @@ public class LevelLoader : MonoBehaviour
         
     }
 
+    public void LoadNextScene()
+    {
+        int idx = SceneManager.GetActiveScene().buildIndex + 1;
+        if (idx > 1)
+            idx = 0;
+        LoadScene(idx);
+    }
 
-    public void LoadScene(int index)
+    private void LoadScene(int index)
     {
         SceneManager.LoadScene(index);
+    }
+
+    public void LoadCurrentScene()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

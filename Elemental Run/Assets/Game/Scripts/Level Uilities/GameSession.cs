@@ -239,7 +239,7 @@ public class GameSession : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
 
-        levelLoader.LoadScene(0);
+        levelLoader.LoadCurrentScene();
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
@@ -270,7 +270,8 @@ public class GameSession : MonoBehaviour
 
     public void Continue()
     {
-        levelLoader.LoadScene(0);
+        //levelLoader.LoadScene(0);
+        levelLoader.LoadNextScene();
         Destroy(gameObject);
     }
 
