@@ -10,6 +10,7 @@ public class ElementalEntry : MonoBehaviour
     [Tooltip("Fire - 0, Water - 1, Earth - 2")]
     [SerializeField] int elementId = 0;
 
+    bool hasPlayerEntered = false;
     GameSession gameSession;
     //PickupSystem pickupSystem;
     // Start is called before the first frame update
@@ -27,10 +28,12 @@ public class ElementalEntry : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "Player" && !hasPlayerEntered)
         {
             //pickupSystem.ResetAllTerrainSpray();
+            hasPlayerEntered = true;
             gameSession.ActivateElementSelectionPanel(elementId);
+            
         }
     }
 }

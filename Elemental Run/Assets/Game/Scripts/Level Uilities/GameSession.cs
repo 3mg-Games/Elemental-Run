@@ -14,7 +14,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] float startingCapacityOfContainers = 0.02f;
     [SerializeField] GameObject conitnueButton;
     [SerializeField] bool is2Choices = false;
-    [SerializeField] bool isLevel1 = true;
+    [SerializeField] int currLevelNum;
+    //[SerializeField] bool isLevel1 = true;
 
     public PlayerController player;
     public Vector3 lastCheckPointPos;
@@ -71,6 +72,8 @@ public class GameSession : MonoBehaviour
         levelLoader = FindObjectOfType<LevelLoader>();
         elemntSelectionPanel.SetActive(false);
         choiceWaitTimer = choiceWaitTime;
+        //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
+        currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
     }
 
     // Update is called once per frame
@@ -103,24 +106,99 @@ public class GameSession : MonoBehaviour
         //Time.timeScale = 0; //stop the player
         player.SetIsPlayerMoving(false);
         elemntSelectionPanel.SetActive(true);
-       /* if(is2Choices)
+        if (is2Choices)
         {
             choice++;
-            if(isLevel1)
+            GameObject leftSideChoice = elemntSelectionPanel.transform.GetChild(0).gameObject;
+            GameObject rightSideChoice = elemntSelectionPanel.transform.GetChild(1).gameObject;
+
+            GameObject lFire = leftSideChoice.transform.GetChild(0).gameObject;
+            GameObject lWater = leftSideChoice.transform.GetChild(1).gameObject;
+            GameObject lEarth = leftSideChoice.transform.GetChild(2).gameObject;
+
+            GameObject rFire = rightSideChoice.transform.GetChild(0).gameObject;
+            GameObject rWater = rightSideChoice.transform.GetChild(1).gameObject;
+            GameObject rEarth = rightSideChoice.transform.GetChild(2).gameObject;
+
+            lFire.SetActive(false);
+            lWater.SetActive(false);
+            lEarth.SetActive(false);
+
+            rFire.SetActive(false);
+            rWater.SetActive(false);
+            rEarth.SetActive(false);
+            
+
+            switch (currLevelNum)
             {
-                switch(choice)
-                {
-                    case 1:
+                /*children of each side - 
+                * 0 - fire
+                * 1 - water
+                * 2 - earth*/
 
-                        break;
-                    case 2:
+                case 1:
+                    switch (choice)
+                    {
+                        case 1:
+                            lFire.SetActive(true);
+                            rWater.SetActive(true);
+                            break;
 
-                        break;
-                    case 3:
-                        break;
-                }
+                        case 2:
+                            lEarth.SetActive(true);
+                            rWater.SetActive(true);
+                            break;
+
+                        case 3:
+                            lFire.SetActive(true);
+                            rEarth.SetActive(true);
+                            break;
+                    }
+
+                    break;
+
+                case 2:
+                    switch (choice)
+                    {
+                        case 1:
+                            lEarth.SetActive(true);
+                            rFire.SetActive(true);
+                            break;
+
+                        case 2:
+                            lFire.SetActive(true);
+                            rWater.SetActive(true);
+                            break;
+
+                        case 3:
+                            lWater.SetActive(true);
+                            rEarth.SetActive(true);
+                            break;
+                    }
+
+                    break;
+
+                case 3:
+                    switch (choice)
+                    {
+                        case 1:
+
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+                            break;
+                    }
+
+                    break;
+
+
+
             }
-        }*/
+
+        
+        }
         isChoiceWaitTimerActive = true;
     }
 
@@ -148,6 +226,8 @@ public class GameSession : MonoBehaviour
                     if (elementSelectedId == 2)
                     {
                         isPlayerAlive = false;
+                      //  Debug.Log("Terrain id = " + currTerrainElementId +
+                      //      ", Selected element id = " + elementSelectedId);
                         StartCoroutine(Kill());
                     }
 
@@ -156,6 +236,8 @@ public class GameSession : MonoBehaviour
                 case 1: //water
                     if (elementSelectedId == 0)
                     {
+                      //  Debug.Log("Terrain id = " + currTerrainElementId +
+                       //     ", Selected element id = " + elementSelectedId);
                         isPlayerAlive = false;
                         StartCoroutine(Kill());
                     }
@@ -166,6 +248,8 @@ public class GameSession : MonoBehaviour
                 case 2:   //earth
                     if (elementSelectedId == 1)
                     {
+                       // Debug.Log("Terrain id = " + currTerrainElementId +
+                       //     ", Selected element id = " + elementSelectedId);
                         isPlayerAlive = false;
                         StartCoroutine(Kill());
 
@@ -175,7 +259,7 @@ public class GameSession : MonoBehaviour
 
             }
         }
-
+        
         else
         {
             switch (currTerrainElementId)
@@ -212,7 +296,7 @@ public class GameSession : MonoBehaviour
 
             }
         }
-
+        
         //code for decreasing fuel level
         if (isPlayerAlive)
         {
@@ -221,7 +305,8 @@ public class GameSession : MonoBehaviour
             {
                 //Debug.Log(elementSelectedId);
             }
-            pickupSystem.ConsumeFuel(elementSelectedId);
+            bool val = pickupSystem.ConsumeFuel(elementSelectedId);
+            if(val)
             player.SetIsPlayerMoving(true);
         }
 
@@ -261,6 +346,15 @@ public class GameSession : MonoBehaviour
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
         isPlayerAlive = true;
+
+        // currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
+        currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
+        choice = 0;
+
+        for (int i = 0; i < 3; i++)
+        {
+            lastElementsCapacity[i] = startingCapacityOfContainers;
+        }
     }
 
     public void Win()

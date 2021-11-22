@@ -263,12 +263,13 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
-        animator.enabled = false;
-        isPlayerMoving = false;
+        //animator.enabled = false;
+        //isPlayerMoving = false;
+        SetIsPlayerMoving(false);
         
         transform.GetChild(2).gameObject.SetActive(false);
         gameObject.AddComponent<Rigidbody>();
-        //characterController.enabled = false;
+        characterController.enabled = false;
         //characterController.
         //Destroy(characterController);
     }

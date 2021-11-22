@@ -169,22 +169,22 @@ public class PickupSystem : MonoBehaviour
        
     }
 
-    public void ConsumeFuel(int elementId)
+    public bool ConsumeFuel(int elementId)
     {
         // 0 - fire
         // 1 - water
         // 2 - earth
         //Debug.Log("Before Decrement = " + elements[elementId]);
         elements[elementId] = elements[elementId] - percentageConsumptionInElement;
-        //Debug.Log("Decrement = " + percentageConsumptionInElement);
-        //Debug.Log("After Decrement = " + elements[elementId]);
+      //  Debug.Log("Decrement = " + percentageConsumptionInElement);
+       //Debug.Log("After Decrement = " + elements[elementId]);
         if (elements[elementId] < lowerLimitOfContainers)
         {
             elements[elementId] = lowerLimitOfContainers;
             //Debug.Log("empty container");
             //player.KillPlayer();
             StartCoroutine(gameSession.Kill());
-            return;
+            return false;
         }
 
         //Debug.Log("consume");
@@ -220,6 +220,8 @@ public class PickupSystem : MonoBehaviour
 
                 break;
         }
+
+        return true;
     }
 
 

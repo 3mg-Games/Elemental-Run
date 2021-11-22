@@ -20,7 +20,7 @@ public class LevelLoader : MonoBehaviour
     public void LoadNextScene()
     {
         int idx = SceneManager.GetActiveScene().buildIndex + 1;
-        if (idx > 1)
+        if (idx >= SceneManager.sceneCountInBuildSettings)
             idx = 0;
         LoadScene(idx);
     }
@@ -33,5 +33,10 @@ public class LevelLoader : MonoBehaviour
     public void LoadCurrentScene()
     {
         LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public int GetCurrentSceneBuildIdx()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 }
