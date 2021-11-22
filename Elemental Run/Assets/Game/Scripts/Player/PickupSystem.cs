@@ -21,7 +21,9 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] Vector3 deltaTerrainSprayPosW;
     [SerializeField] Vector3 deltaTerrainSprayPosE;
 
-   
+    [SerializeField] GameObject fireSpray;
+    [SerializeField] GameObject waterSpray;
+    [SerializeField] GameObject earthSpray;
 
     float[] elements = new float[3];     // 0 - fire
                                          // 1 - water
@@ -197,6 +199,7 @@ public class PickupSystem : MonoBehaviour
 
                 SetFire();
                 ActivateFireTerrainSpray(true);
+                Spray(true, 0);
                 
                 break;
 
@@ -207,6 +210,7 @@ public class PickupSystem : MonoBehaviour
 
                 SetWater();
                 ActivateWaterTerrainSpray(true);
+                Spray(true, 1);
 
                 break;
 
@@ -217,6 +221,7 @@ public class PickupSystem : MonoBehaviour
 
                 SetEarth();
                 ActivateEarthTerrainSpray(true);
+                Spray(true, 2);
 
                 break;
         }
@@ -270,6 +275,8 @@ public class PickupSystem : MonoBehaviour
         ActivateFireTerrainSpray(false);
         ActivateWaterTerrainSpray(false);
         ActivateEarthTerrainSpray(false);
+
+        ResetAllSpray();
     }
 
 
@@ -350,6 +357,35 @@ public class PickupSystem : MonoBehaviour
 
         elementalEnemy.GetComponent<ElementalEnemy>().Destroy();
         //Destroy(elementalWall);
+    }
+
+    void Spray(bool activate, int spray)
+    {
+        // // 0 - fire
+        // 1 - water
+        // 2 - earth
+
+        switch(spray)
+        {
+            case 0:
+                fireSpray.SetActive(activate);
+                break;
+
+            case 1:
+                waterSpray.SetActive(activate);
+                break;
+
+            case 2:
+                earthSpray.SetActive(activate);
+                break;
+        }
+    }
+
+    private void ResetAllSpray()
+    {
+        Spray(false, 0);
+        Spray(false, 1);
+        Spray(false, 2);
     }
 
 }
