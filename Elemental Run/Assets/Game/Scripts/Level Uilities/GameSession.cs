@@ -360,6 +360,8 @@ public class GameSession : MonoBehaviour
     public void Win()
     {
         conitnueButton.SetActive(true);
+        player.PlayerWin();
+        FindObjectOfType<CamerFollow>().ActivateRotate();
     }
 
     public void Continue()

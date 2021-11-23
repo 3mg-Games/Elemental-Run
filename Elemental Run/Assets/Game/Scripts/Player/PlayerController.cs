@@ -274,6 +274,12 @@ public class PlayerController : MonoBehaviour
         //Destroy(characterController);
     }
 
+    public void PlayerWin()
+    {
+        animator.SetTrigger("Win");
+        isPlayerMoving = false;
+    }
+
     public void SetIsPlayerMoving(bool val)
     {
         isPlayerMoving = val;
