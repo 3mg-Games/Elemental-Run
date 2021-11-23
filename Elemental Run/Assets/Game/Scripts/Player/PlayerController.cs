@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float mobileHorizontalRunSpeed = 2f;
     [SerializeField] float horizontalSpeed = 4f;
-
+    [SerializeField] GameObject confetti;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
     [SerializeField] CinemachineVirtualCamera westCam;
@@ -278,6 +278,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger("Win");
         isPlayerMoving = false;
+        confetti.SetActive(true);
     }
 
     public void SetIsPlayerMoving(bool val)

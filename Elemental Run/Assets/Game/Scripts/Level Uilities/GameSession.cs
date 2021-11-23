@@ -359,9 +359,19 @@ public class GameSession : MonoBehaviour
 
     public void Win()
     {
-        winScreen.SetActive(true);
+
         player.PlayerWin();
+
+
+        
+        StartCoroutine(AcitvateWinScreen());
+    }
+
+    private IEnumerator AcitvateWinScreen()
+    {
+        yield return new WaitForSeconds(1f);
         FindObjectOfType<CamerFollow>().ActivateRotate();
+        winScreen.SetActive(true);
     }
 
     public void Continue()
