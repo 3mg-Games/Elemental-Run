@@ -8,12 +8,15 @@ public class ElementPickup : MonoBehaviour
                                      // 1 - water
                                      // 2 - earth
 
-   
+    [SerializeField] AudioClip pickUpSfx;   
+    [SerializeField] [Range(0, 1f)] float pickUpSfxVolume = 1f;
     PickupSystem pickupSystem;
+   // AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         pickupSystem = FindObjectOfType<PickupSystem>();
+       // audioSource = GetComponent<AudioSource>();
     }
 
     
@@ -22,6 +25,9 @@ public class ElementPickup : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            AudioSource.PlayClipAtPoint(pickUpSfx,
+                Camera.main.transform.position,
+                pickUpSfxVolume);
             pickupSystem.AddNewElementPickup(elementId);
             Destroy(gameObject);
         }

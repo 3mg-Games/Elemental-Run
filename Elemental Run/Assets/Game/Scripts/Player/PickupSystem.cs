@@ -39,12 +39,14 @@ public class PickupSystem : MonoBehaviour
     bool isEarthTerrainSpray = false;
 
     Vector3 deltaTerrainSprayPos;
+
+    AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
         gameSession = FindObjectOfType<GameSession>();
-
+        audioSource = GetComponent<AudioSource>();
         /*
         startingCapacityOfContainers = gameSession
         */
@@ -188,9 +190,9 @@ public class PickupSystem : MonoBehaviour
             StartCoroutine(gameSession.Kill());
             return false;
         }
-
+        audioSource.Play();
         //Debug.Log("consume");
-        switch(elementId)
+        switch (elementId)
         {
             case 0:
                 isFireTerrainSpray = true;
@@ -200,6 +202,7 @@ public class PickupSystem : MonoBehaviour
                 SetFire();
                 ActivateFireTerrainSpray(true);
                 Spray(true, 0);
+
                 
                 break;
 
@@ -386,6 +389,7 @@ public class PickupSystem : MonoBehaviour
         Spray(false, 0);
         Spray(false, 1);
         Spray(false, 2);
+        audioSource.Stop();
     }
 
 }

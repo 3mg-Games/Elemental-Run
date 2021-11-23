@@ -15,6 +15,8 @@ public class GameSession : MonoBehaviour
     [SerializeField] GameObject winScreen;
     [SerializeField] bool is2Choices = false;
     [SerializeField] int currLevelNum;
+    [SerializeField] AudioClip levelCompleteSfx;
+    [SerializeField] [Range(0, 1)] float levelCompleteSfxVolume = 1f;
     //[SerializeField] bool isLevel1 = true;
 
     public PlayerController player;
@@ -359,18 +361,20 @@ public class GameSession : MonoBehaviour
 
     public void Win()
     {
-
+        AudioSource.PlayClipAtPoint(levelCompleteSfx,
+            Camera.main.transform.position,
+            levelCompleteSfxVolume);
         player.PlayerWin();
 
 
-        
+        FindObjectOfType<CamerFollow>().ActivateRotate();
         StartCoroutine(AcitvateWinScreen());
     }
 
     private IEnumerator AcitvateWinScreen()
     {
         yield return new WaitForSeconds(1f);
-        FindObjectOfType<CamerFollow>().ActivateRotate();
+        
         winScreen.SetActive(true);
     }
 
