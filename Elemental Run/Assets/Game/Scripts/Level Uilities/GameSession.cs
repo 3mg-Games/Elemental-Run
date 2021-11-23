@@ -342,7 +342,7 @@ public class GameSession : MonoBehaviour
         elemntSelectionPanel = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(0).gameObject;
         elemntSelectionPanel.SetActive(false);
 
-        winScreen = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(1).gameObject;
+        winScreen = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(2).gameObject;
         winScreen.SetActive(false);
 
         isChoiceWaitTimerActive = false;
