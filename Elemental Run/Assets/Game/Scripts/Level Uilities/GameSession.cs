@@ -12,7 +12,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] GameObject elemntSelectionPanel;
     [SerializeField] float choiceWaitTime = 10f;
     [SerializeField] float startingCapacityOfContainers = 0.02f;
-    [SerializeField] GameObject conitnueButton;
+    [SerializeField] GameObject winScreen;
     [SerializeField] bool is2Choices = false;
     [SerializeField] int currLevelNum;
     //[SerializeField] bool isLevel1 = true;
@@ -340,8 +340,8 @@ public class GameSession : MonoBehaviour
         elemntSelectionPanel = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(0).gameObject;
         elemntSelectionPanel.SetActive(false);
 
-        conitnueButton = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(1).gameObject;
-        conitnueButton.SetActive(false);
+        winScreen = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(1).gameObject;
+        winScreen.SetActive(false);
 
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
@@ -359,7 +359,7 @@ public class GameSession : MonoBehaviour
 
     public void Win()
     {
-        conitnueButton.SetActive(true);
+        winScreen.SetActive(true);
         player.PlayerWin();
         FindObjectOfType<CamerFollow>().ActivateRotate();
     }
