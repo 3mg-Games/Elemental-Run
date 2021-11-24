@@ -40,6 +40,8 @@ public class GameSession : MonoBehaviour
     bool isPlayerAlive = true;
     bool isChoiceWaitTimerActive = false;
     bool hasGameStarted = false;
+    bool isFirstTimeTutorial = true;
+    bool hasLevelLoaded = false;
     float choiceWaitTimer;
     float playerInputWaitTimer;
 
@@ -64,6 +66,7 @@ public class GameSession : MonoBehaviour
             isClampZ = true;
             isClampX = false;
             playerInputWaitTimer = waitTimeForPlayerInput;
+            
         }
 
         else
@@ -82,19 +85,43 @@ public class GameSession : MonoBehaviour
         choiceWaitTimer = choiceWaitTime;
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
         currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!hasGameStarted)
+        if(hasLevelLoaded)
+        {
+            hasLevelLoaded = false;
+            if (isFirstTimeTutorial)
+            {
+                player.SetIsPlayerMoving(false);
+            }
+
+            else
+            {
+                Destroy(tutorial);
+                hasGameStarted = true;
+                player.SetIsPlayerMoving(true);
+            }
+        }
+
+        if(!hasGameStarted && isFirstTimeTutorial)
         {
             playerInputWaitTimer -= Time.deltaTime;
             if(playerInputWaitTimer <= 0f || Input.GetMouseButtonDown(0))
             {
                 Destroy(tutorial);
+                isFirstTimeTutorial = false;
                 hasGameStarted = true;
                 player.SetIsPlayerMoving(true);
+            }
+
+            if(playerInputWaitTimer <= waitTimeForPlayerInput - 2)
+            {
+                tutorial.SetActive(true);
             }
         }
         if (hasGameStarted)
@@ -383,9 +410,10 @@ public class GameSession : MonoBehaviour
             lastElementsCapacity[i] = startingCapacityOfContainers;
         }
 
+        hasLevelLoaded = true;
 
-        hasGameStarted = true;
-        player.SetIsPlayerMoving(true);
+      //  hasGameStarted = true;
+       // player.SetIsPlayerMoving(true);
     }
 
     public void Win()
@@ -411,7 +439,7 @@ public class GameSession : MonoBehaviour
     {
         //levelLoader.LoadScene(0);
         levelLoader.LoadNextScene();
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     

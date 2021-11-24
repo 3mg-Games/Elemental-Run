@@ -62,13 +62,18 @@ public class PlayerController : MonoBehaviour
 
     private float initialRunSpeed;
 
-    
+    private void Awake()
+    {
+        gameSession = FindObjectOfType<GameSession>();
+        characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
+        SetIsPlayerMoving(false);
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        gameSession = FindObjectOfType<GameSession>();
-        characterController = GetComponent<CharacterController>();
+        
 
         transform.position = gameSession.lastCheckPointPos;
         dir = gameSession.playerDir;
@@ -113,14 +118,14 @@ public class PlayerController : MonoBehaviour
         clampUpperLimit = gameSession.clampUpperLimit;
 
        // transform.rotation = gameSession.lastCheckPointTransform.rotation;
-        animator = GetComponent<Animator>();
+        
 
         turnWaypoints = new List<Transform>();
         turnWayPointIdx = 0;
 
         initialRunSpeed = runSpeed;
 
-        SetIsPlayerMoving(false);
+       // SetIsPlayerMoving(false);
         //this.animator.enabled = true;
     }
 
