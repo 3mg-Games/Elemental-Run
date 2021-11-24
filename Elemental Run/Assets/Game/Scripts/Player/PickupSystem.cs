@@ -38,6 +38,10 @@ public class PickupSystem : MonoBehaviour
     bool isWaterTerrainSpray = false;
     bool isEarthTerrainSpray = false;
 
+    bool isConsumeFire = false;
+    bool isConsumeWater = false;
+    bool isConsumeEarth = false;
+
     Vector3 deltaTerrainSprayPos;
 
     AudioSource audioSource;
@@ -112,6 +116,110 @@ public class PickupSystem : MonoBehaviour
                 transform.position;
             //earthTerrainSpray.gameObject.transform.rotation = transform.rotation;
         }
+
+        if(isConsumeFire)
+        {
+            elements[0] = elements[0] - percentageConsumptionInElement;
+
+            if (elements[0] < lowerLimitOfContainers)
+            {
+                elements[0] = lowerLimitOfContainers;
+                //Debug.Log("empty container");
+                //player.KillPlayer();
+                ResetAllSpray();
+                StartCoroutine(gameSession.Kill());
+                isConsumeFire = false;
+            }
+
+            SetFire();
+        }
+
+        if(isConsumeWater)
+        {
+            elements[1] = elements[1] - percentageConsumptionInElement;
+
+            if (elements[1] < lowerLimitOfContainers)
+            {
+                elements[1] = lowerLimitOfContainers;
+                //Debug.Log("empty container");
+                //player.KillPlayer();
+                ResetAllSpray();
+                StartCoroutine(gameSession.Kill());
+                isConsumeWater = false;
+            }
+
+            SetWater();
+        }
+
+        if(isConsumeEarth)
+        {
+            elements[2] = elements[2] - percentageConsumptionInElement;
+
+            if (elements[2] < lowerLimitOfContainers)
+            {
+                elements[2] = lowerLimitOfContainers;
+                //Debug.Log("empty container");
+                //player.KillPlayer();
+                ResetAllSpray();
+                StartCoroutine(gameSession.Kill());
+                isConsumeEarth = false;
+            }
+
+            SetEarth();
+        }
+
+    }
+
+    public bool ConsumeFuel(int elementId)
+    {
+        // 0 - fire
+        // 1 - water
+        // 2 - earth
+        //Debug.Log("Before Decrement = " + elements[elementId]);
+       // elements[elementId] = elements[elementId] - percentageConsumptionInElement;
+        //  Debug.Log("Decrement = " + percentageConsumptionInElement);
+        //Debug.Log("After Decrement = " + elements[elementId]);
+        
+        audioSource.Play();
+        //Debug.Log("consume");
+        switch (elementId)
+        {
+            case 0:
+                isFireTerrainSpray = true;
+                isWaterTerrainSpray = false;
+                isEarthTerrainSpray = false;
+                isConsumeFire = true;
+                //SetFire();
+                ActivateFireTerrainSpray(true);
+                Spray(true, 0);
+
+
+                break;
+
+            case 1:
+                isFireTerrainSpray = false;
+                isWaterTerrainSpray = true;
+                isEarthTerrainSpray = false;
+                isConsumeWater = true;
+               // SetWater();
+                ActivateWaterTerrainSpray(true);
+                Spray(true, 1);
+
+                break;
+
+            case 2:
+                isFireTerrainSpray = false;
+                isWaterTerrainSpray = false;
+                isEarthTerrainSpray = true;
+                isConsumeEarth = true;
+               // SetEarth();
+                ActivateEarthTerrainSpray(true);
+                Spray(true, 2);
+
+                break;
+        }
+
+        return true;
     }
 
     public void AddNewElementPickup(int elementId)
@@ -173,6 +281,7 @@ public class PickupSystem : MonoBehaviour
        
     }
 
+    /*
     public bool ConsumeFuel(int elementId)
     {
         // 0 - fire
@@ -231,7 +340,7 @@ public class PickupSystem : MonoBehaviour
 
         return true;
     }
-
+    */
 
     void ActivateFireTerrainSpray(bool val)
     {
@@ -275,6 +384,10 @@ public class PickupSystem : MonoBehaviour
     public void ResetAllTerrainSpray()
     {
         //code for reseting all terrain sprays and disabling them
+        isConsumeFire = false;
+        isConsumeWater = false;
+        isConsumeEarth = false;
+
         ActivateFireTerrainSpray(false);
         ActivateWaterTerrainSpray(false);
         ActivateEarthTerrainSpray(false);
