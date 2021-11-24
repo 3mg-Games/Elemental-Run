@@ -71,10 +71,15 @@ public class CamerFollow : MonoBehaviour
 
     public void ActivateRotate()
     {
-        transform.parent = null;
+        SetParentNull();
         point = player.transform.position;
         transform.LookAt(point);
         isWin = true;
+    }
+
+    public void SetParentNull()
+    {
+        transform.parent = null;
     }
 
     // Update is called once per frame

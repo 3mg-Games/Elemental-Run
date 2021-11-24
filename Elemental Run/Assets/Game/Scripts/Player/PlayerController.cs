@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
     bool isClampZ;
     bool isClampX;
 
+    
+
     Animator animator;
     GameSession gameSession;
 
@@ -56,8 +58,11 @@ public class PlayerController : MonoBehaviour
 
     float clampLowerLimit;
     float clampUpperLimit;
+   
 
     private float initialRunSpeed;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -115,6 +120,7 @@ public class PlayerController : MonoBehaviour
 
         initialRunSpeed = runSpeed;
 
+        SetIsPlayerMoving(false);
         //this.animator.enabled = true;
     }
 
@@ -265,6 +271,7 @@ public class PlayerController : MonoBehaviour
     {
         //animator.enabled = false;
         //isPlayerMoving = false;
+        FindObjectOfType<CamerFollow>().SetParentNull();
         SetIsPlayerMoving(false);
         
         transform.GetChild(2).gameObject.SetActive(false);

@@ -17,6 +17,9 @@ public class GameSession : MonoBehaviour
     [SerializeField] int currLevelNum;
     [SerializeField] AudioClip levelCompleteSfx;
     [SerializeField] [Range(0, 1)] float levelCompleteSfxVolume = 1f;
+    [SerializeField] float waitTimeForPlayerInput = 5f;
+    [SerializeField] GameObject tutorial;
+
     //[SerializeField] bool isLevel1 = true;
 
     public PlayerController player;
@@ -36,8 +39,10 @@ public class GameSession : MonoBehaviour
 
     bool isPlayerAlive = true;
     bool isChoiceWaitTimerActive = false;
-
+    bool hasGameStarted = false;
     float choiceWaitTimer;
+    float playerInputWaitTimer;
+
     LevelLoader levelLoader;
     private static GameSession instance;
 
@@ -58,7 +63,8 @@ public class GameSession : MonoBehaviour
             clampUpperLimit = 1.5f;
             isClampZ = true;
             isClampX = false;
-}
+            playerInputWaitTimer = waitTimeForPlayerInput;
+        }
 
         else
         {
@@ -81,16 +87,29 @@ public class GameSession : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isChoiceWaitTimerActive)
+        if(!hasGameStarted)
         {
-            choiceWaitTimer -= Time.deltaTime;
-
-            if(choiceWaitTimer < 0f)
+            playerInputWaitTimer -= Time.deltaTime;
+            if(playerInputWaitTimer <= 0f || Input.GetMouseButtonDown(0))
             {
-                
+                Destroy(tutorial);
+                hasGameStarted = true;
+                player.SetIsPlayerMoving(true);
+            }
+        }
+        if (hasGameStarted)
+        {
+            if (isChoiceWaitTimerActive)
+            {
+                choiceWaitTimer -= Time.deltaTime;
 
-                ChooseElementRandomly();
-                
+                if (choiceWaitTimer < 0f)
+                {
+
+
+                    ChooseElementRandomly();
+
+                }
             }
         }
     }
@@ -339,11 +358,17 @@ public class GameSession : MonoBehaviour
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
-        elemntSelectionPanel = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(0).gameObject;
-        elemntSelectionPanel.SetActive(false);
 
-        winScreen = GameObject.FindGameObjectWithTag("Selection Canvas").transform.GetChild(2).gameObject;
+        GameObject canvas = GameObject.FindGameObjectWithTag("Selection Canvas").gameObject;
+
+        elemntSelectionPanel = canvas.transform.GetChild(0).gameObject;
+        elemntSelectionPanel.SetActive(false);
+        
+
+        winScreen = canvas.transform.GetChild(2).gameObject;
         winScreen.SetActive(false);
+
+        tutorial = canvas.transform.GetChild(3).gameObject;
 
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
@@ -357,6 +382,10 @@ public class GameSession : MonoBehaviour
         {
             lastElementsCapacity[i] = startingCapacityOfContainers;
         }
+
+
+        hasGameStarted = true;
+        player.SetIsPlayerMoving(true);
     }
 
     public void Win()
