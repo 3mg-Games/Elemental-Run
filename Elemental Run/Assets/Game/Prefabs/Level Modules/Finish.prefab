@@ -309,6 +309,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &1070720493556151006
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,6 +560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &2373849051872453073
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,6 +1030,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &4365817672510860831
 GameObject:
   m_ObjectHideFlags: 0
@@ -1149,6 +1155,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &4540136879515803653
 GameObject:
   m_ObjectHideFlags: 0
@@ -1365,6 +1373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &4625251061940669848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1530,6 +1540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &5065956348607751841
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,6 +1665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &5196533068474172557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,6 +1883,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &6323703928601416954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1992,6 +2008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!54 &2078563669
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2189,6 +2207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &8233003563785973779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,6 +2425,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1 &8654386799977310220
 GameObject:
   m_ObjectHideFlags: 0
@@ -2887,6 +2909,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
+  pickUpSfxVolume: 0.75
 --- !u!1001 &1701615292958723662
 PrefabInstance:
   m_ObjectHideFlags: 0

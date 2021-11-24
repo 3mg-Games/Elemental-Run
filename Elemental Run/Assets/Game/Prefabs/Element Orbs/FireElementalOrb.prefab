@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementId: 0
   pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
-  pickUpSfxVolume: 1
+  pickUpSfxVolume: 0.75
 --- !u!1001 &6822328354739870591
 PrefabInstance:
   m_ObjectHideFlags: 0
