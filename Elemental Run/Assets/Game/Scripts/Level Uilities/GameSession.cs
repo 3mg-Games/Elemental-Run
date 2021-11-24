@@ -85,6 +85,13 @@ public class GameSession : MonoBehaviour
         choiceWaitTimer = choiceWaitTime;
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
         currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
+        if(currLevelNum != 1)
+        {
+            hasLevelLoaded = false;
+            Destroy(tutorial);
+            hasGameStarted = true;
+            player.SetIsPlayerMoving(true);
+        }
         
         
     }
@@ -376,6 +383,14 @@ public class GameSession : MonoBehaviour
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
+
+        if (currLevelNum != 1)
+        {
+            hasLevelLoaded = false;
+            Destroy(tutorial);
+            hasGameStarted = true;
+            player.SetIsPlayerMoving(true);
+        }
     }
 
     
@@ -418,6 +433,8 @@ public class GameSession : MonoBehaviour
 
     public void Win()
     {
+        pickupSystem.SetBonus(false);
+
         AudioSource.PlayClipAtPoint(levelCompleteSfx,
             Camera.main.transform.position,
             levelCompleteSfxVolume);
@@ -439,7 +456,8 @@ public class GameSession : MonoBehaviour
     {
         //levelLoader.LoadScene(0);
         levelLoader.LoadNextScene();
-        //Destroy(gameObject);
+        
+        Destroy(gameObject);
     }
 
     

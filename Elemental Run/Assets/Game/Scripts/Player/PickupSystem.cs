@@ -6,6 +6,7 @@ public class PickupSystem : MonoBehaviour
 {
     [SerializeField] float percentageIncreaseInElement = 0.1f;
     [SerializeField] float percentageConsumptionInElement = 0.25f;
+    [SerializeField] float percentageConsumptionInElementInBonusRound = 0.25f;
     [SerializeField] float lowerLimitOfContainers = 0.0001f;
     [SerializeField] float upperLimitOfContainers = 1f;
     //[SerializeField] float startingCapacityOfContainers = 0.1f;
@@ -41,6 +42,8 @@ public class PickupSystem : MonoBehaviour
     bool isConsumeFire = false;
     bool isConsumeWater = false;
     bool isConsumeEarth = false;
+
+    bool isBonus = false;
 
     Vector3 deltaTerrainSprayPos;
 
@@ -166,6 +169,33 @@ public class PickupSystem : MonoBehaviour
             }
 
             SetEarth();
+        }
+
+        if(isBonus)
+        {
+            if(elements[0] > lowerLimitOfContainers)
+            {
+                elements[0] = elements[0] - percentageConsumptionInElementInBonusRound;
+                SetFire();
+            }
+            
+            else if(elements[1] > lowerLimitOfContainers)
+            {
+                elements[1] = elements[1] - percentageConsumptionInElementInBonusRound;
+                SetWater();
+            }
+
+            else if (elements[2] > lowerLimitOfContainers)
+            {
+                elements[2] = elements[2] - percentageConsumptionInElementInBonusRound;
+                SetEarth();
+            }
+
+            else
+            {
+                isBonus = false;
+                gameSession.Win();
+            }
         }
 
     }
@@ -505,4 +535,8 @@ public class PickupSystem : MonoBehaviour
         audioSource.Stop();
     }
 
+    public void SetBonus(bool val)
+    {
+        isBonus = val;
+    }
 }

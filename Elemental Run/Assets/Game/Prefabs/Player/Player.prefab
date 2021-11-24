@@ -1628,6 +1628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   percentageIncreaseInElement: 0.25
   percentageConsumptionInElement: 0.006
+  percentageConsumptionInElementInBonusRound: 0.006
   lowerLimitOfContainers: 0.01
   upperLimitOfContainers: 1
   fireFluid: {fileID: 4726026818019394787}
