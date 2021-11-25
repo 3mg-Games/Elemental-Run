@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     
 
     Animator animator;
-    GameSession gameSession;
+    public GameSession gameSession;
 
     List<Transform> turnWaypoints;
 
@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        gameSession = FindObjectOfType<GameSession>();
+        
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         SetIsPlayerMoving(false);
@@ -73,8 +73,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
 
+        gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
         transform.position = gameSession.lastCheckPointPos;
         dir = gameSession.playerDir;
 
@@ -132,6 +132,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(gameSession == null)
+            gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
+
         if (isPlayerMoving)
         {
             Move();

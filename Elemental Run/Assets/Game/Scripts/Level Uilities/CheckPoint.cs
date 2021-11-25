@@ -19,6 +19,12 @@ public class CheckPoint : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (gameSession == null)
+            gameSession = FindObjectOfType<GameSession>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

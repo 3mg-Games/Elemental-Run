@@ -35,7 +35,7 @@ public class GameSession : MonoBehaviour
 
     PickupSystem pickupSystem;
 
-    int currTerrainElementId;
+    public int currTerrainElementId;
 
     bool isPlayerAlive = true;
     bool isChoiceWaitTimerActive = false;
@@ -71,7 +71,7 @@ public class GameSession : MonoBehaviour
 
         else
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 
@@ -271,6 +271,8 @@ public class GameSession : MonoBehaviour
         //Time.timeScale = 0;
         //also check if wrong fuel to kill player
 
+        Debug.Log("Terrain ID = " + currTerrainElementId + " , Selected Element ID" + elementSelectedId);
+
         if (test1)
         {
 
@@ -427,6 +429,11 @@ public class GameSession : MonoBehaviour
 
         hasLevelLoaded = true;
 
+        if(currLevelNum > 2)
+        {
+            is2Choices = false;
+        }
+       // Debug.Log("LEvel was loaded");
       //  hasGameStarted = true;
        // player.SetIsPlayerMoving(true);
     }
@@ -457,7 +464,7 @@ public class GameSession : MonoBehaviour
         //levelLoader.LoadScene(0);
         levelLoader.LoadNextScene();
         
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     

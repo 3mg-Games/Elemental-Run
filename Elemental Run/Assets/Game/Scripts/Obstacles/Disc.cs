@@ -33,6 +33,8 @@ public class Disc : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameSession == null)
+            gameSession = FindObjectOfType<GameSession>();
         if (wayPointsIndex <= wayPointsCount - 1)
         {
             Vector3 dir;

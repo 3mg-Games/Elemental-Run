@@ -80,6 +80,8 @@ public class PickupSystem : MonoBehaviour
         * West - 2
         * East - 3 
         * South - 4*/
+        if (gameSession == null)
+            gameSession = FindObjectOfType<GameSession>();
 
         int dir = player.GetDir();
         switch (dir)

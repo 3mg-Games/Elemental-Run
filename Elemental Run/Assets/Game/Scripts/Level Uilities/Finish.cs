@@ -14,7 +14,8 @@ public class Finish : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (gameSession == null)
+            gameSession = FindObjectOfType<GameSession>();
     }
 
     private void OnTriggerEnter(Collider other)

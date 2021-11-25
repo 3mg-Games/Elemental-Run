@@ -11,7 +11,7 @@ public class ElementalEntry : MonoBehaviour
     [SerializeField] int elementId = 0;
 
     bool hasPlayerEntered = false;
-    GameSession gameSession;
+    public GameSession gameSession;
     //PickupSystem pickupSystem;
     // Start is called before the first frame update
     void Start()
@@ -23,7 +23,8 @@ public class ElementalEntry : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(gameSession == null)
+            gameSession = FindObjectOfType<GameSession>();
     }
 
     private void OnTriggerEnter(Collider other)
