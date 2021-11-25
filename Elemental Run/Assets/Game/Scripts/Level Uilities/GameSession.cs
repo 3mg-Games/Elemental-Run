@@ -443,6 +443,8 @@ public class GameSession : MonoBehaviour
         {
             is2Choices = false;
         }
+
+        playerDir = 1;
        // Debug.Log("LEvel was loaded");
       //  hasGameStarted = true;
        // player.SetIsPlayerMoving(true);

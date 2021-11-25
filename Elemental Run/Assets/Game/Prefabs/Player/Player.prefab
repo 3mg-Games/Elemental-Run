@@ -1711,6 +1711,7 @@ MonoBehaviour:
   horizontalSpeed: 3
   confetti: {fileID: 4670824605040807699}
   dir: 0
+  gameSession: {fileID: 0}
 --- !u!114 &4726026816456271685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1724,8 +1725,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   percentageIncreaseInElement: 0.25
-  percentageConsumptionInElement: 0.0068
-  percentageConsumptionInElementInBonusRound: 0.0068
+  percentageConsumptionInElement: 0.0045
+  percentageConsumptionInElementInBonusRound: 0.0045
   lowerLimitOfContainers: 0.01
   upperLimitOfContainers: 1
   fireFluid: {fileID: 4726026818019394787}
