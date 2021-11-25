@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameSession : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] [Range(0, 1)] float levelCompleteSfxVolume = 1f;
     [SerializeField] float waitTimeForPlayerInput = 5f;
     [SerializeField] GameObject tutorial;
+    [SerializeField] TextMeshProUGUI coinText;
 
     //[SerializeField] bool isLevel1 = true;
 
@@ -49,7 +51,7 @@ public class GameSession : MonoBehaviour
     private static GameSession instance;
 
     int choice = 0;
-    
+    int coinCount;
     private void Awake()
     {
         if(instance == null)
@@ -65,6 +67,7 @@ public class GameSession : MonoBehaviour
             clampUpperLimit = 1.5f;
             isClampZ = true;
             isClampX = false;
+            coinCount = 0;
             playerInputWaitTimer = waitTimeForPlayerInput;
             
         }
@@ -92,14 +95,15 @@ public class GameSession : MonoBehaviour
             hasGameStarted = true;
             player.SetIsPlayerMoving(true);
         }
-        
-        
+
+        coinText.text = coinCount.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(hasLevelLoaded)
+        coinText.text = coinCount.ToString();
+        if (hasLevelLoaded)
         {
             hasLevelLoaded = false;
             if (isFirstTimeTutorial)
@@ -414,6 +418,12 @@ public class GameSession : MonoBehaviour
 
         tutorial = canvas.transform.GetChild(3).gameObject;
 
+        coinText = canvas.transform.GetChild(4).
+            gameObject.transform.GetChild(1).
+            gameObject.GetComponent<TextMeshProUGUI>();
+        coinText.text = coinCount.ToString();
+
+
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
         isPlayerAlive = true;
@@ -467,5 +477,10 @@ public class GameSession : MonoBehaviour
         //Destroy(gameObject);
     }
 
+    public void IncrementCoin()
+    {
+        coinCount++;
+        coinText.text = coinCount.ToString();
+    }
     
 }
