@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera eastCam;
     [SerializeField] CinemachineVirtualCamera southCam;*/
 
+    [Tooltip("North - 1, West - 2, East - 3, South - 4")]
     public int dir;
 
     private float gravity = -12.8f;
@@ -36,13 +37,13 @@ public class PlayerController : MonoBehaviour
     bool isJump = false;
     bool isTurn = false;
 
-    bool isNorth = true;
-    bool isWest = false;
-    bool isEast = false;
-    bool isSouth = false;
+    public bool isNorth = true;
+    public bool isWest = false;
+    public bool isEast = false;
+    public bool isSouth = false;
 
-    bool isClampZ;
-    bool isClampX;
+    public bool isClampZ;
+    public bool isClampX;
 
     
 
@@ -64,7 +65,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        
+       // ResetPlayer();
+
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         SetIsPlayerMoving(false);
@@ -73,12 +75,39 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
 
+        // transform.rotation = gameSession.lastCheckPointTransform.rotation;
+
+
+        turnWaypoints = new List<Transform>();
+        turnWayPointIdx = 0;
+
+        initialRunSpeed = runSpeed;
+
+        // SetIsPlayerMoving(false);
+        //this.animator.enabled = true;
+    }
+
+    private void ResetPlayer()
+    {
+        
         gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
-        transform.position = gameSession.lastCheckPointPos;
+        if (!gameSession.GetIsNewLevel())
+        {
+            Debug.Log("Game session last checkpoint pos = " + gameSession.lastCheckPointPos.x + ", "+
+                gameSession.lastCheckPointPos.y + ", " +
+                gameSession.lastCheckPointPos.z);
+            
+            transform.position = gameSession.lastCheckPointPos;
+
+            Debug.Log("Player Position = " + transform.position.x + ", " +
+                transform.position.y + ", "+
+                transform.position.z + ", ");
+        }
         dir = gameSession.playerDir;
 
-        switch(dir)
+        switch (dir)
         {
             case 1:
                 isNorth = true;
@@ -116,24 +145,21 @@ public class PlayerController : MonoBehaviour
         isClampX = gameSession.isClampX;
         clampLowerLimit = gameSession.clampLowerLimit;
         clampUpperLimit = gameSession.clampUpperLimit;
-
-       // transform.rotation = gameSession.lastCheckPointTransform.rotation;
-        
-
-        turnWaypoints = new List<Transform>();
-        turnWayPointIdx = 0;
-
-        initialRunSpeed = runSpeed;
-
-       // SetIsPlayerMoving(false);
-        //this.animator.enabled = true;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(gameSession == null)
-            gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
+        Debug.Log("Before load Player Position = " + transform.position.x + ", " +
+               transform.position.y + ", " +
+               transform.position.z + ", ");
+        if (gameSession == null)
+            ResetPlayer();
+
+        Debug.Log("After load Player Position = " + transform.position.x + ", " +
+               transform.position.y + ", " +
+               transform.position.z + ", ");
+        // gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
 
         if (isPlayerMoving)
         {

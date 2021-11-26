@@ -52,11 +52,18 @@ public class PickupSystem : MonoBehaviour
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
-        gameSession = FindObjectOfType<GameSession>();
+
         audioSource = GetComponent<AudioSource>();
         /*
         startingCapacityOfContainers = gameSession
         */
+
+        ResetFuelTerrain();
+    }
+
+    private void ResetFuelTerrain()
+    {
+        gameSession = FindObjectOfType<GameSession>();
         for (int i = 0; i < 3; i++)
         {
             elements[i] = gameSession.lastElementsCapacity[i];
@@ -72,7 +79,7 @@ public class PickupSystem : MonoBehaviour
         deltaTerrainSprayPos = deltaTerrainSprayPosN;
     }
 
-   
+
     // Update is called once per frame
     void Update()
     {
@@ -81,7 +88,8 @@ public class PickupSystem : MonoBehaviour
         * East - 3 
         * South - 4*/
         if (gameSession == null)
-            gameSession = FindObjectOfType<GameSession>();
+            ResetFuelTerrain();
+            //gameSession = FindObjectOfType<GameSession>();
 
         int dir = player.GetDir();
         switch (dir)

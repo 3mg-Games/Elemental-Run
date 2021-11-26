@@ -29,7 +29,8 @@ public class GameSession : MonoBehaviour
     public float[] lastElementsCapacity = new float[3];
     [Tooltip("North - 1, West - 2, East - 3, South - 4")]
     public int playerDir;
-    
+    public int twoChoiceSystemChoiceCount = 0;
+
     public float clampLowerLimit;
     public float clampUpperLimit;
     public bool isClampZ;
@@ -44,13 +45,15 @@ public class GameSession : MonoBehaviour
     bool hasGameStarted = false;
     bool isFirstTimeTutorial = true;
     bool hasLevelLoaded = false;
+    public bool isNewLevel = false;
+
     float choiceWaitTimer;
     float playerInputWaitTimer;
 
     LevelLoader levelLoader;
     private static GameSession instance;
 
-    int choice = 0;
+    int choice;
     int coinCount;
     private void Awake()
     {
@@ -69,7 +72,7 @@ public class GameSession : MonoBehaviour
             isClampX = false;
             coinCount = 0;
             playerInputWaitTimer = waitTimeForPlayerInput;
-            
+            choice = twoChoiceSystemChoiceCount;
         }
 
         else
@@ -275,7 +278,7 @@ public class GameSession : MonoBehaviour
         //Time.timeScale = 0;
         //also check if wrong fuel to kill player
 
-        Debug.Log("Terrain ID = " + currTerrainElementId + " , Selected Element ID" + elementSelectedId);
+        //Debug.Log("Terrain ID = " + currTerrainElementId + " , Selected Element ID" + elementSelectedId);
 
         if (test1)
         {
@@ -382,9 +385,9 @@ public class GameSession : MonoBehaviour
     {
         isPlayerAlive = false;
         player.KillPlayer();
-
+        isNewLevel = false;
         yield return new WaitForSeconds(2f);
-
+        
         levelLoader.LoadCurrentScene();
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
@@ -430,24 +433,46 @@ public class GameSession : MonoBehaviour
 
         // currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
         currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
-        choice = 0;
-
+       // choice = 0;
+        /*
         for (int i = 0; i < 3; i++)
         {
             lastElementsCapacity[i] = startingCapacityOfContainers;
-        }
+        }*/
 
-        hasLevelLoaded = true;
+        //hasLevelLoaded = true;
 
         if(currLevelNum > 2)
         {
             is2Choices = false;
         }
+        hasLevelLoaded = false;
+        Destroy(tutorial);
+        hasGameStarted = true;
+        player.SetIsPlayerMoving(true);
 
-        playerDir = 1;
-       // Debug.Log("LEvel was loaded");
-      //  hasGameStarted = true;
-       // player.SetIsPlayerMoving(true);
+        choice = twoChoiceSystemChoiceCount;
+
+        if(isNewLevel)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                lastElementsCapacity[i] = startingCapacityOfContainers;
+            }
+            playerDir = 1;
+            clampLowerLimit = -1.5f;
+            clampUpperLimit = 1.5f;
+            isClampZ = true;
+            isClampX = false;
+            // coinCount = 0;
+            //  playerInputWaitTimer = waitTimeForPlayerInput;
+            choice = twoChoiceSystemChoiceCount = 0;
+            lastCheckPointPos = new Vector3(0f, 0.15f, 0f);
+        }
+        //playerDir = 1;
+        Debug.Log("LEvel was loaded");
+        //hasGameStarted = true;
+        //player.SetIsPlayerMoving(true);
     }
 
     public void Win()
@@ -474,6 +499,23 @@ public class GameSession : MonoBehaviour
     public void Continue()
     {
         //levelLoader.LoadScene(0);
+        isNewLevel = true;
+        if (isNewLevel)
+        {
+            for (int i = 0; i < 3; i++)
+            {
+                lastElementsCapacity[i] = startingCapacityOfContainers;
+            }
+            playerDir = 1;
+            clampLowerLimit = -1.5f;
+            clampUpperLimit = 1.5f;
+            isClampZ = true;
+            isClampX = false;
+            // coinCount = 0;
+            //  playerInputWaitTimer = waitTimeForPlayerInput;
+            choice = twoChoiceSystemChoiceCount = 0;
+            lastCheckPointPos = new Vector3(0.00f, 0.15f, 0.00f);
+        }
         levelLoader.LoadNextScene();
         
         //Destroy(gameObject);
@@ -483,6 +525,16 @@ public class GameSession : MonoBehaviour
     {
         coinCount++;
         coinText.text = coinCount.ToString();
+    }
+
+    public void SetTwoChoiceCount()
+    {
+        twoChoiceSystemChoiceCount = choice;
+    }
+
+    public bool GetIsNewLevel()
+    {
+        return isNewLevel;
     }
     
 }

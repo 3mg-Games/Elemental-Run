@@ -45,6 +45,8 @@ public class CheckPoint : MonoBehaviour
             gameSession.clampLowerLimit = clampLimits.x;
             gameSession.clampUpperLimit = clampLimits.y;
 
+            gameSession.SetTwoChoiceCount();
+
             animator.SetTrigger("Activate");
         }
     }
