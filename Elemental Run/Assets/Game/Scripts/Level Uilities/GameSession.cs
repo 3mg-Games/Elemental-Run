@@ -45,7 +45,7 @@ public class GameSession : MonoBehaviour
     bool hasGameStarted = false;
     bool isFirstTimeTutorial = true;
     bool hasLevelLoaded = false;
-    public bool isNewLevel = false;
+   // public bool isNewLevel = false;
 
     float choiceWaitTimer;
     float playerInputWaitTimer;
@@ -385,7 +385,7 @@ public class GameSession : MonoBehaviour
     {
         isPlayerAlive = false;
         player.KillPlayer();
-        isNewLevel = false;
+       // isNewLevel = false;
         yield return new WaitForSeconds(2f);
         
         levelLoader.LoadCurrentScene();
@@ -433,14 +433,14 @@ public class GameSession : MonoBehaviour
 
         // currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
         currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
-       // choice = 0;
-        /*
+        //choice = 0;
+        
         for (int i = 0; i < 3; i++)
         {
             lastElementsCapacity[i] = startingCapacityOfContainers;
-        }*/
+        }
 
-        //hasLevelLoaded = true;
+        hasLevelLoaded = true;
 
         if(currLevelNum > 2)
         {
@@ -453,7 +453,7 @@ public class GameSession : MonoBehaviour
 
         choice = twoChoiceSystemChoiceCount;
 
-        if(isNewLevel)
+      /*  if(isNewLevel)
         {
             for (int i = 0; i < 3; i++)
             {
@@ -468,7 +468,7 @@ public class GameSession : MonoBehaviour
             //  playerInputWaitTimer = waitTimeForPlayerInput;
             choice = twoChoiceSystemChoiceCount = 0;
             lastCheckPointPos = new Vector3(0f, 0.15f, 0f);
-        }
+        }*/
         //playerDir = 1;
         Debug.Log("LEvel was loaded");
         //hasGameStarted = true;
@@ -499,26 +499,11 @@ public class GameSession : MonoBehaviour
     public void Continue()
     {
         //levelLoader.LoadScene(0);
-        isNewLevel = true;
-        if (isNewLevel)
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                lastElementsCapacity[i] = startingCapacityOfContainers;
-            }
-            playerDir = 1;
-            clampLowerLimit = -1.5f;
-            clampUpperLimit = 1.5f;
-            isClampZ = true;
-            isClampX = false;
-            // coinCount = 0;
-            //  playerInputWaitTimer = waitTimeForPlayerInput;
-            choice = twoChoiceSystemChoiceCount = 0;
-            lastCheckPointPos = new Vector3(0.00f, 0.15f, 0.00f);
-        }
+        //isNewLevel = true;
+        
         levelLoader.LoadNextScene();
         
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     public void IncrementCoin()
@@ -532,9 +517,11 @@ public class GameSession : MonoBehaviour
         twoChoiceSystemChoiceCount = choice;
     }
 
+    /*
     public bool GetIsNewLevel()
     {
-        return isNewLevel;
-    }
+        
+       return isNewLevel;
+    }*/
     
 }

@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        ResetPlayer();
 
         // transform.rotation = gameSession.lastCheckPointTransform.rotation;
 
@@ -93,8 +93,8 @@ public class PlayerController : MonoBehaviour
     {
         
         gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
-        if (!gameSession.GetIsNewLevel())
-        {
+        //if (!gameSession.GetIsNewLevel())
+       // {
             Debug.Log("Game session last checkpoint pos = " + gameSession.lastCheckPointPos.x + ", "+
                 gameSession.lastCheckPointPos.y + ", " +
                 gameSession.lastCheckPointPos.z);
@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Player Position = " + transform.position.x + ", " +
                 transform.position.y + ", "+
                 transform.position.z + ", ");
-        }
+       // }
         dir = gameSession.playerDir;
 
         switch (dir)
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Before load Player Position = " + transform.position.x + ", " +
+        /*Debug.Log("Before load Player Position = " + transform.position.x + ", " +
                transform.position.y + ", " +
                transform.position.z + ", ");
         if (gameSession == null)
@@ -158,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("After load Player Position = " + transform.position.x + ", " +
                transform.position.y + ", " +
-               transform.position.z + ", ");
+               transform.position.z + ", ");*/
         // gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
 
         if (isPlayerMoving)
