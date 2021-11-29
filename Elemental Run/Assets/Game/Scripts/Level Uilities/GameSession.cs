@@ -15,6 +15,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] float startingCapacityOfContainers = 0.02f;
     [SerializeField] GameObject winScreen;
     [SerializeField] bool is2Choices = false;
+    [SerializeField] bool is1Choice = false;
     [SerializeField] int currLevelNum;
     [SerializeField] AudioClip levelCompleteSfx;
     [SerializeField] [Range(0, 1)] float levelCompleteSfxVolume = 1f;
@@ -70,7 +71,7 @@ public class GameSession : MonoBehaviour
             clampUpperLimit = 1.5f;
             isClampZ = true;
             isClampX = false;
-            coinCount = 0;
+            coinCount = PlayerPrefs.GetInt("Coins", 0);
             playerInputWaitTimer = waitTimeForPlayerInput;
             choice = twoChoiceSystemChoiceCount;
         }
@@ -198,7 +199,7 @@ public class GameSession : MonoBehaviour
                 * 1 - water
                 * 2 - earth*/
 
-                case 1:
+                case 2:
                     switch (choice)
                     {
                         case 1:
@@ -219,7 +220,7 @@ public class GameSession : MonoBehaviour
 
                     break;
 
-                case 2:
+                case 3:
                     switch (choice)
                     {
                         case 1:
@@ -240,7 +241,7 @@ public class GameSession : MonoBehaviour
 
                     break;
 
-                case 3:
+                case 4:
                     switch (choice)
                     {
                         case 1:
@@ -260,6 +261,90 @@ public class GameSession : MonoBehaviour
             }
 
         
+        }
+
+        else if(is1Choice)
+        {
+            choice++;
+            GameObject centerChoices = elemntSelectionPanel.transform.GetChild(0).gameObject;
+            
+
+            GameObject cFire = centerChoices.transform.GetChild(0).gameObject;
+            GameObject cWater = centerChoices.transform.GetChild(1).gameObject;
+            GameObject cEarth = centerChoices.transform.GetChild(2).gameObject;
+
+            
+
+            cFire.SetActive(false);
+            cWater.SetActive(false);
+            cEarth.SetActive(false);
+
+           
+
+            switch (currLevelNum)
+            {
+                /*children of each side - 
+                * 0 - fire
+                * 1 - water
+                * 2 - earth*/
+
+                case 1:
+                    switch (choice)
+                    {
+                        case 1:
+                            cFire.SetActive(true);
+                            
+                            break;
+
+                        case 2:
+                            
+                            cWater.SetActive(true);
+                            break;
+
+                        case 3:
+                            
+                            cEarth.SetActive(true);
+                            break;
+                    }
+
+                    break;
+
+               /* case 2:
+                    switch (choice)
+                    {
+                        case 1:
+                           
+                            break;
+
+                        case 2:
+                           
+                            break;
+
+                        case 3:
+
+                            break;
+                    }
+
+                    break;
+
+                case 3:
+                    switch (choice)
+                    {
+                        case 1:
+
+                            break;
+                        case 2:
+
+                            break;
+                        case 3:
+                            break;
+                    }
+
+                    break;*/
+
+
+
+            }
         }
         isChoiceWaitTimerActive = true;
     }
@@ -424,7 +509,7 @@ public class GameSession : MonoBehaviour
         coinText = canvas.transform.GetChild(4).
             gameObject.transform.GetChild(1).
             gameObject.GetComponent<TextMeshProUGUI>();
-        coinText.text = coinCount.ToString();
+        coinText.text = coinCount.ToString();                  //edit coin code here
 
 
         isChoiceWaitTimerActive = false;
@@ -442,10 +527,16 @@ public class GameSession : MonoBehaviour
 
         hasLevelLoaded = true;
 
-        if(currLevelNum > 2)
+        if(currLevelNum > 3)
         {
             is2Choices = false;
         }
+
+        if(currLevelNum > 1)
+        {
+            is1Choice = false;
+        }
+
         hasLevelLoaded = false;
         Destroy(tutorial);
         hasGameStarted = true;
@@ -509,12 +600,22 @@ public class GameSession : MonoBehaviour
     public void IncrementCoin()
     {
         coinCount++;
-        coinText.text = coinCount.ToString();
+        //if(coinCount > PlayerPrefs.GetInt("Coins", 0))
+      //  {
+            PlayerPrefs.SetInt("Coins", coinCount);
+            coinText.text = coinCount.ToString();
+        //}
+        
     }
 
     public void SetTwoChoiceCount()
     {
         twoChoiceSystemChoiceCount = choice;
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.DeleteAll();
     }
 
     /*
@@ -523,5 +624,5 @@ public class GameSession : MonoBehaviour
         
        return isNewLevel;
     }*/
-    
+
 }
