@@ -71,7 +71,8 @@ public class GameSession : MonoBehaviour
             clampUpperLimit = 1.5f;
             isClampZ = true;
             isClampX = false;
-            coinCount = PlayerPrefs.GetInt("Coins", 0);
+           
+           
             playerInputWaitTimer = waitTimeForPlayerInput;
             choice = twoChoiceSystemChoiceCount;
         }
@@ -99,7 +100,11 @@ public class GameSession : MonoBehaviour
             hasGameStarted = true;
             player.SetIsPlayerMoving(true);
         }
-
+        if(currLevelNum == 1)
+        {
+            PlayerPrefs.DeleteAll();
+        }
+        coinCount = PlayerPrefs.GetInt("Coins", 0);
         coinText.text = coinCount.ToString();
     }
 
