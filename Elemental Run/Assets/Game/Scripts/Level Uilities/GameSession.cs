@@ -75,6 +75,9 @@ public class GameSession : MonoBehaviour
            
             playerInputWaitTimer = waitTimeForPlayerInput;
             choice = twoChoiceSystemChoiceCount;
+            
+
+            
         }
 
         else
@@ -89,23 +92,33 @@ public class GameSession : MonoBehaviour
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
+        currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
         elemntSelectionPanel.SetActive(false);
         choiceWaitTimer = choiceWaitTime;
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
-        currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
-        if(currLevelNum != 1)
+        //PlayerPrefs.DeleteAll();
+
+        int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
+        if (currLevelNum != savedLevelNum)
+        {
+            levelLoader.LoadParticularScene(savedLevelNum-1);
+            Destroy(gameObject);
+        }
+        if (currLevelNum != 1)
         {
             hasLevelLoaded = false;
             Destroy(tutorial);
             hasGameStarted = true;
             player.SetIsPlayerMoving(true);
         }
-        if(currLevelNum == 1)
+        if(savedLevelNum == 1)
         {
-            PlayerPrefs.DeleteAll();
+           PlayerPrefs.DeleteKey("Coins");
         }
         coinCount = PlayerPrefs.GetInt("Coins", 0);
         coinText.text = coinCount.ToString();
+
+        //PlayerPrefs.SetInt("Level", currLevelNum);
     }
 
     // Update is called once per frame
@@ -596,7 +609,9 @@ public class GameSession : MonoBehaviour
     {
         //levelLoader.LoadScene(0);
         //isNewLevel = true;
-        
+        PlayerPrefs.SetInt("Coins", coinCount);
+
+        PlayerPrefs.SetInt("Level", currLevelNum + 1);
         levelLoader.LoadNextScene();
         
         Destroy(gameObject);
@@ -607,7 +622,7 @@ public class GameSession : MonoBehaviour
         coinCount++;
         //if(coinCount > PlayerPrefs.GetInt("Coins", 0))
       //  {
-            PlayerPrefs.SetInt("Coins", coinCount);
+            //PlayerPrefs.SetInt("Coins", coinCount);
             coinText.text = coinCount.ToString();
         //}
         
@@ -620,7 +635,7 @@ public class GameSession : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        PlayerPrefs.DeleteAll();
+       // PlayerPrefs.DeleteKey("Coins");
     }
 
     /*
