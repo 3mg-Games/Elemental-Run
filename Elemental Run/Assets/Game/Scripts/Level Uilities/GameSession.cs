@@ -9,6 +9,7 @@ public class GameSession : MonoBehaviour
     // 0 - fire
     // 1 - water
     // 2 - earth
+    [SerializeField] bool isEditor = false;
     [SerializeField] bool test1 = true;
     [SerializeField] GameObject elemntSelectionPanel;
     [SerializeField] float choiceWaitTime = 10f;
@@ -99,7 +100,7 @@ public class GameSession : MonoBehaviour
         //PlayerPrefs.DeleteAll();
 
         int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
-        if (currLevelNum != savedLevelNum)
+        if (currLevelNum != savedLevelNum && !isEditor)
         {
             levelLoader.LoadParticularScene(savedLevelNum-1);
             Destroy(gameObject);
