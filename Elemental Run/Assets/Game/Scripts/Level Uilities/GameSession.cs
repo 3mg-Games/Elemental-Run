@@ -107,7 +107,7 @@ public class GameSession : MonoBehaviour
         elemntSelectionPanel.SetActive(false);
         choiceWaitTimer = choiceWaitTime;
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
-       // PlayerPrefs.DeleteAll();
+       //PlayerPrefs.DeleteAll();
 
         int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
         if (currLevelNum != savedLevelNum && !isEditor)
@@ -639,10 +639,10 @@ public class GameSession : MonoBehaviour
         var pos = Vector3.zero;
         var dir = player.GetDir();
         if (dir == 1)
-        pos = player.transform.position + new Vector3(-1f, 0.8f, 0f);
+        pos = player.transform.position + new Vector3(-1f, 1.6f, 0f);
 
         else if(dir == 2)
-            pos = player.transform.position + new Vector3(0f, 0.8f, -1f);
+            pos = player.transform.position + new Vector3(0f, 1.6f, -1f);
         GameObject coinSpawn = Instantiate(coinSpawnPrefab.gameObject,
             pos,
             player.transform.rotation)
