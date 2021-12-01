@@ -107,7 +107,8 @@ public class GameSession : MonoBehaviour
         elemntSelectionPanel.SetActive(false);
         choiceWaitTimer = choiceWaitTime;
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
-       //PlayerPrefs.DeleteAll();
+        //
+        PlayerPrefs.DeleteAll();
 
         int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
         if (currLevelNum != savedLevelNum && !isEditor)
