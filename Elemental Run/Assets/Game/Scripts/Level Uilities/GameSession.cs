@@ -28,8 +28,8 @@ public class GameSession : MonoBehaviour
     //[SerializeField] GameObject coinSpawnCanvas;
     //[SerializeField] RectTransform localCoinPos;
     //[SerializeField] bool isLevel1 = true;
-    [SerializeField] GameObject coinSpawnCanvasPrefab;
-    [SerializeField] RectTransform coinTarget;
+    [SerializeField] GameObject coinSpawnPrefab;
+    [SerializeField] Transform coinTarget;
 
 
     public PlayerController player;
@@ -107,7 +107,7 @@ public class GameSession : MonoBehaviour
         elemntSelectionPanel.SetActive(false);
         choiceWaitTimer = choiceWaitTime;
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
-        PlayerPrefs.DeleteAll();
+       // PlayerPrefs.DeleteAll();
 
         int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
         if (currLevelNum != savedLevelNum && !isEditor)
@@ -545,6 +545,8 @@ public class GameSession : MonoBehaviour
       //  coinTextImg = canvas.transform.GetChild(4).                                                    //commented out
        //     gameObject.transform.GetChild(0).transform;                                                 //commented out
 
+        coinTarget = Camera.main.transform.GetChild(2).transform;
+
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
         isPlayerAlive = true;
@@ -634,10 +636,16 @@ public class GameSession : MonoBehaviour
 
     public void IncrementCoin(Transform coinTransform)
     {
-        var pos = player.transform.position + new Vector3(0, 2f, 0);
-        GameObject coinSpawn = Instantiate(coinSpawnCanvasPrefab.gameObject,
-            coinTransform.position,
-            coinTransform.rotation)
+        var pos = Vector3.zero;
+        var dir = player.GetDir();
+        if (dir == 1)
+        pos = player.transform.position + new Vector3(-1f, 0.8f, 0f);
+
+        else if(dir == 2)
+            pos = player.transform.position + new Vector3(0f, 0.8f, -1f);
+        GameObject coinSpawn = Instantiate(coinSpawnPrefab.gameObject,
+            pos,
+            player.transform.rotation)
             as GameObject; //coinSpawnCanvas.transform.GetChild(0).
                                                                            //GetComponent<RectTransform>().anchoredPosition,
        // coinSpawn.transform.SetParent(coinSpawnCanvas.transform);
@@ -670,7 +678,7 @@ public class GameSession : MonoBehaviour
        // PlayerPrefs.DeleteKey("Coins");
     }
 
-    public RectTransform GetCoinSpawnTarget()
+    public Transform GetCoinSpawnTarget()
     {
         //return coinTextImg;
         return coinTarget;

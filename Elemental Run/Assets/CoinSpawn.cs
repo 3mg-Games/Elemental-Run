@@ -9,13 +9,13 @@ public class CoinSpawn : MonoBehaviour
     GameSession gameSession;
     //RectTransform target;
 
-    RectTransform coinRectTransform;
+    //Transform coinRectTransform;
     // Start is called before the first frame update
     void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
        // target = gameSession.GetCoinSpawnTarget();
-        coinRectTransform = GetComponent<RectTransform>();
+      //  coinRectTransform = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -29,13 +29,13 @@ public class CoinSpawn : MonoBehaviour
         var targetPosition = gameSession.GetCoinSpawnTarget().position;
         var movementThisFrame = coinMoveSpeed * Time.deltaTime;
 
-        //Debug.Log(targetPosition);
-        dir = targetPosition - coinRectTransform.position;
+        Debug.Log(targetPosition);
+        dir = targetPosition - transform.position;
          
         transform.position = Vector3.MoveTowards        //try character controller here
-                      (transform.position, targetPosition, movementThisFrame);
-              if (transform.position == targetPosition) 
-           Destroy();
+        (transform.position, targetPosition, movementThisFrame);
+        if (Vector3.Distance(transform.position, targetPosition) < 3f) 
+              Destroy();
 
 
     }
