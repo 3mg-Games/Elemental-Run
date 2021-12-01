@@ -23,11 +23,14 @@ public class GameSession : MonoBehaviour
     [SerializeField] float waitTimeForPlayerInput = 5f;
     [SerializeField] GameObject tutorial;
     [SerializeField] TextMeshProUGUI coinText;
-    [SerializeField] Transform coinTextImg;
-    [SerializeField] GameObject coinSpawnPrefab;
-    [SerializeField] GameObject coinSpawnCanvas;
-    [SerializeField] RectTransform localCoinPos;
+    //[SerializeField] Transform coinTextImg;
+    //[SerializeField] GameObject coinSpawnPrefab;
+    //[SerializeField] GameObject coinSpawnCanvas;
+    //[SerializeField] RectTransform localCoinPos;
     //[SerializeField] bool isLevel1 = true;
+    [SerializeField] GameObject coinSpawnCanvasPrefab;
+    [SerializeField] RectTransform coinTarget;
+
 
     public PlayerController player;
     public Vector3 lastCheckPointPos;
@@ -523,8 +526,8 @@ public class GameSession : MonoBehaviour
         levelLoader = FindObjectOfType<LevelLoader>();
 
         GameObject canvas = GameObject.FindGameObjectWithTag("Selection Canvas").gameObject;
-        coinSpawnCanvas = GameObject.FindGameObjectWithTag("Coin Canvas").gameObject;
-        localCoinPos = coinSpawnCanvas.transform.GetChild(0).gameObject.GetComponent<RectTransform>();
+        //coinSpawnCanvas = GameObject.FindGameObjectWithTag("Coin Canvas").gameObject;                   //commented out
+        //localCoinPos = coinSpawnCanvas.transform.GetChild(0).gameObject.GetComponent<RectTransform>();  // commented out
         elemntSelectionPanel = canvas.transform.GetChild(0).gameObject;
         elemntSelectionPanel.SetActive(false);
         
@@ -539,8 +542,8 @@ public class GameSession : MonoBehaviour
             gameObject.GetComponent<TextMeshProUGUI>();
         coinText.text = coinCount.ToString();                  //edit coin code here
         //coinSpawnTarget = Camera.main.transform.GetChild(0).transform;
-        coinTextImg = canvas.transform.GetChild(4).
-            gameObject.transform.GetChild(0).transform;
+      //  coinTextImg = canvas.transform.GetChild(4).                                                    //commented out
+       //     gameObject.transform.GetChild(0).transform;                                                 //commented out
 
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
@@ -629,13 +632,16 @@ public class GameSession : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void IncrementCoin()
+    public void IncrementCoin(Transform coinTransform)
     {
         var pos = player.transform.position + new Vector3(0, 2f, 0);
-        GameObject coinSpawn = Instantiate(coinSpawnPrefab) as GameObject; //coinSpawnCanvas.transform.GetChild(0).
+        GameObject coinSpawn = Instantiate(coinSpawnCanvasPrefab.gameObject,
+            coinTransform.position,
+            coinTransform.rotation)
+            as GameObject; //coinSpawnCanvas.transform.GetChild(0).
                                                                            //GetComponent<RectTransform>().anchoredPosition,
-        coinSpawn.transform.SetParent(coinSpawnCanvas.transform);
-        coinSpawn.transform.localPosition = localCoinPos.localPosition;
+       // coinSpawn.transform.SetParent(coinSpawnCanvas.transform);
+        //coinSpawn.transform.localPosition = localCoinPos.localPosition;
             //Quaternion.identity,
            // coinSpawnCanvas.transform);
         //coinSpawn.transform.SetParent(coinSpawnCanvas.transform, false);
@@ -664,9 +670,10 @@ public class GameSession : MonoBehaviour
        // PlayerPrefs.DeleteKey("Coins");
     }
 
-    public Transform GetCoinSpawnTarget()
+    public RectTransform GetCoinSpawnTarget()
     {
-        return coinTextImg;
+        //return coinTextImg;
+        return coinTarget;
     }
 
     /*

@@ -7,12 +7,15 @@ public class CoinSpawn : MonoBehaviour
 {
     [SerializeField] float coinMoveSpeed = 10f;
     GameSession gameSession;
-    Transform target;
+    //RectTransform target;
+
+    RectTransform coinRectTransform;
     // Start is called before the first frame update
     void Start()
     {
         gameSession = FindObjectOfType<GameSession>();
-        target = gameSession.GetCoinSpawnTarget();
+       // target = gameSession.GetCoinSpawnTarget();
+        coinRectTransform = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
@@ -22,10 +25,12 @@ public class CoinSpawn : MonoBehaviour
         
         Vector3 dir;
 
-        var targetPosition = target.position;
+        //var targetPosition = target.position;
+        var targetPosition = gameSession.GetCoinSpawnTarget().position;
         var movementThisFrame = coinMoveSpeed * Time.deltaTime;
-       
-        dir = targetPosition - transform.position;
+
+        //Debug.Log(targetPosition);
+        dir = targetPosition - coinRectTransform.position;
          
         transform.position = Vector3.MoveTowards        //try character controller here
                       (transform.position, targetPosition, movementThisFrame);

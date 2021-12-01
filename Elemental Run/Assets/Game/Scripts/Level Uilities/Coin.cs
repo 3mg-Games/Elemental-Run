@@ -30,7 +30,7 @@ public class Coin : MonoBehaviour
             AudioSource.PlayClipAtPoint(pickUpSfx,
                    Camera.main.transform.position,
                    pickUpSfxVolume);
-            gameSession.IncrementCoin();
+            gameSession.IncrementCoin(gameObject.transform);
             Destroy(gameObject);
 
         }
