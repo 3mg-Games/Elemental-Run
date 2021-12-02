@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float mobileHorizontalRunSpeed = 2f;
     [SerializeField] float horizontalSpeed = 4f;
     [SerializeField] GameObject confetti;
+    [SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
     [SerializeField] CinemachineVirtualCamera westCam;
@@ -31,19 +32,21 @@ public class PlayerController : MonoBehaviour
     private float jumpDistance;
     private float turnMovementSpeed, turnRotateSpeed;
 
+
     bool drag;
     bool isPlayerMoving = true;
     bool isTouchActive = false;
     bool isJump = false;
     bool isTurn = false;
+    bool isWallRun = false;
 
-    public bool isNorth = true;
-    public bool isWest = false;
-    public bool isEast = false;
-    public bool isSouth = false;
+    bool isNorth = true;
+    bool isWest = false;
+    bool isEast = false;
+    bool isSouth = false;
 
-    public bool isClampZ;
-    public bool isClampX;
+    bool isClampZ;
+    bool isClampX;
 
     
 
@@ -56,6 +59,8 @@ public class PlayerController : MonoBehaviour
     int turnWayPointsCount;
 
     int camPriority = 2;
+
+    int wallPos = 0;
 
     float clampLowerLimit;
     float clampUpperLimit;
@@ -242,6 +247,8 @@ public class PlayerController : MonoBehaviour
                 movement = new Vector3(horizontalInput * -1* horizontalSpeed, 0, -verticalInput * runSpeed);
         }
 
+
+
         //Mathf.Clamp(movement.z, -1.5f, 1.5f);
         characterController.Move(movement * Time.deltaTime);
         characterController.Move(velocity * Time.deltaTime);
@@ -264,6 +271,33 @@ public class PlayerController : MonoBehaviour
                 transform.position.y,
                 transform.position.z);
         }
+    }
+
+    private void WallRun()
+    {
+        verticalInput = 1;
+        var wallDir = Vector3.zero;
+        if(wallPos == 1)
+        {
+            wallDir = Vector3.forward;
+        }
+
+        else if(wallPos == 2)
+        {
+            wallDir = Vector3.right;  //change this later
+        }
+        RaycastHit ray;
+        Physics.Raycast(transform.position, wallDir, out ray, wallRunMaxDistance);
+
+        //characterVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
+        // then, add the jumpSpeed value upwards
+       // characterVelocity += wallRunComponent.GetWallJumpDirection() * jumpForce;
+        var movement = new Vector3(verticalInput * runSpeed, 0, 0);
+        movement += wallDir * 7f;
+
+        characterController.Move(movement * Time.deltaTime);
+
+
     }
 
     private void Turn()
@@ -466,6 +500,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             runSpeed = runSpeed - initialRunSpeed * percentageChangeInSpeed / 100f;
+        }
+    }
+
+
+    public void ActivateWallRun(bool val, int wallPos)
+    {
+        if(val)
+        {
+            this.wallPos = wallPos;
+            isPlayerMoving = false;
+            isWallRun = true;
         }
     }
 }

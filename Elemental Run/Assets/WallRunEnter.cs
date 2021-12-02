@@ -1,0 +1,31 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class WallRunEnter : MonoBehaviour
+{
+    /* 1 - Left
+     * 2 - Right*/
+    [SerializeField] int wallPos;
+    PlayerController player;
+    // Start is called before the first frame update
+    void Start()
+    {
+        player = FindObjectOfType<PlayerController>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            player.ActivateWallRun(true, wallPos);
+            //do stuff for tilting the player
+        }
+    }
+}
