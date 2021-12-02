@@ -7,6 +7,9 @@ public class WallRunEnter : MonoBehaviour
     /* 1 - Left
      * 2 - Right*/
     [SerializeField] int wallPos;
+
+    [SerializeField] GameObject path;
+    [SerializeField] float wallRunSpeed;
     PlayerController player;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +27,7 @@ public class WallRunEnter : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            player.ActivateWallRun(true, wallPos);
+            player.ActivateWallRun(true, path, wallRunSpeed, wallPos);
             //do stuff for tilting the player
         }
     }

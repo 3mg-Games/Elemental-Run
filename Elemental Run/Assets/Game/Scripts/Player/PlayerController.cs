@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private float jumpHeight;
     private float jumpDistance;
     private float turnMovementSpeed, turnRotateSpeed;
+    private float wallRunSpeed;
 
 
     bool drag;
@@ -54,9 +55,13 @@ public class PlayerController : MonoBehaviour
     public GameSession gameSession;
 
     List<Transform> turnWaypoints;
+    List<Transform> wallRunWayPoints;
 
     int turnWayPointIdx;
     int turnWayPointsCount;
+
+    int wallRunWayPointsIdx;
+    int wallRunWayPointsCount;
 
     int camPriority = 2;
 
@@ -67,6 +72,8 @@ public class PlayerController : MonoBehaviour
    
 
     private float initialRunSpeed;
+
+    Vector3 originalRoationEulerAngles;
 
     private void Awake()
     {
@@ -86,6 +93,7 @@ public class PlayerController : MonoBehaviour
 
 
         turnWaypoints = new List<Transform>();
+        wallRunWayPoints = new List<Transform>();
         turnWayPointIdx = 0;
 
         initialRunSpeed = runSpeed;
@@ -174,6 +182,11 @@ public class PlayerController : MonoBehaviour
         else if(isTurn)
         {
             Turn();
+        }
+
+        else if(isWallRun)
+        {
+            WallRun();
         }
     }
 
@@ -275,29 +288,40 @@ public class PlayerController : MonoBehaviour
 
     private void WallRun()
     {
-        verticalInput = 1;
-        var wallDir = Vector3.zero;
-        if(wallPos == 1)
+        if(wallRunWayPointsIdx <= wallRunWayPointsCount - 1)
         {
-            wallDir = Vector3.forward;
+            Debug.Log(transform.rotation.eulerAngles);
+            Vector3 dir;
+            var targetOriginalPosition = wallRunWayPoints[wallRunWayPointsIdx].transform.position;
+
+            //var targetPosition = targetOriginalPosition;
+            
+            var targetPosition = new Vector3(targetOriginalPosition.x,
+                transform.position.y,
+                targetOriginalPosition.z);
+
+            var movementThisFrame = wallRunSpeed * Time.deltaTime;
+            //var rotationThisFrame = turnRotateSpeed * Time.deltaTime;
+            dir = targetPosition - transform.position;
+           // Quaternion rotation = Quaternion.LookRotation(-dir, Vector3.up);
+            //Debug.Log(rotation);
+
+            transform.position = Vector3.MoveTowards        //try character controller here
+                      (transform.position, targetPosition, movementThisFrame);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationThisFrame);
+
+
+            if (transform.position == targetPosition)
+                wallRunWayPointsIdx++;
+
         }
 
-        else if(wallPos == 2)
+        else
         {
-            wallDir = Vector3.right;  //change this later
+            isWallRun = false;
+            isPlayerMoving = true;
         }
-        RaycastHit ray;
-        Physics.Raycast(transform.position, wallDir, out ray, wallRunMaxDistance);
-
-        //characterVelocity = new Vector3(characterVelocity.x, 0f, characterVelocity.z);
-        // then, add the jumpSpeed value upwards
-       // characterVelocity += wallRunComponent.GetWallJumpDirection() * jumpForce;
-        var movement = new Vector3(verticalInput * runSpeed, 0, 0);
-        movement += wallDir * 7f;
-
-        characterController.Move(movement * Time.deltaTime);
-
-
+    
     }
 
     private void Turn()
@@ -504,11 +528,74 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void ActivateWallRun(bool val, int wallPos)
+    public void ActivateWallRun(bool val, GameObject path, float wallRunSpeed, int wallPos)
     {
         if(val)
         {
+
+            wallRunWayPoints.Clear();
+            for (int i = 0; i < path.transform.childCount; i++)
+            {
+                //Debug.Log(path.transform.childCount);
+                //  Debug.Log(path.transform.GetChild(i).gameObject.transform.position);
+                wallRunWayPoints.Add(path.transform.GetChild(i).gameObject.transform);
+            }
+
+            this.wallRunSpeed = wallRunSpeed;
+            wallRunWayPointsCount = path.transform.childCount;
+            //this.turnRotateSpeed = turnRotateSpeed;
+
+            //check player is closest to which waypoint
+            var closestWayPoint = wallRunWayPoints[0];
+            var closestDistance = Vector3.Distance(transform.position, closestWayPoint.position);
+            wallRunWayPointsIdx = 0;
+            int ind;
+            for (ind = 0; ind < wallRunWayPointsCount; ind++)
+            {
+                var currWaypoint = wallRunWayPoints[ind];
+                if (closestWayPoint.transform.position.x <= transform.position.x)
+                {
+                    closestWayPoint = wallRunWayPoints[ind];
+                    closestDistance = Vector3.Distance(transform.position, currWaypoint.position);
+                    wallRunWayPointsIdx = ind;
+                   
+                }
+
+                else
+                {
+                    break;
+                }
+            }
+            var curWaypoint = wallRunWayPoints[ind];
+            closestWayPoint = wallRunWayPoints[ind];
+            closestDistance = Vector3.Distance(transform.position, curWaypoint.position);
+            wallRunWayPointsIdx = ind;
+
+            for (int i = ind+1; i < wallRunWayPointsCount; i++)
+            {
+                var currWaypoint = wallRunWayPoints[i];
+                if (Vector3.Distance(transform.position, currWaypoint.position) < closestDistance)
+                {
+                    closestWayPoint = wallRunWayPoints[i];
+                    closestDistance = Vector3.Distance(transform.position, currWaypoint.position);
+                    wallRunWayPointsIdx = i;
+                }
+            }
+
+
+            // wallRunWayPointsIdx = 0;
             this.wallPos = wallPos;
+
+            originalRoationEulerAngles = transform.rotation.eulerAngles;
+            
+            if(wallPos == 1)
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, 34.9f));
+
+            else
+            {
+                transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f));
+            }
+           
             isPlayerMoving = false;
             isWallRun = true;
         }
