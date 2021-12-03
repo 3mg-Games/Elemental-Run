@@ -6,6 +6,7 @@ public class WallRunEnter : MonoBehaviour
 {
     /* 1 - Left
      * 2 - Right*/
+    [Tooltip("1 - Left side, 2 - Right side")]
     [SerializeField] int wallPos;
 
     [SerializeField] GameObject path;

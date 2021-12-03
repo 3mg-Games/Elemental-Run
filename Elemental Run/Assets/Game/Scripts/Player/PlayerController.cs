@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float mobileHorizontalRunSpeed = 2f;
     [SerializeField] float horizontalSpeed = 4f;
     [SerializeField] GameObject confetti;
-    [SerializeField] float wallRunMaxDistance = 1f;
+    [SerializeField] float currentAngleDelta = 2f;
+    //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
     [SerializeField] CinemachineVirtualCamera westCam;
@@ -49,6 +50,7 @@ public class PlayerController : MonoBehaviour
     bool isClampZ;
     bool isClampX;
 
+    bool isWallRotate = false;
     
 
     Animator animator;
@@ -74,6 +76,9 @@ public class PlayerController : MonoBehaviour
     private float initialRunSpeed;
 
     Vector3 originalRoationEulerAngles;
+    Quaternion targetRotation;
+    Quaternion curRotation;
+    [SerializeField] CamerFollow cam;
 
     private void Awake()
     {
@@ -88,7 +93,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         ResetPlayer();
-
+        //cam = Camera.main.GetComponent<CamerFollow>();
         // transform.rotation = gameSession.lastCheckPointTransform.rotation;
 
 
@@ -174,6 +179,7 @@ public class PlayerController : MonoBehaviour
                transform.position.z + ", ");*/
         // gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
 
+
         if (isPlayerMoving)
         {
             Move();
@@ -188,9 +194,14 @@ public class PlayerController : MonoBehaviour
         {
             WallRun();
         }
+
+        if(isWallRotate)
+        {
+            WallRunPlayerRoate();
+        }
     }
 
-   
+    
 
     private void Move()
     {
@@ -286,11 +297,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void WallRunPlayerRoate()
+    {
+        curRotation = transform.rotation;
+        //= transform.rotation;
+        //if (smooth)
+        // {
+        // currentAngleDelta = SmoothDelay(currentAngleDelta, angle, smoothDelay);
+        //}
+        //else
+        //{
+
+        //}
+        if (wallPos == 1)
+        {
+            curRotation *= Quaternion.Euler(0f, 0f, currentAngleDelta);
+            if (curRotation.eulerAngles.z >= targetRotation.eulerAngles.z)
+            {
+                isWallRotate = false;
+                return;
+            }
+        }
+
+        else
+
+        {
+            curRotation *= Quaternion.Euler(0f, 0f, -currentAngleDelta);
+            if (curRotation.eulerAngles.z <= targetRotation.eulerAngles.z)
+            {
+                isWallRotate = false;
+                return;
+            }
+        }
+
+        // Debug.Log("Curr rot z = " + curRotation.eulerAngles.z + " Target Rot z = " + targetRotation.eulerAngles.z);
+
+       
+        
+        transform.rotation = curRotation;
+    }
+
     private void WallRun()
     {
-        if(wallRunWayPointsIdx <= wallRunWayPointsCount - 1)
+      // Debug.Log(Camera.main.transform.rotation.eulerAngles);
+        if (wallRunWayPointsIdx <= wallRunWayPointsCount - 1)
         {
-            Debug.Log(transform.rotation.eulerAngles);
+           // Debug.Log(transform.rotation.eulerAngles);
             Vector3 dir;
             var targetOriginalPosition = wallRunWayPoints[wallRunWayPointsIdx].transform.position;
 
@@ -318,6 +370,9 @@ public class PlayerController : MonoBehaviour
 
         else
         {
+            cam.SwitchToNormalCam();
+            transform.rotation = Quaternion.Euler(originalRoationEulerAngles);
+           
             isWallRun = false;
             isPlayerMoving = true;
         }
@@ -348,7 +403,6 @@ public class PlayerController : MonoBehaviour
 
             if (transform.position == targetPosition)
                 turnWayPointIdx++;
-
 
         }
 
@@ -566,6 +620,7 @@ public class PlayerController : MonoBehaviour
                     break;
                 }
             }
+
             var curWaypoint = wallRunWayPoints[ind];
             closestWayPoint = wallRunWayPoints[ind];
             closestDistance = Vector3.Distance(transform.position, curWaypoint.position);
@@ -585,17 +640,21 @@ public class PlayerController : MonoBehaviour
 
             // wallRunWayPointsIdx = 0;
             this.wallPos = wallPos;
-
+            cam.SwitchToWallRunCam(this.wallPos);
             originalRoationEulerAngles = transform.rotation.eulerAngles;
-            
+            //Debug.Log(Camera.main.transform.rotation.eulerAngles);
             if(wallPos == 1)
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, 34.9f));
+             //  transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, 34.9f));
+             targetRotation = Quaternion.Euler(new Vector3(0f, 270f, 34.9f)); 
 
             else
             {
-                transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f));
+               // transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f));
+               targetRotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f)); 
             }
-           
+
+
+            isWallRotate = true;
             isPlayerMoving = false;
             isWallRun = true;
         }
