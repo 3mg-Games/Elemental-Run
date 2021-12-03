@@ -108,7 +108,7 @@ public class GameSession : MonoBehaviour
         choiceWaitTimer = choiceWaitTime;
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
         //
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
 
         int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
         if (currLevelNum != savedLevelNum && !isEditor)
@@ -230,7 +230,7 @@ public class GameSession : MonoBehaviour
                 * 1 - water
                 * 2 - earth*/
 
-                case 2:
+                case 1:
                     switch (choice)
                     {
                         case 1:
@@ -251,7 +251,7 @@ public class GameSession : MonoBehaviour
 
                     break;
 
-                case 3:
+                case 2:
                     switch (choice)
                     {
                         case 1:
@@ -272,7 +272,7 @@ public class GameSession : MonoBehaviour
 
                     break;
 
-                case 4:
+                case 3:
                     switch (choice)
                     {
                         case 1:
@@ -294,7 +294,7 @@ public class GameSession : MonoBehaviour
         
         }
 
-        else if(is1Choice)
+        /*else if(is1Choice)
         {
             choice++;
             GameObject centerChoices = elemntSelectionPanel.transform.GetChild(0).gameObject;
@@ -317,7 +317,7 @@ public class GameSession : MonoBehaviour
                 /*children of each side - 
                 * 0 - fire
                 * 1 - water
-                * 2 - earth*/
+                * 2 - earth
 
                 case 1:
                     switch (choice)
@@ -340,7 +340,7 @@ public class GameSession : MonoBehaviour
 
                     break;
 
-               /* case 2:
+                case 2:
                     switch (choice)
                     {
                         case 1:
@@ -371,12 +371,12 @@ public class GameSession : MonoBehaviour
                             break;
                     }
 
-                    break;*/
+                    break;
 
 
 
             }
-        }
+        }*/
         isChoiceWaitTimerActive = true;
     }
 
@@ -563,12 +563,12 @@ public class GameSession : MonoBehaviour
 
         hasLevelLoaded = true;
 
-        if(currLevelNum > 3)
+        if(currLevelNum > 2)
         {
             is2Choices = false;
         }
 
-        if(currLevelNum > 1)
+        if(currLevelNum > 0)
         {
             is1Choice = false;
         }

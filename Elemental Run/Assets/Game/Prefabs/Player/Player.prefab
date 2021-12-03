@@ -14307,6 +14307,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5052054876149527270}
   speedMod: 10
+  lWallRunEulerAngles: {x: 3.6, y: 87.5, z: 0.000012}
+  rWallRunEulerAngles: {x: 3.6, y: 87.5, z: -359.9}
+  cam2: {fileID: 0}
+  currentAngleDelta: 7
+  isPlayerFollow: 0
+  deltaN: {x: 4.2, y: -2.9, z: 0}
 --- !u!82 &3693563513719997904
 AudioSource:
   m_ObjectHideFlags: 0
@@ -29943,8 +29949,10 @@ MonoBehaviour:
   mobileHorizontalRunSpeed: 0.8
   horizontalSpeed: 3
   confetti: {fileID: 4670824605040807699}
+  currentAngleDelta: 7
   dir: 1
   gameSession: {fileID: 0}
+  cam: {fileID: 321984464}
 --- !u!114 &4726026816456271685
 MonoBehaviour:
   m_ObjectHideFlags: 0
