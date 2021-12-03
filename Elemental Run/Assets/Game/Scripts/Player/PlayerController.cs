@@ -51,7 +51,8 @@ public class PlayerController : MonoBehaviour
     bool isClampX;
 
     bool isWallRotate = false;
-    
+
+    bool mobileInput = true;
 
     Animator animator;
     public GameSession gameSession;
@@ -208,11 +209,14 @@ public class PlayerController : MonoBehaviour
         verticalInput = 1;
         horizontalInput = Input.GetAxis("Horizontal");
 
-        if (Input.touchCount > 0)
+        if (mobileInput)
         {
-            if (!isTouchActive)
-                isTouchActive = true;
-            horizontalInput = Input.GetTouch(0).deltaPosition.x;
+            if (Input.touchCount > 0)
+            {
+                if (!isTouchActive)
+                    isTouchActive = true;
+                horizontalInput = Input.GetTouch(0).deltaPosition.x;
+            }
         }
 
 
@@ -374,6 +378,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(originalRoationEulerAngles);
            
             isWallRun = false;
+            mobileInput = true;
             isPlayerMoving = true;
         }
     
@@ -653,7 +658,7 @@ public class PlayerController : MonoBehaviour
                targetRotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f)); 
             }
 
-
+            mobileInput = false;
             isWallRotate = true;
             isPlayerMoving = false;
             isWallRun = true;

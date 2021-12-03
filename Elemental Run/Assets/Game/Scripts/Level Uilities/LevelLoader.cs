@@ -26,7 +26,9 @@ public class LevelLoader : MonoBehaviour
     {
         int idx = SceneManager.GetActiveScene().buildIndex + 1;
         if (idx >= SceneManager.sceneCountInBuildSettings)
+        {
             idx = 0;
+        }
         LoadScene(idx);
     }
 
@@ -49,5 +51,10 @@ public class LevelLoader : MonoBehaviour
     public void LoadParticularScene(int idx)
     {
         LoadScene(idx);
+    }
+
+    public int GetTotalSceneCount()
+    {
+        return SceneManager.sceneCountInBuildSettings;
     }
 }

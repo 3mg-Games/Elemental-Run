@@ -630,6 +630,9 @@ public class GameSession : MonoBehaviour
         PlayerPrefs.SetInt("Coins", coinCount);
 
         PlayerPrefs.SetInt("Level", currLevelNum + 1);
+
+        if(PlayerPrefs.GetInt("Level") > levelLoader.GetTotalSceneCount())
+            PlayerPrefs.SetInt("Level", 1);
         levelLoader.LoadNextScene();
         
         Destroy(gameObject);
