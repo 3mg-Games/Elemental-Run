@@ -346,7 +346,7 @@ public class PlayerController : MonoBehaviour
       // Debug.Log(Camera.main.transform.rotation.eulerAngles);
         if (wallRunWayPointsIdx <= wallRunWayPointsCount - 1)
         {
-           // Debug.Log(transform.rotation.eulerAngles);
+           //Debug.Log(transform.rotation.eulerAngles);
             Vector3 dir;
             var targetOriginalPosition = wallRunWayPoints[wallRunWayPointsIdx].transform.position;
 
@@ -612,17 +612,36 @@ public class PlayerController : MonoBehaviour
             for (ind = 0; ind < wallRunWayPointsCount; ind++)
             {
                 var currWaypoint = wallRunWayPoints[ind];
-                if (closestWayPoint.transform.position.x <= transform.position.x)
+                if (dir == 1)
                 {
-                    closestWayPoint = wallRunWayPoints[ind];
-                    closestDistance = Vector3.Distance(transform.position, currWaypoint.position);
-                    wallRunWayPointsIdx = ind;
-                   
+                    if (closestWayPoint.transform.position.x <= transform.position.x)
+                    {
+                        closestWayPoint = wallRunWayPoints[ind];
+                        closestDistance = Vector3.Distance(transform.position, currWaypoint.position);
+                        wallRunWayPointsIdx = ind;
+
+                    }
+
+                    else
+                    {
+                        break;
+                    }
                 }
 
-                else
+                else if(dir == 2)
                 {
-                    break;
+                    if (closestWayPoint.transform.position.z <= transform.position.z)
+                    {
+                        closestWayPoint = wallRunWayPoints[ind];
+                        closestDistance = Vector3.Distance(transform.position, currWaypoint.position);
+                        wallRunWayPointsIdx = ind;
+
+                    }
+
+                    else
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -645,7 +664,7 @@ public class PlayerController : MonoBehaviour
 
             // wallRunWayPointsIdx = 0;
             this.wallPos = wallPos;
-            cam.SwitchToWallRunCam(this.wallPos);
+            cam.SwitchToWallRunCam(this.wallPos, dir);
             originalRoationEulerAngles = transform.rotation.eulerAngles;
             //Debug.Log(Camera.main.transform.rotation.eulerAngles);
             if(wallPos == 1)

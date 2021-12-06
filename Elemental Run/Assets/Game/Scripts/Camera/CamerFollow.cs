@@ -15,12 +15,14 @@ public class CamerFollow : MonoBehaviour
     [SerializeField] Vector3 rWallRunEulerAngles;
 
     [SerializeField] GameObject cam2;
+    [SerializeField] GameObject cam3W;
     [SerializeField] float currentAngleDelta;
 
     [SerializeField] bool isPlayerFollow = false;
 
     [SerializeField] Vector3 deltaN = new Vector3(4.2f, -2.9f, 0f);
-    /*[SerializeField] Vector3 deltaW = new Vector3(4.2f, -2.9f, 0f);
+    [SerializeField] Vector3 deltaW = new Vector3(4.2f, -2.9f, 0f);
+    /*
     [SerializeField] Vector3 deltaE = new Vector3(4.2f, -2.9f, 0f);
     [SerializeField] Vector3 deltaS = new Vector3(4.2f, -2.9f, 0f);
 
@@ -80,6 +82,7 @@ public class CamerFollow : MonoBehaviour
         if (!isWin && isPlayerFollow)
         {
             transform.position = new Vector3(player.position.x - delta.x, player.position.y - delta.y, player.position.z - delta.z);
+            Debug.Log(transform.position);
         }
         if (isWin)
         {
@@ -92,6 +95,20 @@ public class CamerFollow : MonoBehaviour
         {
             WallRunCamRoate();
         }
+    }
+
+    public void SetDelta(int direction)
+    {
+        if(direction == 1)
+        {
+            delta = deltaN;
+        }
+
+        else if(direction == 2)
+        {
+            delta = deltaW;
+        }
+
     }
 
     private void WallRunCamRoate()
@@ -131,29 +148,58 @@ public class CamerFollow : MonoBehaviour
         transform.parent = null;
     }
 
-    public void SwitchToWallRunCam(int dir)
+    public void SwitchToWallRunCam(int wallDir, int playerDir)
     {
         /* 1 - left
          * 2 - Right
          * */
-
-        if (dir == 1)
-        // transform.rotation = Quaternion.Euler(lWallRunEulerAngles); 
+        if (playerDir == 1)
         {
-            cam2.SetActive(true);
-            targetRotation = Quaternion.Euler(lWallRunEulerAngles);
-            isCamRotate = true;
+            //delta = deltaN;
+            cam2.GetComponent<CamerFollow>().SetDelta(1);
+
+            if (wallDir == 1)
+            // transform.rotation = Quaternion.Euler(lWallRunEulerAngles); 
+            {
+                cam2.SetActive(true);
+                targetRotation = Quaternion.Euler(lWallRunEulerAngles);
+                isCamRotate = true;
+            }
+
+
+            else
+            {
+                //transform.rotation = Quaternion.Euler(rWallRunEulerAngles);
+                cam2.SetActive(true);
+                targetRotation = Quaternion.Euler(rWallRunEulerAngles);
+                isCamRotate = true;
+            }
         }
 
-
-        else
+        else if(playerDir == 2)
         {
-            //transform.rotation = Quaternion.Euler(rWallRunEulerAngles);
-            cam2.SetActive(true);
-            targetRotation = Quaternion.Euler(rWallRunEulerAngles);
-            isCamRotate = true;
+            // delta = deltaW;
+            cam3W.GetComponent<CamerFollow>().SetDelta(2);
+            if (wallDir == 1)
+            // transform.rotation = Quaternion.Euler(lWallRunEulerAngles); 
+            {
+                cam3W.SetActive(true);
+                targetRotation = Quaternion.Euler(lWallRunEulerAngles);
+                isCamRotate = true;
+            }
+
+
+            else
+            {
+                //transform.rotation = Quaternion.Euler(rWallRunEulerAngles);
+                cam3W.SetActive(true);
+                targetRotation = Quaternion.Euler(rWallRunEulerAngles);
+                isCamRotate = true;
+            }
         }
             
+        
+
 
     }
 
@@ -161,6 +207,7 @@ public class CamerFollow : MonoBehaviour
     {
         //transform.rotation = Quaternion.Euler(orignialRotEulerAngles);
         cam2.SetActive(false);
+        cam3W.SetActive(false);
     }
 
     
