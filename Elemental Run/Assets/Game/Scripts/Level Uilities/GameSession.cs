@@ -214,6 +214,13 @@ public class GameSession : MonoBehaviour
             GameObject rWater = rightSideChoice.transform.GetChild(1).gameObject;
             GameObject rEarth = rightSideChoice.transform.GetChild(2).gameObject;
 
+            GameObject elementalTutorial = elemntSelectionPanel.transform.GetChild(3).gameObject;
+            GameObject lElementalTutorial = elementalTutorial.transform.GetChild(0).gameObject; 
+            GameObject rElementalTutorial = elementalTutorial.transform.GetChild(1).gameObject;
+
+            lElementalTutorial.SetActive(false);
+            rElementalTutorial.SetActive(false);
+
             lFire.SetActive(false);
             lWater.SetActive(false);
             lEarth.SetActive(false);
@@ -236,16 +243,19 @@ public class GameSession : MonoBehaviour
                         case 1:
                             lFire.SetActive(true);
                             rWater.SetActive(true);
+                            lElementalTutorial.SetActive(true);
                             break;
 
                         case 2:
                             lEarth.SetActive(true);
                             rWater.SetActive(true);
+                            rElementalTutorial.SetActive(true);
                             break;
 
                         case 3:
                             lFire.SetActive(true);
                             rEarth.SetActive(true);
+                            rElementalTutorial.SetActive(true);
                             break;
                     }
 
