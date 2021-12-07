@@ -746,7 +746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5717800521775528221
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1242,7 +1242,7 @@ PrefabInstance:
     - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
         type: 3}
@@ -1252,7 +1252,7 @@ PrefabInstance:
     - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
         type: 3}
@@ -1268,6 +1268,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.68764
+      objectReference: {fileID: 0}
+    - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.68764
+      objectReference: {fileID: 0}
+    - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.68764
       objectReference: {fileID: 0}
     - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
         type: 3}
@@ -1307,7 +1322,7 @@ PrefabInstance:
     - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 133
       objectReference: {fileID: 0}
     - target: {fileID: 625096603676022373, guid: 58755ea538257554a8ff2bb27597d486,
         type: 3}
@@ -1333,6 +1348,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level Number UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 8410660477954081703, guid: 58755ea538257554a8ff2bb27597d486,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.040008545
       objectReference: {fileID: 0}
     - target: {fileID: 8410660477954081703, guid: 58755ea538257554a8ff2bb27597d486,
         type: 3}
@@ -1442,12 +1462,12 @@ PrefabInstance:
     - target: {fileID: 8145727209069939959, guid: 84c916f2ea3e4fe44aa52b0f7a87e6c2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -82.600006
+      value: -82.599976
       objectReference: {fileID: 0}
     - target: {fileID: 8145727209069939959, guid: 84c916f2ea3e4fe44aa52b0f7a87e6c2,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -60.299988
+      value: -60.30005
       objectReference: {fileID: 0}
     - target: {fileID: 8145727209069939959, guid: 84c916f2ea3e4fe44aa52b0f7a87e6c2,
         type: 3}
