@@ -235,6 +235,9 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && velocity.y < 0)
         {
             velocity.y = 0;
+
+            if(!isJump)
+            animator.SetBool("Jump", false);
         }
 
         else
@@ -247,6 +250,7 @@ public class PlayerController : MonoBehaviour
         {
             isJump = false;
             velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
+            animator.SetBool("Jump", true);
         }
 
 
@@ -458,6 +462,8 @@ public class PlayerController : MonoBehaviour
         this.jumpHeight = jumpHeight;
         this.jumpDistance = jumpDistance;
         isJump = true;
+        // animator.SetBool("Jump", true);
+       // animator.SetBool("Jump", true);
 
     }
 
@@ -676,7 +682,7 @@ public class PlayerController : MonoBehaviour
                // transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f));
                targetRotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f)); 
             }
-
+            animator.SetBool("Jump", false);
             mobileInput = false;
             isWallRotate = true;
             isPlayerMoving = false;
