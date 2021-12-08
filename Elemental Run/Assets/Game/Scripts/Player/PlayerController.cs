@@ -435,20 +435,40 @@ public class PlayerController : MonoBehaviour
         transform.GetChild(2).gameObject.SetActive(false);
         if(!isDeathByWater && terrainID == 0)
         {
-            playerBurningVfx.SetActive(true);
+            StartCoroutine(BurnPlayer());
         }
-        StartCoroutine(FallThrough());
+        StartCoroutine(FallThrough(terrainID, isDeathByWater));
         
         //characterController.
         //Destroy(characterController);
     }
 
-    private IEnumerator FallThrough()
+    private IEnumerator BurnPlayer()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1f);
+        playerBurningVfx.SetActive(true);
+    }
 
-       
-        gameObject.AddComponent<Rigidbody>();
+    private IEnumerator FallThrough(int terrainId, bool isDeathByWater)
+    {
+        var timeAfterFallThroughHappens = 2f;
+        if(isDeathByWater)
+        {
+            gameObject.AddComponent<Rigidbody>();
+            characterController.enabled = false;
+        }
+        if(terrainId == 1)
+        {
+            timeAfterFallThroughHappens = 1f;
+        }
+        yield return new WaitForSeconds(timeAfterFallThroughHappens);
+
+        if (terrainId == 1 || terrainId == 0)   //if fire or water then sink the player
+        {
+            gameObject.AddComponent<Rigidbody>();
+            Physics.gravity = new Vector3(0, -0.8f, 0);
+            
+        }
         characterController.enabled = false;
     }
 

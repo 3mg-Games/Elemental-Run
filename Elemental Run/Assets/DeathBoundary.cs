@@ -21,7 +21,7 @@ public class DeathBoundary : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            StartCoroutine(gameSession.Kill(true));
+            StartCoroutine(gameSession.Kill(true, 3));
         }
     }
 }

@@ -23,7 +23,7 @@ public class Punch : MonoBehaviour
         if (other.tag == "Player")
         {
             
-            StartCoroutine(gameSession.Kill(false));
+            StartCoroutine(gameSession.Kill(false, 3)); //3for obstacle
 
         }
     }

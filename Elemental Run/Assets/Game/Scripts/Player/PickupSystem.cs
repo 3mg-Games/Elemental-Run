@@ -49,7 +49,7 @@ public class PickupSystem : MonoBehaviour
 
     AudioSource audioSource;
 
-    //int currTeerrainID;
+    int currTeerrainID;
     // Start is called before the first frame update
     void Start()
     {
@@ -142,7 +142,7 @@ public class PickupSystem : MonoBehaviour
                 //Debug.Log("empty container");
                 //player.KillPlayer();
                 ResetAllSpray();
-                StartCoroutine(gameSession.Kill(false));
+                StartCoroutine(gameSession.Kill(false, currTeerrainID));
                 isConsumeFire = false;
             }
 
@@ -159,7 +159,7 @@ public class PickupSystem : MonoBehaviour
                 //Debug.Log("empty container");
                 //player.KillPlayer();
                 ResetAllSpray();
-                StartCoroutine(gameSession.Kill(false));
+                StartCoroutine(gameSession.Kill(false, currTeerrainID));
                 isConsumeWater = false;
             }
 
@@ -176,7 +176,7 @@ public class PickupSystem : MonoBehaviour
                 //Debug.Log("empty container");
                 //player.KillPlayer();
                 ResetAllSpray();
-                StartCoroutine(gameSession.Kill(false));
+                StartCoroutine(gameSession.Kill(false, currTeerrainID));
                 isConsumeEarth = false;
             }
 
@@ -212,7 +212,7 @@ public class PickupSystem : MonoBehaviour
 
     }
 
-    public bool ConsumeFuel(int elementId)
+    public bool ConsumeFuel(int elementId, int currTeerrainID)
     {
         // 0 - fire
         // 1 - water
@@ -223,6 +223,7 @@ public class PickupSystem : MonoBehaviour
         //Debug.Log("After Decrement = " + elements[elementId]);
        // this.currTeerrainID = currTeerrainID;
         audioSource.Play();
+        this.currTeerrainID = currTeerrainID;
         //Debug.Log("consume");
         switch (elementId)
         {
@@ -459,7 +460,7 @@ public class PickupSystem : MonoBehaviour
         {
             elements[counterElementNeededId] = lowerLimitOfContainers;
             
-            StartCoroutine(gameSession.Kill(false));
+            StartCoroutine(gameSession.Kill(false, 3));
             return;
         }
         switch (elementalWallId)
@@ -495,7 +496,7 @@ public class PickupSystem : MonoBehaviour
         {
             elements[counterElementNeededId] = lowerLimitOfContainers;
 
-            StartCoroutine(gameSession.Kill(false));
+            StartCoroutine(gameSession.Kill(false, 3));
             return;
         }
         switch (elementalEnemyId)
