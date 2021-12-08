@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float horizontalSpeed = 4f;
     [SerializeField] GameObject confetti;
     [SerializeField] float currentAngleDelta = 2f;
+    [SerializeField] GameObject playerBurningVfx;
     //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
@@ -422,18 +423,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void KillPlayer()
+    public void KillPlayer(bool isDeathByWater, int terrainID)
     {
         //animator.enabled = false;
         //isPlayerMoving = false;
         FindObjectOfType<CamerFollow>().SetParentNull();
-        SetIsPlayerMoving(false);
-        
+        animator.enabled = true;   //enable animator for fuel empty condition
+        animator.SetTrigger("Trip");
+        isPlayerMoving = false;
+        //SetIsPlayerMoving(false);
         transform.GetChild(2).gameObject.SetActive(false);
-        gameObject.AddComponent<Rigidbody>();
-        characterController.enabled = false;
+        if(!isDeathByWater && terrainID == 0)
+        {
+            playerBurningVfx.SetActive(true);
+        }
+        StartCoroutine(FallThrough());
+        
         //characterController.
         //Destroy(characterController);
+    }
+
+    private IEnumerator FallThrough()
+    {
+        yield return new WaitForSeconds(2f);
+
+       
+        gameObject.AddComponent<Rigidbody>();
+        characterController.enabled = false;
     }
 
     public void PlayerWin()

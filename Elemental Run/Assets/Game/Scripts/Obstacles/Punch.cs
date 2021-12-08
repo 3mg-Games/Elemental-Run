@@ -23,7 +23,7 @@ public class Punch : MonoBehaviour
         if (other.tag == "Player")
         {
             
-            StartCoroutine(gameSession.Kill());
+            StartCoroutine(gameSession.Kill(false));
 
         }
     }

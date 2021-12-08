@@ -48,6 +48,8 @@ public class PickupSystem : MonoBehaviour
     Vector3 deltaTerrainSprayPos;
 
     AudioSource audioSource;
+
+    //int currTeerrainID;
     // Start is called before the first frame update
     void Start()
     {
@@ -140,7 +142,7 @@ public class PickupSystem : MonoBehaviour
                 //Debug.Log("empty container");
                 //player.KillPlayer();
                 ResetAllSpray();
-                StartCoroutine(gameSession.Kill());
+                StartCoroutine(gameSession.Kill(false));
                 isConsumeFire = false;
             }
 
@@ -157,7 +159,7 @@ public class PickupSystem : MonoBehaviour
                 //Debug.Log("empty container");
                 //player.KillPlayer();
                 ResetAllSpray();
-                StartCoroutine(gameSession.Kill());
+                StartCoroutine(gameSession.Kill(false));
                 isConsumeWater = false;
             }
 
@@ -174,7 +176,7 @@ public class PickupSystem : MonoBehaviour
                 //Debug.Log("empty container");
                 //player.KillPlayer();
                 ResetAllSpray();
-                StartCoroutine(gameSession.Kill());
+                StartCoroutine(gameSession.Kill(false));
                 isConsumeEarth = false;
             }
 
@@ -216,10 +218,10 @@ public class PickupSystem : MonoBehaviour
         // 1 - water
         // 2 - earth
         //Debug.Log("Before Decrement = " + elements[elementId]);
-       // elements[elementId] = elements[elementId] - percentageConsumptionInElement;
+        // elements[elementId] = elements[elementId] - percentageConsumptionInElement;
         //  Debug.Log("Decrement = " + percentageConsumptionInElement);
         //Debug.Log("After Decrement = " + elements[elementId]);
-        
+       // this.currTeerrainID = currTeerrainID;
         audioSource.Play();
         //Debug.Log("consume");
         switch (elementId)
@@ -230,7 +232,7 @@ public class PickupSystem : MonoBehaviour
                 isEarthTerrainSpray = false;
                 isConsumeFire = true;
                 //SetFire();
-                ActivateFireTerrainSpray(true);
+                //ActivateFireTerrainSpray(true);
                 Spray(true, 0);
 
 
@@ -242,7 +244,7 @@ public class PickupSystem : MonoBehaviour
                 isEarthTerrainSpray = false;
                 isConsumeWater = true;
                // SetWater();
-                ActivateWaterTerrainSpray(true);
+               // ActivateWaterTerrainSpray(true);
                 Spray(true, 1);
 
                 break;
@@ -253,7 +255,7 @@ public class PickupSystem : MonoBehaviour
                 isEarthTerrainSpray = true;
                 isConsumeEarth = true;
                // SetEarth();
-                ActivateEarthTerrainSpray(true);
+               // ActivateEarthTerrainSpray(true);
                 Spray(true, 2);
 
                 break;
@@ -428,9 +430,9 @@ public class PickupSystem : MonoBehaviour
         isConsumeWater = false;
         isConsumeEarth = false;
 
-        ActivateFireTerrainSpray(false);
-        ActivateWaterTerrainSpray(false);
-        ActivateEarthTerrainSpray(false);
+        //ActivateFireTerrainSpray(false);
+        //ActivateWaterTerrainSpray(false);
+        //ActivateEarthTerrainSpray(false);
 
         ResetAllSpray();
     }
@@ -457,7 +459,7 @@ public class PickupSystem : MonoBehaviour
         {
             elements[counterElementNeededId] = lowerLimitOfContainers;
             
-            StartCoroutine(gameSession.Kill());
+            StartCoroutine(gameSession.Kill(false));
             return;
         }
         switch (elementalWallId)
@@ -493,7 +495,7 @@ public class PickupSystem : MonoBehaviour
         {
             elements[counterElementNeededId] = lowerLimitOfContainers;
 
-            StartCoroutine(gameSession.Kill());
+            StartCoroutine(gameSession.Kill(false));
             return;
         }
         switch (elementalEnemyId)

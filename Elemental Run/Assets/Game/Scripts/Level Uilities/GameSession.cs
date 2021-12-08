@@ -418,7 +418,7 @@ public class GameSession : MonoBehaviour
                         isPlayerAlive = false;
                       //  Debug.Log("Terrain id = " + currTerrainElementId +
                       //      ", Selected element id = " + elementSelectedId);
-                        StartCoroutine(Kill());
+                        StartCoroutine(Kill(false));
                     }
 
                     break;
@@ -429,7 +429,7 @@ public class GameSession : MonoBehaviour
                       //  Debug.Log("Terrain id = " + currTerrainElementId +
                        //     ", Selected element id = " + elementSelectedId);
                         isPlayerAlive = false;
-                        StartCoroutine(Kill());
+                        StartCoroutine(Kill(false));
                     }
 
 
@@ -441,7 +441,7 @@ public class GameSession : MonoBehaviour
                        // Debug.Log("Terrain id = " + currTerrainElementId +
                        //     ", Selected element id = " + elementSelectedId);
                         isPlayerAlive = false;
-                        StartCoroutine(Kill());
+                        StartCoroutine(Kill(false));
 
                     }
 
@@ -459,7 +459,7 @@ public class GameSession : MonoBehaviour
                     if (elementSelectedId == 1 || elementSelectedId == 2)
                     {
                         isPlayerAlive = false;
-                        StartCoroutine(Kill());
+                        StartCoroutine(Kill(false));
                     }
 
                     break;
@@ -468,7 +468,7 @@ public class GameSession : MonoBehaviour
                     if (elementSelectedId == 0 || elementSelectedId == 2)
                     {
                         isPlayerAlive = false;
-                        StartCoroutine(Kill());
+                        StartCoroutine(Kill(false));
                     }
 
 
@@ -478,7 +478,7 @@ public class GameSession : MonoBehaviour
                     if (elementSelectedId == 0 || elementSelectedId == 1)
                     {
                         isPlayerAlive = false;
-                        StartCoroutine(Kill());
+                        StartCoroutine(Kill(false));
 
                     }
 
@@ -507,12 +507,12 @@ public class GameSession : MonoBehaviour
        
     }
 
-    public IEnumerator Kill()
+    public IEnumerator Kill(bool isDeathByWater)
     {
         isPlayerAlive = false;
-        player.KillPlayer();
+        player.KillPlayer(isDeathByWater, currTerrainElementId);
        // isNewLevel = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         
         levelLoader.LoadCurrentScene();
         pickupSystem = FindObjectOfType<PickupSystem>();
