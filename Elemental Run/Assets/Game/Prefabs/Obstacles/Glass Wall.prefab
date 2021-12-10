@@ -154,3 +154,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da71a33bfd07e9348b457b26661aa7d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  glassWallBrokenPrefab: {fileID: 1054592399852321315, guid: ed6930113b62dd045a1a77e90fc9ee03,
+    type: 3}
+  timeAfterWhichPiecesDisappear: 1.5
+  explosionForce: 80
+  explosionRadius: 40
