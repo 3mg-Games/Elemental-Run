@@ -429,8 +429,12 @@ public class PlayerController : MonoBehaviour
         //isPlayerMoving = false;
         FindObjectOfType<CamerFollow>().SetParentNull();
         animator.enabled = true;   //enable animator for fuel empty condition
-        animator.SetTrigger("Trip");
-        isPlayerMoving = false;
+        if (!isDeathByWater)
+            animator.SetTrigger("Trip");
+        else
+            animator.SetTrigger("Fall");
+         isPlayerMoving = false;
+
         //SetIsPlayerMoving(false);
         transform.GetChild(2).gameObject.SetActive(false);
         if(!isDeathByWater && terrainID == 0)
@@ -456,6 +460,7 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.AddComponent<Rigidbody>();
             characterController.enabled = false;
+            Physics.gravity = new Vector3(0f, -14f, 0f);
         }
         if(terrainId == 1)
         {
