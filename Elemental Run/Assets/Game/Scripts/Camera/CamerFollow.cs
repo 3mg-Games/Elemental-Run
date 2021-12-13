@@ -82,7 +82,7 @@ public class CamerFollow : MonoBehaviour
         if (!isWin && isPlayerFollow)
         {
             transform.position = new Vector3(player.position.x - delta.x, player.position.y - delta.y, player.position.z - delta.z);
-            Debug.Log(transform.position);
+            //Debug.Log(transform.position);
         }
         if (isWin)
         {
