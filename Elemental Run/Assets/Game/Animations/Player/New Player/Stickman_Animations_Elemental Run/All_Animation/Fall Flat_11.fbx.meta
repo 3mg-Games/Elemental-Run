@@ -38,7 +38,7 @@ ModelImporter:
       name: Trip
       takeName: Armature|Armature|mixamo.com|Layer0
       internalID: 0
-      firstFrame: 0
+      firstFrame: 10
       lastFrame: 76
       wrapMode: 0
       orientationOffsetY: 0

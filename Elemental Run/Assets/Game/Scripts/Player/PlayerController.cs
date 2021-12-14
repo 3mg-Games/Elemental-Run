@@ -381,7 +381,8 @@ public class PlayerController : MonoBehaviour
         {
             cam.SwitchToNormalCam();
             transform.rotation = Quaternion.Euler(originalRoationEulerAngles);
-           
+            animator.SetBool("Jump", false);  //check this line later
+            animator.SetBool("WallRun", false);
             isWallRun = false;
             mobileInput = true;
             isPlayerMoving = true;
@@ -723,8 +724,9 @@ public class PlayerController : MonoBehaviour
                // transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f));
                targetRotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f)); 
             }
-            animator.SetBool("Jump", false);
-
+           
+            animator.SetBool("WallRun", true);
+            
             mobileInput = false;
             //isWallRotate = true;
             isPlayerMoving = false;
