@@ -724,8 +724,9 @@ public class PlayerController : MonoBehaviour
                targetRotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f)); 
             }
             animator.SetBool("Jump", false);
+
             mobileInput = false;
-            isWallRotate = true;
+            //isWallRotate = true;
             isPlayerMoving = false;
             isWallRun = true;
         }
