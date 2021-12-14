@@ -26,7 +26,7 @@ public class WallShattering : MonoBehaviour
             Debug.Log("Wall trigger");
             collider.isTrigger = false;
             rb.isKinematic = false;
-            var force = Random.Range(40f, 80f);
+            var force = Random.Range(5f, 8f);
             rb.AddForce(force * Vector3.right);
         }
     }

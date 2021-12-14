@@ -14,8 +14,8 @@ public class CamerFollow : MonoBehaviour
     [SerializeField] Vector3 lWallRunEulerAngles;
     [SerializeField] Vector3 rWallRunEulerAngles;
 
-    [SerializeField] GameObject cam2;
-    [SerializeField] GameObject cam3W;
+    [SerializeField] GameObject northWallRunCam;
+    [SerializeField] GameObject westWallRunCam;
     [SerializeField] float currentAngleDelta;
 
     [SerializeField] bool isPlayerFollow = false;
@@ -164,12 +164,12 @@ public class CamerFollow : MonoBehaviour
         if (playerDir == 1)
         {
             //delta = deltaN;
-            cam2.GetComponent<CamerFollow>().SetDelta(1);
+            northWallRunCam.GetComponent<CamerFollow>().SetDelta(1);
 
             if (wallDir == 1)
             // transform.rotation = Quaternion.Euler(lWallRunEulerAngles); 
             {
-                cam2.SetActive(true);
+                northWallRunCam.SetActive(true);
                 targetRotation = Quaternion.Euler(lWallRunEulerAngles);
                 isCamRotate = true;
             }
@@ -178,7 +178,7 @@ public class CamerFollow : MonoBehaviour
             else
             {
                 //transform.rotation = Quaternion.Euler(rWallRunEulerAngles);
-                cam2.SetActive(true);
+                northWallRunCam.SetActive(true);
                 targetRotation = Quaternion.Euler(rWallRunEulerAngles);
                 isCamRotate = true;
             }
@@ -187,11 +187,11 @@ public class CamerFollow : MonoBehaviour
         else if(playerDir == 2)
         {
             // delta = deltaW;
-            cam3W.GetComponent<CamerFollow>().SetDelta(2);
+            westWallRunCam.GetComponent<CamerFollow>().SetDelta(2);
             if (wallDir == 1)
             // transform.rotation = Quaternion.Euler(lWallRunEulerAngles); 
             {
-                cam3W.SetActive(true);
+                westWallRunCam.SetActive(true);
                 targetRotation = Quaternion.Euler(lWallRunEulerAngles);
                 isCamRotate = true;
             }
@@ -200,7 +200,7 @@ public class CamerFollow : MonoBehaviour
             else
             {
                 //transform.rotation = Quaternion.Euler(rWallRunEulerAngles);
-                cam3W.SetActive(true);
+                westWallRunCam.SetActive(true);
                 targetRotation = Quaternion.Euler(rWallRunEulerAngles);
                 isCamRotate = true;
             }
@@ -214,8 +214,8 @@ public class CamerFollow : MonoBehaviour
     public void SwitchToNormalCam()
     {
         //transform.rotation = Quaternion.Euler(orignialRotEulerAngles);
-        cam2.SetActive(false);
-        cam3W.SetActive(false);
+        northWallRunCam.SetActive(false);
+        westWallRunCam.SetActive(false);
     }
 
     

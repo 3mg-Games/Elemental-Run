@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3364910165591386184}
-  m_LocalRotation: {x: 0.04273669, y: 0.70581424, z: -0.042736705, w: 0.705814}
+  m_LocalRotation: {x: 0.042736698, y: 0.7058142, z: -0.0427367, w: 0.7058141}
   m_LocalPosition: {x: -5.2400002, y: 2.5700002, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35,7 +35,7 @@ Transform:
   - {fileID: 7001915314378344950}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 6.93, y: 180.00002, z: 0}
+  m_LocalEulerAnglesHint: {x: 6.9300003, y: 90.00001, z: 0}
 --- !u!20 &3364910165591386191
 Camera:
   m_ObjectHideFlags: 0
@@ -126,10 +126,12 @@ MonoBehaviour:
   speedMod: 10
   lWallRunEulerAngles: {x: 3.6, y: 87.5, z: 0.000012}
   rWallRunEulerAngles: {x: 3.6, y: 87.5, z: -359.9}
-  cam2: {fileID: 3364910165591386184}
+  northWallRunCam: {fileID: 0}
+  westWallRunCam: {fileID: 0}
   currentAngleDelta: 7
   isPlayerFollow: 1
-  deltaN: {x: 5.2, y: -2.4, z: 0}
+  deltaN: {x: 6.9, y: -2.7, z: 2.1}
+  deltaW: {x: 4.2, y: -2.9, z: 0}
 --- !u!1 &3364910166302527669
 GameObject:
   m_ObjectHideFlags: 0
