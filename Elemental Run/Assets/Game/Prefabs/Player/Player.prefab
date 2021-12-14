@@ -47241,8 +47241,8 @@ MonoBehaviour:
   speedMod: 10
   lWallRunEulerAngles: {x: 3.6, y: 87.5, z: 0.000012}
   rWallRunEulerAngles: {x: 3.6, y: 87.5, z: -359.9}
-  cam2: {fileID: 0}
-  cam3W: {fileID: 0}
+  northWallRunCam: {fileID: 0}
+  westWallRunCam: {fileID: 0}
   currentAngleDelta: 7
   isPlayerFollow: 0
   deltaN: {x: 4.2, y: -2.9, z: 0}
@@ -52095,12 +52095,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2066910284}
-  m_LocalRotation: {x: -0.601639, y: -0.5672342, z: -0.36509854, w: 0.42776033}
-  m_LocalPosition: {x: 2.0786614, y: -40.802223, z: 13.672596}
-  m_LocalScale: {x: 26.767342, y: 26.767334, z: 26.767338}
+  m_LocalRotation: {x: -0.60163903, y: -0.5672343, z: -0.36509845, w: 0.42776036}
+  m_LocalPosition: {x: 0.15390003, y: -3.014745, z: 1.0277717}
+  m_LocalScale: {x: 1.9733993, y: 1.9733998, z: 1.973399}
   m_Children:
   - {fileID: 63921144}
-  m_Father: {fileID: 6515712193404781253}
+  m_Father: {fileID: 8116056190349796963}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 268.756, y: -0.0009765625, z: 90.001}
 --- !u!198 &2066910287
@@ -67553,7 +67553,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5901452234807471039}
-  - {fileID: 2066910285}
   m_Father: {fileID: 366175168616615608}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -69271,6 +69270,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.9999999, z: 0.99999994}
   m_Children:
   - {fileID: 7670283005155116705}
+  - {fileID: 2066910285}
   m_Father: {fileID: 3385248494168228771}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
