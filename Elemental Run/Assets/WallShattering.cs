@@ -28,6 +28,7 @@ public class WallShattering : MonoBehaviour
             rb.isKinematic = false;
             var force = Random.Range(5f, 8f);
             rb.AddForce(force * Vector3.right);
+            Destroy(gameObject, 1.3f);
         }
     }
 }
