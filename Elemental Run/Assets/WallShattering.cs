@@ -23,12 +23,13 @@ public class WallShattering : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            Debug.Log("Wall trigger");
+           // Debug.Log("Wall trigger");
+           /*
             collider.isTrigger = false;
             rb.isKinematic = false;
             var force = Random.Range(5f, 8f);
             rb.AddForce(force * Vector3.right);
-            Destroy(gameObject, 1.3f);
+            Destroy(gameObject, 1.3f);*/
         }
     }
 }

@@ -5106,7 +5106,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2429625331365388517}
   m_Layer: 8
-  m_Name: Wall L 1
+  m_Name: Wall Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8676,7 +8676,7 @@ PrefabInstance:
     - target: {fileID: 1007286683836762363, guid: a8fe7384d6e5731458563122d5e26950,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.61
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 1007286683836762363, guid: a8fe7384d6e5731458563122d5e26950,
         type: 3}
@@ -8761,7 +8761,7 @@ PrefabInstance:
     - target: {fileID: 4379695063478583454, guid: 3ec7be5c79044094fac7ea94e131822e,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.61
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 4379695063478583454, guid: 3ec7be5c79044094fac7ea94e131822e,
         type: 3}
@@ -8846,7 +8846,7 @@ PrefabInstance:
     - target: {fileID: 5664435974901907373, guid: ec574ecc529fb4e48a8cbde324c288f1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.61
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 5664435974901907373, guid: ec574ecc529fb4e48a8cbde324c288f1,
         type: 3}
@@ -9374,7 +9374,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8360c5745ca0c334aaec1de7d7faf57b,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.4
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8360c5745ca0c334aaec1de7d7faf57b,
         type: 3}
