@@ -184,7 +184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &780712894
 RectTransform:
   m_ObjectHideFlags: 0
@@ -610,7 +610,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8a256bbf382265f4db735d3374f8a869, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c225f872c841ea748a547df8cbfd342a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -739,7 +739,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 527a4e63af2225848bd5e59d9699e550, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f764d36af191964281e390e3b9d2fb1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1290,7 +1290,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4736bac2b34bd444e82a387caf88de00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 812f6ce1efc36f24e8104e6610147414, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1419,7 +1419,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4736bac2b34bd444e82a387caf88de00, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 812f6ce1efc36f24e8104e6610147414, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1586,7 +1586,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8a256bbf382265f4db735d3374f8a869, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c225f872c841ea748a547df8cbfd342a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1841,7 +1841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 527a4e63af2225848bd5e59d9699e550, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1f764d36af191964281e390e3b9d2fb1, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
