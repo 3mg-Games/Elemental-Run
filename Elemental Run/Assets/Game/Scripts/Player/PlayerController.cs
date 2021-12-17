@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject confetti;
     [SerializeField] float currentAngleDelta = 2f;
     [SerializeField] GameObject playerBurningVfx;
+    [SerializeField] GameObject speedVfx;
     //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
@@ -237,8 +238,11 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = 0;
 
-            if(!isJump)
-            animator.SetBool("Jump", false);
+            if (!isJump)
+            {
+                ActivateSpeedVFx(false);
+                animator.SetBool("Jump", false);
+            }
         }
 
         else
@@ -381,6 +385,7 @@ public class PlayerController : MonoBehaviour
         {
             cam.SwitchToNormalCam();
             transform.rotation = Quaternion.Euler(originalRoationEulerAngles);
+            ActivateSpeedVFx(false);
             animator.SetBool("Jump", false);  //check this line later
             animator.SetBool("WallRun", false);
             isWallRun = false;
@@ -419,6 +424,7 @@ public class PlayerController : MonoBehaviour
 
         else
         {
+            ActivateSpeedVFx(false);
             isTurn = false;
             isPlayerMoving = true;
         }
@@ -428,6 +434,7 @@ public class PlayerController : MonoBehaviour
     {
         //animator.enabled = false;
         //isPlayerMoving = false;
+        ActivateSpeedVFx(false);
         FindObjectOfType<CamerFollow>().SetParentNull();
         animator.enabled = true;   //enable animator for fuel empty condition
         if (!isDeathByWater)
@@ -503,6 +510,8 @@ public class PlayerController : MonoBehaviour
     {
         this.jumpHeight = jumpHeight;
         this.jumpDistance = jumpDistance;
+
+        ActivateSpeedVFx(true);
         isJump = true;
         // animator.SetBool("Jump", true);
        // animator.SetBool("Jump", true);
@@ -581,7 +590,10 @@ public class PlayerController : MonoBehaviour
 
         turnWayPointIdx = 0;
         turnWayPointsCount = path.transform.childCount;
+
+        ActivateSpeedVFx(true);
         isTurn = true;
+      
     }
 
     void SetDir(int direction)
@@ -724,7 +736,8 @@ public class PlayerController : MonoBehaviour
                // transform.rotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f));
                targetRotation = Quaternion.Euler(new Vector3(0f, 270f, -34.9f)); 
             }
-           
+
+            ActivateSpeedVFx(true);
             animator.SetBool("WallRun", true);
             
             mobileInput = false;
@@ -732,5 +745,10 @@ public class PlayerController : MonoBehaviour
             isPlayerMoving = false;
             isWallRun = true;
         }
+    }
+
+    private void ActivateSpeedVFx(bool val)
+    {
+        speedVfx.SetActive(val);
     }
 }
