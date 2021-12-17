@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CamerFollow : MonoBehaviour
 {
@@ -14,8 +15,9 @@ public class CamerFollow : MonoBehaviour
     [SerializeField] Vector3 lWallRunEulerAngles;
     [SerializeField] Vector3 rWallRunEulerAngles;
 
-    [SerializeField] GameObject northWallRunCam;
-    [SerializeField] GameObject westWallRunCam;
+    [SerializeField] CinemachineVirtualCamera northWallRunCam;
+    [SerializeField] CinemachineVirtualCamera westWallRunCam;
+    [SerializeField] CinemachineVirtualCamera noramlCam;
     [SerializeField] float currentAngleDelta;
 
     [SerializeField] bool isPlayerFollow = false;
@@ -40,6 +42,8 @@ public class CamerFollow : MonoBehaviour
     Quaternion curRotation;
     Quaternion targetRotation;
 
+
+   
     //PlayerController player;
     // Start is called before the first frame update
     void Start()
@@ -142,8 +146,7 @@ public class CamerFollow : MonoBehaviour
         cam2.transform.rotation = curRotation;*/
     }
 
-
-    public void ActivateRotate()
+    public void LevelComplete()
     {
         SetParentNull();
         point = player.transform.position;
@@ -151,7 +154,17 @@ public class CamerFollow : MonoBehaviour
         isWin = true;
     }
 
+    public void ActivateRotate()
+    {
+        noramlCam.transform.gameObject.GetComponent<CamerFollow>().LevelComplete();
+    }
+
     public void SetParentNull()
+    {
+        noramlCam.transform.gameObject.GetComponent<CamerFollow>().PlayerDead();
+    }
+
+    public void PlayerDead()
     {
         transform.parent = null;
     }
@@ -169,7 +182,9 @@ public class CamerFollow : MonoBehaviour
             if (wallDir == 1)
             // transform.rotation = Quaternion.Euler(lWallRunEulerAngles); 
             {
-                northWallRunCam.SetActive(true);
+                //northWallRunCam.SetActive(true);
+                noramlCam.Priority = 1;
+                northWallRunCam.Priority = 11;
                 targetRotation = Quaternion.Euler(lWallRunEulerAngles);
                 isCamRotate = true;
             }
@@ -178,7 +193,8 @@ public class CamerFollow : MonoBehaviour
             else
             {
                 //transform.rotation = Quaternion.Euler(rWallRunEulerAngles);
-                northWallRunCam.SetActive(true);
+                noramlCam.Priority = 1;
+                northWallRunCam.Priority = 11;
                 targetRotation = Quaternion.Euler(rWallRunEulerAngles);
                 isCamRotate = true;
             }
@@ -187,12 +203,13 @@ public class CamerFollow : MonoBehaviour
         else if(playerDir == 2)
         {
             // delta = deltaW;
-            westWallRunCam.GetComponent<CamerFollow>().SetDelta(2);
+            //westWallRunCam.GetComponent<CamerFollow>().SetDelta(2);
             if (wallDir == 1)
             // transform.rotation = Quaternion.Euler(lWallRunEulerAngles); 
             {
-                westWallRunCam.SetActive(true);
-                targetRotation = Quaternion.Euler(lWallRunEulerAngles);
+                noramlCam.Priority = 1;
+                westWallRunCam.Priority = 11;
+              //  targetRotation = Quaternion.Euler(lWallRunEulerAngles);
                 isCamRotate = true;
             }
 
@@ -200,8 +217,9 @@ public class CamerFollow : MonoBehaviour
             else
             {
                 //transform.rotation = Quaternion.Euler(rWallRunEulerAngles);
-                westWallRunCam.SetActive(true);
-                targetRotation = Quaternion.Euler(rWallRunEulerAngles);
+                noramlCam.Priority = 1;
+                westWallRunCam.Priority = 11;
+              //  targetRotation = Quaternion.Euler(rWallRunEulerAngles);
                 isCamRotate = true;
             }
         }
@@ -214,8 +232,10 @@ public class CamerFollow : MonoBehaviour
     public void SwitchToNormalCam()
     {
         //transform.rotation = Quaternion.Euler(orignialRotEulerAngles);
-        northWallRunCam.SetActive(false);
-        westWallRunCam.SetActive(false);
+
+        northWallRunCam.Priority = 1;
+        westWallRunCam.Priority = 1;
+        noramlCam.Priority = 11;
     }
 
     

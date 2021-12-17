@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float currentAngleDelta = 2f;
     [SerializeField] GameObject playerBurningVfx;
     [SerializeField] GameObject speedVfx;
+    [SerializeField] GameObject mainCam;
     //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
@@ -435,10 +436,13 @@ public class PlayerController : MonoBehaviour
         //animator.enabled = false;
         //isPlayerMoving = false;
         ActivateSpeedVFx(false);
-        FindObjectOfType<CamerFollow>().SetParentNull();
+        mainCam.GetComponent<CamerFollow>().SetParentNull();
         animator.enabled = true;   //enable animator for fuel empty condition
         if (!isDeathByWater)
+        {
+            animator.SetBool("Jump", false);
             animator.SetTrigger("Trip");
+        }
         else
             animator.SetTrigger("Fall");
          isPlayerMoving = false;
@@ -747,7 +751,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void ActivateSpeedVFx(bool val)
+    public void ActivateSpeedVFx(bool val)
     {
         speedVfx.SetActive(val);
     }

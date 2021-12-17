@@ -5,9 +5,12 @@ using UnityEngine;
 public class GlassWall : MonoBehaviour
 {
     [SerializeField] GameObject glassWallBrokenPrefab;
+    [SerializeField] GameObject glassOriginal;
     [SerializeField] float timeAfterWhichPiecesDisappear = 1.5f;
     [SerializeField] float explosionForce = 5f;
     [SerializeField] float explosionRadius = 5f;
+   // [SerializeField] AudioClip glassBreakSfx;
+   //[SerializeField] [Range(0f, 1f)] float glassBreakSfxVolume = 1f;
 
     PlayerController player;
     // Start is called before the first frame update
@@ -26,6 +29,7 @@ public class GlassWall : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            Destroy(glassOriginal);
             GameObject glassWallBroken = Instantiate(glassWallBrokenPrefab,
                 transform.position,
                 transform.rotation);
@@ -38,7 +42,9 @@ public class GlassWall : MonoBehaviour
                     explosionRadius);
                 Destroy(child.gameObject, timeAfterWhichPiecesDisappear);
             }
-            Destroy(gameObject);
+
+            
+            //Destroy(gameObject);
         }
     }
 }

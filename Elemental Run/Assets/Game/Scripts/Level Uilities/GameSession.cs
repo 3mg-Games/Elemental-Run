@@ -23,6 +23,7 @@ public class GameSession : MonoBehaviour
     [SerializeField] float waitTimeForPlayerInput = 5f;
     [SerializeField] GameObject tutorial;
     [SerializeField] TextMeshProUGUI coinText;
+   
     //[SerializeField] Transform coinTextImg;
     //[SerializeField] GameObject coinSpawnPrefab;
     //[SerializeField] GameObject coinSpawnCanvas;
@@ -55,9 +56,9 @@ public class GameSession : MonoBehaviour
     bool hasGameStarted = false;
     bool isFirstTimeTutorial = true;
     bool hasLevelLoaded = false;
-   // public bool isNewLevel = false;
+    // public bool isNewLevel = false;
 
-        
+    GameObject mainCam;
 
     float choiceWaitTimer;
     float playerInputWaitTimer;
@@ -104,6 +105,7 @@ public class GameSession : MonoBehaviour
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
         currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
+        mainCam = player.transform.GetChild(3).transform.gameObject;
         elemntSelectionPanel.SetActive(false);
         choiceWaitTimer = choiceWaitTime;
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
@@ -196,6 +198,7 @@ public class GameSession : MonoBehaviour
 
     public void ActivateElementSelectionPanel(int elementTerrainId)
     {
+        player.ActivateSpeedVFx(false);
         currTerrainElementId = elementTerrainId;
         //Time.timeScale = 0; //stop the player
         player.SetIsPlayerMoving(false);
@@ -535,7 +538,7 @@ public class GameSession : MonoBehaviour
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
-
+        mainCam = player.transform.GetChild(3).transform.gameObject;
         GameObject canvas = GameObject.FindGameObjectWithTag("Selection Canvas").gameObject;
         //coinSpawnCanvas = GameObject.FindGameObjectWithTag("Coin Canvas").gameObject;                   //commented out
         //localCoinPos = coinSpawnCanvas.transform.GetChild(0).gameObject.GetComponent<RectTransform>();  // commented out
@@ -622,7 +625,7 @@ public class GameSession : MonoBehaviour
         player.PlayerWin();
 
 
-        FindObjectOfType<CamerFollow>().ActivateRotate();
+        mainCam.GetComponent<CamerFollow>().ActivateRotate();
         StartCoroutine(AcitvateWinScreen());
     }
 
