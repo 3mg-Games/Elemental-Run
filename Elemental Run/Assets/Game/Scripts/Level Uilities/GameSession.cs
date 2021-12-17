@@ -245,18 +245,20 @@ public class GameSession : MonoBehaviour
                     {
                         case 1:
                             lFire.SetActive(true);
-                            rWater.SetActive(true);
+                            rEarth.SetActive(true);
                             lElementalTutorial.SetActive(true);
                             break;
 
                         case 2:
-                            lEarth.SetActive(true);
+                            //lEarth.SetActive(true);
+                            lFire.SetActive(true);
                             rWater.SetActive(true);
                             rElementalTutorial.SetActive(true);
                             break;
 
                         case 3:
-                            lFire.SetActive(true);
+                            //lFire.SetActive(true);
+                            lWater.SetActive(true);
                             rEarth.SetActive(true);
                             rElementalTutorial.SetActive(true);
                             break;
@@ -269,17 +271,20 @@ public class GameSession : MonoBehaviour
                     {
                         case 1:
                             lEarth.SetActive(true);
-                            rFire.SetActive(true);
+                            //rFire.SetActive(true);
+                            rWater.SetActive(true);
                             break;
 
                         case 2:
                             lFire.SetActive(true);
-                            rWater.SetActive(true);
+                            //rWater.SetActive(true);
+                            rEarth.SetActive(true);
                             break;
 
                         case 3:
                             lWater.SetActive(true);
-                            rEarth.SetActive(true);
+                            //rEarth.SetActive(true);
+                            rFire.SetActive(true);
                             break;
                     }
 

@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject playerBurningVfx;
     [SerializeField] GameObject speedVfx;
     [SerializeField] GameObject mainCam;
+    [SerializeField] AudioClip sinkingSfx;
     //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour
     Quaternion curRotation;
     [SerializeField] CamerFollow cam;
 
+    AudioSource audioSource;
     private void Awake()
     {
        // ResetPlayer();
@@ -91,12 +93,14 @@ public class PlayerController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
         SetIsPlayerMoving(false);
+        
     }
 
     // Start is called before the first frame update
     void Start()
     {
         ResetPlayer();
+        audioSource = GetComponent<AudioSource>();
         //cam = Camera.main.GetComponent<CamerFollow>();
         // transform.rotation = gameSession.lastCheckPointTransform.rotation;
 
@@ -482,6 +486,9 @@ public class PlayerController : MonoBehaviour
 
         if (terrainId == 1 || terrainId == 0)   //if fire or water then sink the player
         {
+            audioSource.clip = sinkingSfx;
+            //audioSource.loop = false;
+            audioSource.Play();
             gameObject.AddComponent<Rigidbody>();
             Physics.gravity = new Vector3(0, -0.8f, 0);
             
