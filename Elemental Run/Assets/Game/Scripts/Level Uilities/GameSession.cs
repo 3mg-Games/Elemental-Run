@@ -539,8 +539,12 @@ public class GameSession : MonoBehaviour
     {
         isPlayerAlive = false;
         player.KillPlayer(isDeathByWater, terrainID);
-       // isNewLevel = false;
-        yield return new WaitForSeconds(3.5f);
+        // isNewLevel = false;
+        var timeAfterWhichSceneIsLoaded = 3.5f;
+        if (terrainID == 3)
+            timeAfterWhichSceneIsLoaded = 4.5f;
+
+        yield return new WaitForSeconds(timeAfterWhichSceneIsLoaded);
         
         levelLoader.LoadCurrentScene();
         pickupSystem = FindObjectOfType<PickupSystem>();

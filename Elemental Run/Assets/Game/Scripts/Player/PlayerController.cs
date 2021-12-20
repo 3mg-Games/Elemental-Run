@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject speedVfx;
     [SerializeField] GameObject mainCam;
     [SerializeField] AudioClip sinkingSfx;
-    
+    [SerializeField] Material freezingMaterial;
+    [SerializeField] SkinnedMeshRenderer renderer;
+    [SerializeField] GameObject coldFumes;
     //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
@@ -454,6 +456,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Jump", false);
             animator.SetTrigger("Freeze");
+            StartCoroutine(Freeze());
         }
 
         else
@@ -473,6 +476,19 @@ public class PlayerController : MonoBehaviour
         //Destroy(characterController);
     }
 
+    private IEnumerator Freeze()
+    {
+        var freezeWaitTime = 1.8f;
+
+        yield return new WaitForSeconds(freezeWaitTime);
+
+        Material[] mats = renderer.materials;
+        mats[1] = freezingMaterial;
+        renderer.materials = mats;
+
+        coldFumes.SetActive(true);
+    }
+
     private IEnumerator BurnPlayer()
     {
         yield return new WaitForSeconds(1f);
@@ -482,15 +498,25 @@ public class PlayerController : MonoBehaviour
     private IEnumerator FallThrough(int terrainId, bool isDeathByWater)
     {
         var timeAfterFallThroughHappens = 2f;
+
         if(isDeathByWater)
         {
             gameObject.AddComponent<Rigidbody>();
             characterController.enabled = false;
             Physics.gravity = new Vector3(0f, -14f, 0f);
+            audioSource.clip = sinkingSfx;
+            //audioSource.loop = false;
+            audioSource.Play();
         }
+
         if(terrainId == 1)
         {
             timeAfterFallThroughHappens = 1f;
+        }
+
+        else if(terrainId == 3)
+        {
+            timeAfterFallThroughHappens = 3f;
         }
         yield return new WaitForSeconds(timeAfterFallThroughHappens);
 
@@ -503,6 +529,7 @@ public class PlayerController : MonoBehaviour
             Physics.gravity = new Vector3(0, -0.8f, 0);
             
         }
+
         characterController.enabled = false;
     }
 
