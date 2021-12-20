@@ -29,7 +29,7 @@ public class PickupSystem : MonoBehaviour
     float[] elements = new float[3];     // 0 - fire
                                          // 1 - water
                                          // 2 - earth
-
+                                         // 3 - ice
 
     PlayerController player;
    // float startingCapacityOfContainers;
@@ -217,6 +217,7 @@ public class PickupSystem : MonoBehaviour
         // 0 - fire
         // 1 - water
         // 2 - earth
+        // 3 - ice
         //Debug.Log("Before Decrement = " + elements[elementId]);
         // elements[elementId] = elements[elementId] - percentageConsumptionInElement;
         //  Debug.Log("Decrement = " + percentageConsumptionInElement);
@@ -453,14 +454,14 @@ public class PickupSystem : MonoBehaviour
         // 0 - fire
         // 1 - water
         // 2 - earth
-
+        
 
         elements[counterElementNeededId] = elements[counterElementNeededId] - percentageConsumptionInElement;
         if (elements[counterElementNeededId] < lowerLimitOfContainers)
         {
             elements[counterElementNeededId] = lowerLimitOfContainers;
             
-            StartCoroutine(gameSession.Kill(false, 3));
+            StartCoroutine(gameSession.Kill(false, 4));
             return;
         }
         switch (elementalWallId)
@@ -489,14 +490,14 @@ public class PickupSystem : MonoBehaviour
         // 0 - fire
         // 1 - water
         // 2 - earth
-
+        
 
         elements[counterElementNeededId] = elements[counterElementNeededId] - percentageConsumptionInElement;
         if (elements[counterElementNeededId] < lowerLimitOfContainers)
         {
             elements[counterElementNeededId] = lowerLimitOfContainers;
 
-            StartCoroutine(gameSession.Kill(false, 3));
+            StartCoroutine(gameSession.Kill(false, 4));
             return;
         }
         switch (elementalEnemyId)

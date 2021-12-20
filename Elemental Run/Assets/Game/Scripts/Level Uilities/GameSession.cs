@@ -9,6 +9,7 @@ public class GameSession : MonoBehaviour
     // 0 - fire
     // 1 - water
     // 2 - earth
+    // 3 - ice
     [SerializeField] bool isEditor = false;
     [SerializeField] bool test1 = true;
     [SerializeField] GameObject elemntSelectionPanel;
@@ -403,7 +404,7 @@ public class GameSession : MonoBehaviour
         // 0 - fire
         // 1 - water
         // 2 - earth
-
+        // 3 - ice
         isChoiceWaitTimerActive = false;
         choiceWaitTimer = choiceWaitTime;
 
@@ -455,6 +456,16 @@ public class GameSession : MonoBehaviour
 
                     break;
 
+
+                case 3:   //ice
+                    if (elementSelectedId == 1 || elementSelectedId == 2)
+                    {
+                        isPlayerAlive = false;
+                        StartCoroutine(Kill(false, 3));
+                    }
+
+                    break;
+
             }
         }
         
@@ -488,6 +499,15 @@ public class GameSession : MonoBehaviour
                         isPlayerAlive = false;
                         StartCoroutine(Kill(false, 2));
 
+                    }
+
+                    break;
+
+                case 3:   //ice
+                    if (elementSelectedId == 1 || elementSelectedId == 2)
+                    {
+                        isPlayerAlive = false;
+                        StartCoroutine(Kill(false, 3));
                     }
 
                     break;

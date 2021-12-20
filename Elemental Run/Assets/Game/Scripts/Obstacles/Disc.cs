@@ -75,7 +75,7 @@ public class Disc : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            StartCoroutine(gameSession.Kill(false, 3));
+            StartCoroutine(gameSession.Kill(false, 4));
 
         }
     }

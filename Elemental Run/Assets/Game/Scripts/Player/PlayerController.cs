@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject speedVfx;
     [SerializeField] GameObject mainCam;
     [SerializeField] AudioClip sinkingSfx;
+    
     //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
@@ -442,14 +443,23 @@ public class PlayerController : MonoBehaviour
         ActivateSpeedVFx(false);
         mainCam.GetComponent<CamerFollow>().SetParentNull();
         animator.enabled = true;   //enable animator for fuel empty condition
-        if (!isDeathByWater)
+        if (!isDeathByWater && terrainID != 3)  //not ice and not death by water
         {
             animator.SetBool("Jump", false);
             animator.SetTrigger("Trip");
         }
+
+
+        else if(terrainID == 3)
+        {
+            animator.SetBool("Jump", false);
+            animator.SetTrigger("Freeze");
+        }
+
         else
             animator.SetTrigger("Fall");
-         isPlayerMoving = false;
+
+        isPlayerMoving = false;
 
         //SetIsPlayerMoving(false);
         transform.GetChild(2).gameObject.SetActive(false);
@@ -484,7 +494,7 @@ public class PlayerController : MonoBehaviour
         }
         yield return new WaitForSeconds(timeAfterFallThroughHappens);
 
-        if (terrainId == 1 || terrainId == 0)   //if fire or water then sink the player
+        if (terrainId == 1 || terrainId == 0 || terrainId == 3)   //if fire or water or ice then sink the player
         {
             audioSource.clip = sinkingSfx;
             //audioSource.loop = false;

@@ -7,7 +7,7 @@ public class ElementalEntry : MonoBehaviour
     // 0 - fire
     // 1 - water
     // 2 - earth
-    [Tooltip("Fire - 0, Water - 1, Earth - 2")]
+    [Tooltip("Fire - 0, Water - 1, Earth - 2, Ice - 3")]
     [SerializeField] int elementId = 0;
 
     bool hasPlayerEntered = false;
