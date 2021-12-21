@@ -10,9 +10,10 @@ public class CheckPoint : MonoBehaviour
     PlayerController player;
     PickupSystem pickupSystem;
     Animator animator;
-    
+    ProgressBar progressBar;
     private void Start()
     {
+        progressBar = FindObjectOfType<ProgressBar>();
         gameSession = FindObjectOfType<GameSession>();
         player = FindObjectOfType<PlayerController>();
         pickupSystem = FindObjectOfType<PickupSystem>();
@@ -48,6 +49,13 @@ public class CheckPoint : MonoBehaviour
             gameSession.SetTwoChoiceCount();
 
             animator.SetTrigger("Activate");
+
+            PlayerPrefs.SetFloat("Progress", progressBar.ProgressBarFill);   //these keys need to be deleted when new level is loaded
+            //PlayerPrefs.Set
+            PlayerPrefs.SetInt("PlayerDirection", gameSession.playerDir);
+            //Debug.Log("Save Initial val of progress = " + progressBar.ProgressBarFill);
+            PlayerPrefs.SetFloat("Player Distance", progressBar.PlayerDistance);
+           // progressBar.ChangeDir(gameSession.playerDir, player.transform.position);
         }
     }
 }

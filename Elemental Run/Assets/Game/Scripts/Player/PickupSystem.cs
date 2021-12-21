@@ -69,6 +69,7 @@ public class PickupSystem : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             elements[i] = gameSession.lastElementsCapacity[i];
+            Debug.Log(elements[i]);
         }
 
         //elements = gameSession.lastElementsCapacity;

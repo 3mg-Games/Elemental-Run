@@ -29,7 +29,7 @@ public class CoinSpawn : MonoBehaviour
         var targetPosition = gameSession.GetCoinSpawnTarget().position;
         var movementThisFrame = coinMoveSpeed * Time.deltaTime;
 
-        Debug.Log(targetPosition);
+        //Debug.Log(targetPosition);
         dir = targetPosition - transform.position;
          
         transform.position = Vector3.MoveTowards        //try character controller here

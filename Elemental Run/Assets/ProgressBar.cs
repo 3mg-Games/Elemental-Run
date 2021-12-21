@@ -15,16 +15,26 @@ public class ProgressBar : MonoBehaviour
     public int playerDir = 1;
     float basePlayerDist;
     float lastDistance;
+    GameSession gameSession;
     // Start is called before the first frame update
     void Start()
     {
+        gameSession = FindObjectOfType<GameSession>();
         player = FindObjectOfType<PlayerController>();
         progressBar = GetComponent<Image>();
 
         //assuming player always starts from north
         prevPlayerPos = player.transform.position;
-        basePlayerDist = playerDistance = prevPlayerPos.x;
-        progressBar.fillAmount = playerDistance / maxDistance;
+        var initialPlayerDistance = prevPlayerPos.x;
+        playerDistance = PlayerPrefs.GetFloat("Player Distance", initialPlayerDistance);
+        basePlayerDist = playerDistance;
+        var initialVal = playerDistance / maxDistance;
+        progressBar.fillAmount = PlayerPrefs.GetFloat("Progress", initialVal);
+       // Debug.Log("Load Initial val of progress = " + progressBar.fillAmount);
+        //playerDir = gameSession.playerDir;
+       
+        ChangeDir(PlayerPrefs.GetInt("PlayerDirection", 1), player.transform.position);
+        
     }
 
     // Update is called once per frame
@@ -32,6 +42,7 @@ public class ProgressBar : MonoBehaviour
     {
         if(progressBar.fillAmount < 1)
         {
+            
             // int playerDir = player.GetDir();
             var diff = Vector3.zero;
             switch (playerDir)
@@ -60,6 +71,34 @@ public class ProgressBar : MonoBehaviour
             
         }
     }
+
+    public float ProgressBarFill
+    {
+        get
+        {
+            return progressBar.fillAmount;
+        }
+
+        set
+        {
+            progressBar.fillAmount = value;
+        }
+    }
+
+    public float PlayerDistance
+    {
+        get
+        {
+            return playerDistance;
+        }
+
+        set
+        {
+            playerDistance = value;
+        }
+    }
+
+    
 
 
     public void ChangeDir(int dir, Vector3 pos)

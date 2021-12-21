@@ -69,8 +69,11 @@ public class GameSession : MonoBehaviour
 
     int choice;
     int coinCount;
+
+    ProgressBar progressBar;
     private void Awake()
     {
+        
         if(instance == null)
         {
             instance = this;
@@ -88,9 +91,17 @@ public class GameSession : MonoBehaviour
            
             playerInputWaitTimer = waitTimeForPlayerInput;
             choice = twoChoiceSystemChoiceCount;
+
+       //     if (isEditor)
+       
+                PlayerPrefs.DeleteKey("Progress");
+
+                PlayerPrefs.DeleteKey("PlayerDirection");
+
+                PlayerPrefs.DeleteKey("Player Distance");
             
 
-            
+
         }
 
         else
@@ -102,6 +113,7 @@ public class GameSession : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        progressBar = FindObjectOfType<ProgressBar>();
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
@@ -114,6 +126,7 @@ public class GameSession : MonoBehaviour
         //PlayerPrefs.DeleteAll();
 
         int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
+        
         if (currLevelNum != savedLevelNum && !isEditor)
         {
             levelLoader.LoadParticularScene(savedLevelNum-1);
@@ -135,6 +148,8 @@ public class GameSession : MonoBehaviour
         //coinImg = 
 
         //PlayerPrefs.SetInt("Level", currLevelNum);
+
+        //PlayerPrefs.SetFloat("Progress", progressBar.ProgressBarFill);
     }
 
     // Update is called once per frame
@@ -646,6 +661,11 @@ public class GameSession : MonoBehaviour
 
     public void Win()
     {
+        PlayerPrefs.DeleteKey("Progress");
+      
+        PlayerPrefs.DeleteKey("PlayerDirection");
+        
+        PlayerPrefs.DeleteKey("Player Distance");
         pickupSystem.SetBonus(false);
 
         AudioSource.PlayClipAtPoint(levelCompleteSfx,
