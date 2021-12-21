@@ -33,7 +33,7 @@ public class PickupSystem : MonoBehaviour
 
     PlayerController player;
    // float startingCapacityOfContainers;
-    GameSession gameSession;
+   public GameSession gameSession;
 
     bool isFireTerrainSpray = false;
     bool isWaterTerrainSpray = false;

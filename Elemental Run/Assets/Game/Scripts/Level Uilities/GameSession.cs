@@ -612,11 +612,11 @@ public class GameSession : MonoBehaviour
         // currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
         currLevelNum = FindObjectOfType<LevelNumber>().GetLevelNumber();
         //choice = 0;
-        
+        /*
         for (int i = 0; i < 3; i++)
         {
             lastElementsCapacity[i] = startingCapacityOfContainers;
-        }
+        }*/
 
         hasLevelLoaded = true;
 

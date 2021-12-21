@@ -73722,6 +73722,7 @@ MonoBehaviour:
   fireSpray: {fileID: 1021419689}
   waterSpray: {fileID: 1325696281}
   earthSpray: {fileID: 141910957266476968}
+  gameSession: {fileID: 0}
 --- !u!82 &2104378278
 AudioSource:
   m_ObjectHideFlags: 0
