@@ -88,6 +88,8 @@ public class PlayerController : MonoBehaviour
     Quaternion curRotation;
     [SerializeField] CamerFollow cam;
 
+    //[SerializeField] Color normal
+
     AudioSource audioSource;
     private void Awake()
     {

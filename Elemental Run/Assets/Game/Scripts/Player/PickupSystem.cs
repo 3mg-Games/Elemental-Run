@@ -26,6 +26,16 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] GameObject waterSpray;
     [SerializeField] GameObject earthSpray;
 
+    [SerializeField] Color elementUiColor1;
+    [SerializeField] Color elementUiColor2;
+
+    [SerializeField] SpriteRenderer fireElementUi;
+    [SerializeField] SpriteRenderer waterElementUi;
+    [SerializeField] SpriteRenderer earthElementUi;
+
+    [SerializeField] float frequecyOfColorChange = 0.2f;
+    
+
     float[] elements = new float[3];     // 0 - fire
                                          // 1 - water
                                          // 2 - earth
@@ -283,18 +293,102 @@ public class PickupSystem : MonoBehaviour
         switch (elementId)
         {
             case 0:
+                StartCoroutine(BlinkFireUiElement(fireElementUi));
                 SetFire();
                 break;
 
             case 1:
+                StartCoroutine(BlinkWaterUiElement(waterElementUi));
                 SetWater();
                 break;
 
             case 2:
+                StartCoroutine(BlinkEarthUiElement(earthElementUi));
                 SetEarth();
                 break;
         }
     }
+
+
+    private IEnumerator BlinkFireUiElement(SpriteRenderer sprite)
+    {
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+    }
+
+    private IEnumerator BlinkWaterUiElement(SpriteRenderer sprite)
+    {
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+    }
+
+    private IEnumerator BlinkEarthUiElement(SpriteRenderer sprite)
+    {
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor2;
+
+        yield return new WaitForSeconds(frequecyOfColorChange);
+
+        sprite.color = elementUiColor1;
+    }
+
+
 
     void SetFire()
     {

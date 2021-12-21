@@ -14086,7 +14086,7 @@ GameObject:
   - component: {fileID: 472706349}
   - component: {fileID: 472706350}
   m_Layer: 0
-  m_Name: Flam_Pickup2 (1)
+  m_Name: Fire Ui Element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -66643,7 +66643,7 @@ GameObject:
   - component: {fileID: 2219317447560934301}
   - component: {fileID: 5258444636101279197}
   m_Layer: 0
-  m_Name: Leaves2
+  m_Name: Earth Ui Element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73531,7 +73531,7 @@ GameObject:
   - component: {fileID: 1897352536649103254}
   - component: {fileID: 663686644906527611}
   m_Layer: 0
-  m_Name: Water_drop3
+  m_Name: Water Ui Element
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73722,6 +73722,12 @@ MonoBehaviour:
   fireSpray: {fileID: 1021419689}
   waterSpray: {fileID: 1325696281}
   earthSpray: {fileID: 141910957266476968}
+  elementUiColor1: {r: 1, g: 1, b: 1, a: 1}
+  elementUiColor2: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+  fireElementUi: {fileID: 472706350}
+  waterElementUi: {fileID: 5258444636101279197}
+  earthElementUi: {fileID: 5258444636101279197}
+  frequecyOfColorChange: 0.2
   gameSession: {fileID: 0}
 --- !u!82 &2104378278
 AudioSource:
