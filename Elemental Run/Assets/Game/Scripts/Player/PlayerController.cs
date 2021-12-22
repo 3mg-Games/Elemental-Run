@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject speedVfx;
     [SerializeField] GameObject mainCam;
     [SerializeField] AudioClip sinkingSfx;
+    [SerializeField] AudioClip lavaSinkingSfx;
     [SerializeField] Material freezingMaterial;
     [SerializeField] SkinnedMeshRenderer renderer;
     [SerializeField] GameObject coldFumes;
@@ -524,7 +525,17 @@ public class PlayerController : MonoBehaviour
 
         if (terrainId == 1 || terrainId == 0 || terrainId == 3)   //if fire or water or ice then sink the player
         {
-            audioSource.clip = sinkingSfx;
+            if(terrainId == 1 || terrainId == 3)
+            {
+                audioSource.clip = sinkingSfx;
+            }
+
+            else if(terrainId == 0)
+            {
+                audioSource.clip = lavaSinkingSfx;
+                audioSource.loop = false;
+            }
+            //audioSource.clip = sinkingSfx;
             //audioSource.loop = false;
             audioSource.Play();
             gameObject.AddComponent<Rigidbody>();
