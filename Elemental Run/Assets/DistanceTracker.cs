@@ -24,7 +24,9 @@ public class DistanceTracker : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            progresBar.EnableProgressFill(false);
             progresBar.ChangeDir(dir, transform.position);
+            //progresBar.en
         }
     }
 }

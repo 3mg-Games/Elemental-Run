@@ -55,6 +55,10 @@ public class CheckPoint : MonoBehaviour
             PlayerPrefs.SetInt("PlayerDirection", gameSession.playerDir);
             Debug.Log("Save Initial val of progress = " + progressBar.ProgressBarFill);
             PlayerPrefs.SetFloat("Player Distance", progressBar.PlayerDistance);
+
+            PlayerPrefs.SetFloat("PrevPlayerPosX", progressBar.PrevPlayerPos.x);
+            PlayerPrefs.SetFloat("PrevPlayerPosY", progressBar.PrevPlayerPos.y);
+            PlayerPrefs.SetFloat("PrevPlayerPosZ", progressBar.PrevPlayerPos.z);
            // progressBar.ChangeDir(gameSession.playerDir, player.transform.position);
         }
     }

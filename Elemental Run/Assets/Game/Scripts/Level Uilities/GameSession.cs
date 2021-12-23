@@ -99,8 +99,10 @@ public class GameSession : MonoBehaviour
                 PlayerPrefs.DeleteKey("PlayerDirection");
 
                 PlayerPrefs.DeleteKey("Player Distance");
-            
 
+            PlayerPrefs.DeleteKey("PrevPlayerPosX");
+            PlayerPrefs.DeleteKey("PrevPlayerPosY");
+            PlayerPrefs.DeleteKey("PrevPlayerPosZ");
 
         }
 
@@ -666,6 +668,11 @@ public class GameSession : MonoBehaviour
         PlayerPrefs.DeleteKey("PlayerDirection");
         
         PlayerPrefs.DeleteKey("Player Distance");
+        PlayerPrefs.DeleteKey("PrevPlayerPosX");
+        PlayerPrefs.DeleteKey("PrevPlayerPosY");
+        PlayerPrefs.DeleteKey("PrevPlayerPosZ");
+
+        
         pickupSystem.SetBonus(false);
 
         AudioSource.PlayClipAtPoint(levelCompleteSfx,
