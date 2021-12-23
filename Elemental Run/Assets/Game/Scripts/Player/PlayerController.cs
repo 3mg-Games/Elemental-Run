@@ -587,12 +587,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump(float jumpHeight, float jumpDistance)
+    public void Jump(float jumpHeight, float jumpDistance, bool isJumpVfx)
     {
         this.jumpHeight = jumpHeight;
         this.jumpDistance = jumpDistance;
 
-        ActivateSpeedVFx(true);
+        if(isJumpVfx)
+            ActivateSpeedVFx(true);
         isJump = true;
         // animator.SetBool("Jump", true);
        // animator.SetBool("Jump", true);

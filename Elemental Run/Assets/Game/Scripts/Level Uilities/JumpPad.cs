@@ -6,6 +6,7 @@ public class JumpPad : MonoBehaviour
 {
     [SerializeField] float jumpHeight = 2f;
     [SerializeField] float jumpDistance = 2f;
+    [SerializeField] bool isJumpVfx = true;
     PlayerController player;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +25,7 @@ public class JumpPad : MonoBehaviour
         if (other.tag == "Player")
         {
             //Debug.Log("Jump");
-            player.Jump(jumpHeight, jumpDistance);
+            player.Jump(jumpHeight, jumpDistance, isJumpVfx);
 
         }
     }
