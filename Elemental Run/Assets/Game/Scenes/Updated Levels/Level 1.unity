@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1445,13 +1445,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d669a3d881d50774daa359a28a6e2b93, type: 3}
---- !u!43 &540562983
+--- !u!4 &568411318 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3306593488933533761, guid: 5d40da93bbc2b304684f366669947041,
+    type: 3}
+  m_PrefabInstance: {fileID: 1837175273}
+  m_PrefabAsset: {fileID: 0}
+--- !u!43 &592968959
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterVolume--1780176
+  m_Name: WaterVolume--2550746
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1608,12 +1614,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!4 &568411318 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3306593488933533761, guid: 5d40da93bbc2b304684f366669947041,
-    type: 3}
-  m_PrefabInstance: {fileID: 1837175273}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &596971391
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6221,7 +6221,7 @@ PrefabInstance:
     - target: {fileID: 1816547257, guid: 5f84c8f17cd63154fa0938433366ab80, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 540562983}
+      objectReference: {fileID: 592968959}
     - target: {fileID: 8783633327052035908, guid: 5f84c8f17cd63154fa0938433366ab80,
         type: 3}
       propertyPath: m_CollisionDetection
@@ -7426,7 +7426,7 @@ PrefabInstance:
     - target: {fileID: 8941907951744542614, guid: 600037ff882a4294e9fc5471cb859620,
         type: 3}
       propertyPath: isEditor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8941907951744542614, guid: 600037ff882a4294e9fc5471cb859620,
         type: 3}
