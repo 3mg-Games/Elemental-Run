@@ -26,8 +26,10 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] GameObject waterSpray;
     [SerializeField] GameObject earthSpray;
 
+    [SerializeField] Color elementUiColor;
     [SerializeField] Color elementUiColor1;
     [SerializeField] Color elementUiColor2;
+    
 
     [SerializeField] SpriteRenderer fireElementUi;
     [SerializeField] SpriteRenderer waterElementUi;
@@ -333,7 +335,7 @@ public class PickupSystem : MonoBehaviour
 
         yield return new WaitForSeconds(frequecyOfColorChange);
 
-        sprite.color = elementUiColor1;
+        sprite.color = elementUiColor;
     }
 
     private IEnumerator BlinkWaterUiElement(SpriteRenderer sprite)
@@ -359,7 +361,7 @@ public class PickupSystem : MonoBehaviour
 
         yield return new WaitForSeconds(frequecyOfColorChange);
 
-        sprite.color = elementUiColor1;
+        sprite.color = elementUiColor;
     }
 
     private IEnumerator BlinkEarthUiElement(SpriteRenderer sprite)
@@ -385,7 +387,7 @@ public class PickupSystem : MonoBehaviour
 
         yield return new WaitForSeconds(frequecyOfColorChange);
 
-        sprite.color = elementUiColor1;
+        sprite.color = elementUiColor;
     }
 
 

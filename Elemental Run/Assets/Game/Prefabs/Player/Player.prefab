@@ -14145,8 +14145,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c456c79f940b39347b233c2f957c920f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 300fcb91861d8dd459ec15c65cc375e9, type: 3}
+  m_Color: {r: 0.9056604, g: 0.8458526, b: 0.8458526, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -66702,8 +66702,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9d8c74d3249f1c047bf7ebc51f89c7a5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: ae716302598ddbe42981e9e10aaa90f1, type: 3}
+  m_Color: {r: 0.9056604, g: 0.8458526, b: 0.8458526, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -73591,8 +73591,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 25039f68953e7bc45a0cc50392a06193, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 8118978d916a6b54f95136278935e1fc, type: 3}
+  m_Color: {r: 0.9056604, g: 0.8458526, b: 0.8458526, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -73728,10 +73728,11 @@ MonoBehaviour:
   fireSpray: {fileID: 1021419689}
   waterSpray: {fileID: 1325696281}
   earthSpray: {fileID: 141910957266476968}
+  elementUiColor: {r: 0.90588236, g: 0.84705883, b: 0.84705883, a: 1}
   elementUiColor1: {r: 1, g: 1, b: 1, a: 1}
   elementUiColor2: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
   fireElementUi: {fileID: 472706350}
-  waterElementUi: {fileID: 5258444636101279197}
+  waterElementUi: {fileID: 663686644906527611}
   earthElementUi: {fileID: 5258444636101279197}
   frequecyOfColorChange: 0.2
   gameSession: {fileID: 0}
