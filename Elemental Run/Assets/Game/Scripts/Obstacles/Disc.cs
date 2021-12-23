@@ -75,7 +75,7 @@ public class Disc : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            StartCoroutine(gameSession.Kill(false, 4));
+            StartCoroutine(gameSession.Kill(false, 5)); //5 for other obstacle
 
         }
     }

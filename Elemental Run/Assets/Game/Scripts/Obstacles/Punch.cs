@@ -23,7 +23,7 @@ public class Punch : MonoBehaviour
         if (other.tag == "Player")
         {
             
-            StartCoroutine(gameSession.Kill(false, 4)); //3for obstacle
+            StartCoroutine(gameSession.Kill(false, 4)); //4 for boxing glove
 
         }
     }

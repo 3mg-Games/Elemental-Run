@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Material freezingMaterial;
     [SerializeField] SkinnedMeshRenderer renderer;
     [SerializeField] GameObject coldFumes;
+    [SerializeField] GameObject punchVfx;
+    [SerializeField] GameObject confusedVfx;
+    [SerializeField] GameObject floorHitVfx;
     //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
@@ -448,7 +451,7 @@ public class PlayerController : MonoBehaviour
         ActivateSpeedVFx(false);
         mainCam.GetComponent<CamerFollow>().SetParentNull();
         animator.enabled = true;   //enable animator for fuel empty condition
-        if (!isDeathByWater && terrainID != 3)  //not ice and not death by water
+        if (!isDeathByWater && terrainID != 3 && terrainID != 4)  //not ice and not death by water
         {
             animator.SetBool("Jump", false);
             animator.SetTrigger("Trip");
@@ -460,6 +463,16 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("Jump", false);
             animator.SetTrigger("Freeze");
             StartCoroutine(Freeze());
+        }
+
+        else if(terrainID == 4)
+        {
+            animator.SetBool("Jump", false);
+            animator.SetTrigger("Knock");
+            punchVfx.SetActive(true);
+            confusedVfx.SetActive(true);
+
+            StartCoroutine(FloorHit());
         }
 
         else
@@ -477,6 +490,13 @@ public class PlayerController : MonoBehaviour
         
         //characterController.
         //Destroy(characterController);
+    }
+
+    private IEnumerator FloorHit()
+    {
+        yield return new WaitForSeconds(0.4f);
+
+        floorHitVfx.SetActive(true);
     }
 
     private IEnumerator Freeze()
