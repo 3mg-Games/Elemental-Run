@@ -570,6 +570,9 @@ public class GameSession : MonoBehaviour
         if (terrainID == 3)
             timeAfterWhichSceneIsLoaded = 4.5f;
 
+
+        int currLevel = PlayerPrefs.GetInt("LevelCount", currLevelNum);
+        FindObjectOfType<Immortal>().LevelFail(currLevel);
         yield return new WaitForSeconds(timeAfterWhichSceneIsLoaded);
         
         levelLoader.LoadCurrentScene();
@@ -698,6 +701,8 @@ public class GameSession : MonoBehaviour
 
 
         mainCam.GetComponent<CamerFollow>().ActivateRotate();
+        int currLevel = PlayerPrefs.GetInt("LevelCount", currLevelNum);
+        FindObjectOfType<Immortal>().LevelComplete(currLevel);
         StartCoroutine(AcitvateWinScreen());
     }
 

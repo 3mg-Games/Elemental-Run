@@ -16,9 +16,9 @@ MonoBehaviour:
   clientTokens:
   - 
   appIds:
-  - 0
+  - 984885868783422
   appLabels:
-  - App Name
+  - Elemental Run
   cookie: 1
   logging: 1
   status: 1
