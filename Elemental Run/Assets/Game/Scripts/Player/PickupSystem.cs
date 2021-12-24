@@ -216,11 +216,13 @@ public class PickupSystem : MonoBehaviour
                 SetEarth();
             }
 
-            else if(player.IsGrounded)
+            else 
             {
-                
-                isBonus = false;
-                gameSession.Win();
+                if (player.IsGrounded)
+                {
+                    isBonus = false;
+                    gameSession.Win();
+                }
             }
         }
 
