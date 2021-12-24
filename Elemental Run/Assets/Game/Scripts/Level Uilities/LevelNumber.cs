@@ -21,4 +21,9 @@ public class LevelNumber : MonoBehaviour
     {
         return levelNumber;
     }
+
+    public void SetLevelNumber(int value)
+    {
+        levelNumber = value;
+    }
 }

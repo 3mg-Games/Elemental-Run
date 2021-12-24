@@ -6,15 +6,18 @@ using TMPro;
 public class LevelNumText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI levelNumText;
+
+    LevelNumber levelNumber;
     // Start is called before the first frame update
     void Start()
     {
-        levelNumText.text = FindObjectOfType<LevelNumber>().GetLevelNumber().ToString();
+        levelNumber = FindObjectOfType<LevelNumber>();
+        levelNumText.text = levelNumber.GetLevelNumber().ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        levelNumText.text = levelNumber.GetLevelNumber().ToString();
     }
 }

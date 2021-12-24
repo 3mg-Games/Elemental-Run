@@ -53,7 +53,7 @@ public class CheckPoint : MonoBehaviour
             PlayerPrefs.SetFloat("Progress", progressBar.ProgressBarFill);   //these keys need to be deleted when new level is loaded
             //PlayerPrefs.Set
             PlayerPrefs.SetInt("PlayerDirection", gameSession.playerDir);
-            Debug.Log("Save Initial val of progress = " + progressBar.ProgressBarFill);
+            //Debug.Log("Save Initial val of progress = " + progressBar.ProgressBarFill);
             PlayerPrefs.SetFloat("Player Distance", progressBar.PlayerDistance);
 
             PlayerPrefs.SetFloat("PrevPlayerPosX", progressBar.PrevPlayerPos.x);

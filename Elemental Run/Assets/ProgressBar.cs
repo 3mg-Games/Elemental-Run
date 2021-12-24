@@ -56,26 +56,26 @@ public class ProgressBar : MonoBehaviour
             switch (playerDir)
             {
                 case 1: //north
-                    Debug.Log("-------Calculation----------");
-                    Debug.Log("=======Difference===========");
-                    Debug.Log("Player Pos = " + player.transform.position);
-                    Debug.Log("Previous Player Pos = " + prevPlayerPos);
+                   // Debug.Log("-------Calculation----------");
+                    //Debug.Log("=======Difference===========");
+                    //Debug.Log("Player Pos = " + player.transform.position);
+                    //Debug.Log("Previous Player Pos = " + prevPlayerPos);
                     diff = player.transform.position - prevPlayerPos;
                     //diff = player.transform.position - basePlayerDist;
-                    
-                    Debug.Log("Difference = " + diff);
+                    //
+                    //Debug.Log("Difference = " + diff);
 
-                    Debug.Log("=======Player Distance=======");
-                    Debug.Log("Base Player distance = " + basePlayerDist);
-                    Debug.Log("Difference X = " + diff.x);
+                    //Debug.Log("=======Player Distance=======");
+                    //Debug.Log("Base Player distance = " + basePlayerDist);
+                    //Debug.Log("Difference X = " + diff.x);
                     playerDistance = basePlayerDist + diff.x;
-                    Debug.Log("Player Distance = " + playerDistance);
+                   // Debug.Log("Player Distance = " + playerDistance);
 
-                    Debug.Log("=======Progress Bar===========");
-                    Debug.Log("Player Distance = " + playerDistance);
-                    Debug.Log("Max Distance = " + maxDistance);
+                    //Debug.Log("=======Progress Bar===========");
+                    //Debug.Log("Player Distance = " + playerDistance);
+                    //Debug.Log("Max Distance = " + maxDistance);
                     progressBar.fillAmount = playerDistance / maxDistance;
-                    Debug.Log("Progress Bar Fill Amount = " + ProgressBarFill);
+                    //Debug.Log("Progress Bar Fill Amount = " + ProgressBarFill);
 
                     break;
 

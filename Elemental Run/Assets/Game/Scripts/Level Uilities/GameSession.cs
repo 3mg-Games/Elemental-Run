@@ -126,7 +126,9 @@ public class GameSession : MonoBehaviour
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
         //
         //PlayerPrefs.DeleteAll();
+        int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
 
+        
         int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
         
         if (currLevelNum != savedLevelNum && !isEditor)
@@ -134,6 +136,13 @@ public class GameSession : MonoBehaviour
             levelLoader.LoadParticularScene(savedLevelNum-1);
             Destroy(gameObject);
         }
+
+        if (isRandomised == 1)
+        {
+            int currLevel = PlayerPrefs.GetInt("LevelCount", 1);
+            FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
+        }
+
         if (currLevelNum != 1)
         {
             hasLevelLoaded = false;
@@ -639,22 +648,29 @@ public class GameSession : MonoBehaviour
 
         choice = twoChoiceSystemChoiceCount;
 
-      /*  if(isNewLevel)
+        int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
+        if (isRandomised == 1)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                lastElementsCapacity[i] = startingCapacityOfContainers;
-            }
-            playerDir = 1;
-            clampLowerLimit = -1.5f;
-            clampUpperLimit = 1.5f;
-            isClampZ = true;
-            isClampX = false;
-            // coinCount = 0;
-            //  playerInputWaitTimer = waitTimeForPlayerInput;
-            choice = twoChoiceSystemChoiceCount = 0;
-            lastCheckPointPos = new Vector3(0f, 0.15f, 0f);
-        }*/
+            int currLevel = PlayerPrefs.GetInt("LevelCount", 1);
+            FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
+        }
+
+        /*  if(isNewLevel)
+          {
+              for (int i = 0; i < 3; i++)
+              {
+                  lastElementsCapacity[i] = startingCapacityOfContainers;
+              }
+              playerDir = 1;
+              clampLowerLimit = -1.5f;
+              clampUpperLimit = 1.5f;
+              isClampZ = true;
+              isClampX = false;
+              // coinCount = 0;
+              //  playerInputWaitTimer = waitTimeForPlayerInput;
+              choice = twoChoiceSystemChoiceCount = 0;
+              lastCheckPointPos = new Vector3(0f, 0.15f, 0f);
+          }*/
         //playerDir = 1;
         Debug.Log("LEvel was loaded");
         //hasGameStarted = true;
@@ -699,10 +715,42 @@ public class GameSession : MonoBehaviour
         PlayerPrefs.SetInt("Coins", coinCount);
 
         PlayerPrefs.SetInt("Level", currLevelNum + 1);
+        int currLevel = PlayerPrefs.GetInt("LevelCount", currLevelNum);
+        Debug.Log("Curr Level = " + currLevel);
+        PlayerPrefs.SetInt("LevelCount", currLevel + 1);
+         currLevel = PlayerPrefs.GetInt("LevelCount", currLevelNum);
+        /*if (PlayerPrefs.GetInt("Level") > levelLoader.GetTotalSceneCount())
+        {
+              //randomize here
+            PlayerPrefs.SetInt("IsRandomized", 1);
+            int randomLevel = UnityEngine.Random.Range(3, 11);
+            PlayerPrefs.SetInt("Level", randomLevel);
+            levelLoader.LoadNextScene();
+        }
 
-        if(PlayerPrefs.GetInt("Level") > levelLoader.GetTotalSceneCount())
-            PlayerPrefs.SetInt("Level", 1);
-        levelLoader.LoadNextScene();
+        else
+        {
+            levelLoader.LoadNextScene();
+        }
+        */
+
+        if (currLevel > 10)
+        {
+            PlayerPrefs.SetInt("IsRandomized", 1);
+            int randomLevel = UnityEngine.Random.Range(3, 11);
+            Debug.Log("Random Level = " + randomLevel);
+
+            //PlayerPrefs.SetInt("Level", randomLevel);
+            // levelLoader.LoadNextScene();
+            levelLoader.LoadNextScene(true);
+            //levelLoader.LoadNextScene();
+        }
+
+
+        else
+        {
+            levelLoader.LoadNextScene(false);
+        }
         
         Destroy(gameObject);
     }

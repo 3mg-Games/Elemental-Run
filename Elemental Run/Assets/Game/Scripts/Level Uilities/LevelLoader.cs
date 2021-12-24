@@ -22,14 +22,29 @@ public class LevelLoader : MonoBehaviour
         
     }
 
-    public void LoadNextScene()
+    
+
+    public void LoadNextScene(bool isLevel10Finished)
     {
-        int idx = SceneManager.GetActiveScene().buildIndex + 1;
-        if (idx >= SceneManager.sceneCountInBuildSettings)
+        if (!isLevel10Finished)
         {
-            idx = 0;
+            int idx = SceneManager.GetActiveScene().buildIndex + 1;
+            if (idx >= SceneManager.sceneCountInBuildSettings)
+            {
+                idx = 0;
+            }
+            LoadScene(idx);
         }
-        LoadScene(idx);
+
+        else
+        {
+            int idx = SceneManager.GetActiveScene().buildIndex + 1;
+            if (idx >= SceneManager.sceneCountInBuildSettings)
+            {
+                idx = 2;
+            }
+            LoadScene(idx);
+        }
     }
 
     private void LoadScene(int index)
