@@ -829,6 +829,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public bool IsGrounded
+    {
+        get
+        {
+            return isGrounded;
+        }
+    }
+
     public void ActivateSpeedVFx(bool val)
     {
         speedVfx.SetActive(val);
