@@ -732,6 +732,8 @@ public class GameSession : MonoBehaviour
         mainCam.GetComponent<CamerFollow>().ActivateRotate();
         int currLevel = PlayerPrefs.GetInt("LevelCount", currLevelNum);
         FindObjectOfType<Immortal>().LevelComplete(currLevel);
+
+        pickupSystem.DeactivateSmokeVfx();
         StartCoroutine(AcitvateWinScreen());
     }
 

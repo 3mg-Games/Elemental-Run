@@ -36,12 +36,16 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] SpriteRenderer earthElementUi;
 
     [SerializeField] float frequecyOfColorChange = 0.2f;
+
+    [SerializeField] GameObject fireSmoke;
+    [SerializeField] GameObject waterSmoke;
+    [SerializeField] GameObject earthSmoke;
     
 
     float[] elements = new float[3];     // 0 - fire
                                          // 1 - water
                                          // 2 - earth
-                                         // 3 - ice
+                                         
 
     PlayerController player;
    // float startingCapacityOfContainers;
@@ -202,22 +206,34 @@ public class PickupSystem : MonoBehaviour
             {
                 elements[0] = elements[0] - percentageConsumptionInElementInBonusRound;
                 SetFire();
+                fireSmoke.SetActive(true);
+                waterSmoke.SetActive(false);
+                earthSmoke.SetActive(false);
             }
             
             else if(elements[1] > lowerLimitOfContainers)
             {
                 elements[1] = elements[1] - percentageConsumptionInElementInBonusRound;
                 SetWater();
+
+                fireSmoke.SetActive(false);
+                waterSmoke.SetActive(true);
+                earthSmoke.SetActive(false);
             }
 
             else if (elements[2] > lowerLimitOfContainers)
             {
                 elements[2] = elements[2] - percentageConsumptionInElementInBonusRound;
                 SetEarth();
+
+                fireSmoke.SetActive(false);
+                waterSmoke.SetActive(false);
+                earthSmoke.SetActive(true);
             }
 
             else 
             {
+                DeactivateSmokeVfx();
                 if (player.IsGrounded)
                 {
                     isBonus = false;
@@ -226,6 +242,13 @@ public class PickupSystem : MonoBehaviour
             }
         }
 
+    }
+
+    public void DeactivateSmokeVfx()
+    {
+        fireSmoke.SetActive(false);
+        waterSmoke.SetActive(false);
+        earthSmoke.SetActive(false);
     }
 
     public bool ConsumeFuel(int elementId, int currTeerrainID)

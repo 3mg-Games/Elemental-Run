@@ -7,11 +7,14 @@ public class JumpPad : MonoBehaviour
     [SerializeField] float jumpHeight = 2f;
     [SerializeField] float jumpDistance = 2f;
     [SerializeField] bool isJumpVfx = true;
+    [SerializeField] bool isBonusLevel = false;
     PlayerController player;
+    PickupSystem pickupSystem;
     // Start is called before the first frame update
     void Start()
     {
         player = FindObjectOfType<PlayerController>();
+        pickupSystem = FindObjectOfType<PickupSystem>();
     }
 
     // Update is called once per frame
@@ -20,12 +23,33 @@ public class JumpPad : MonoBehaviour
         
     }
 
+    private float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)
+    {
+        return rightMin + (value - leftMin) * (rightMax - rightMin) / (leftMax - leftMin);
+    }
+   
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
             //Debug.Log("Jump");
-            player.Jump(jumpHeight, jumpDistance, isJumpVfx);
+            if(isBonusLevel)
+            {
+                var elements = pickupSystem.GetElements();
+
+                float totalFuel = elements[0] + elements[1] + elements[2];
+
+                Debug.Log("Total Fuel = " + totalFuel);
+
+                var newJumpVals = map(totalFuel, 0f, 3f, 30f, 80f);
+
+                //player.Jump(jumpHeight, jumpDistance, isJumpVfx, isBonusLevel);
+                player.Jump(newJumpVals, jumpDistance, isJumpVfx, isBonusLevel);
+            }
+            else
+
+                player.Jump(jumpHeight, jumpDistance, isJumpVfx, isBonusLevel);
 
         }
     }

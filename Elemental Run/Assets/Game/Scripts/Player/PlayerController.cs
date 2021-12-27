@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject punchVfx;
     [SerializeField] GameObject confusedVfx;
     [SerializeField] GameObject floorHitVfx;
+    [SerializeField] CinemachineVirtualCamera bonusLevelCam;
+
     //[SerializeField] float wallRunMaxDistance = 1f;
     //turn them off
     /*[SerializeField] CinemachineVirtualCamera northCam;
@@ -67,7 +69,7 @@ public class PlayerController : MonoBehaviour
     bool isWallRotate = false;
 
     bool mobileInput = true;
-
+    bool isBonusMidAir = false;
     Animator animator;
     public GameSession gameSession;
 
@@ -96,8 +98,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CamerFollow cam;
 
     //[SerializeField] Color normal
-
+    bool isBonusJump;
     AudioSource audioSource;
+
+
+    float currHeight;
     private void Awake()
     {
        // ResetPlayer();
@@ -219,6 +224,11 @@ public class PlayerController : MonoBehaviour
         {
             WallRunPlayerRoate();
         }
+
+        if(isBonusMidAir)
+        {
+            BonusMidAir();
+        }
     }
 
     
@@ -271,6 +281,12 @@ public class PlayerController : MonoBehaviour
         if (isGrounded && isJump)
         {
             isJump = false;
+            if(isBonusJump)
+            {
+                velocity.y += Mathf.Sqrt(jumpHeight * -jumpDistance * gravity);
+            }
+
+            else
             velocity.y += Mathf.Sqrt(jumpHeight * -2 * gravity);
             animator.SetBool("Jump", true);
         }
@@ -621,13 +637,43 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void Jump(float jumpHeight, float jumpDistance, bool isJumpVfx)
+    private void BonusMidAir()
+    {
+        if(currHeight < transform.position.y)
+        {
+            currHeight = transform.position.y;
+        }
+
+        else if(currHeight > transform.position.y)
+        {
+            currHeight = transform.position.y;
+            ActivateSpeedVFx(true);
+            isBonusMidAir = false;
+        }
+    }
+
+    public void DeactivateBonusLevelCam()
+    {
+        bonusLevelCam.Priority = 1;
+    }
+
+    public void Jump(float jumpHeight, float jumpDistance, bool isJumpVfx, bool isBonusJump)
     {
         this.jumpHeight = jumpHeight;
         this.jumpDistance = jumpDistance;
 
         if(isJumpVfx)
             ActivateSpeedVFx(true);
+
+        this.isBonusJump = isBonusJump;
+
+        if(isBonusJump)
+        {
+            bonusLevelCam.Priority = 100;
+        }
+
+        currHeight = transform.position.y;
+        //isBonusMidAir = true;
         isJump = true;
         // animator.SetBool("Jump", true);
        // animator.SetBool("Jump", true);

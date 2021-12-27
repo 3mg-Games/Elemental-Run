@@ -2,30 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bonus : MonoBehaviour
+public class SetCameraToNormal : MonoBehaviour
 {
-    PickupSystem pickupSystem;
-    
+    PlayerController player;
     // Start is called before the first frame update
     void Start()
     {
-        pickupSystem = FindObjectOfType<PickupSystem>();
+        player = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            pickupSystem.SetBonus(true);
+            player.DeactivateBonusLevelCam();
 
         }
-    }
 
+
+    }
 
 }
