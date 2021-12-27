@@ -38,12 +38,17 @@ public class LevelLoader : MonoBehaviour
 
         else
         {
-            int idx = SceneManager.GetActiveScene().buildIndex + 1;
+            int randomLevel = UnityEngine.Random.Range(3, 11);
+           
+            PlayerPrefs.SetInt("Level", randomLevel);
+            /*int idx = SceneManager.GetActiveScene().buildIndex + 1;
             if (idx >= SceneManager.sceneCountInBuildSettings)
             {
                 idx = 2;
-            }
-            LoadScene(idx);
+            }*/
+            Debug.Log("Random Level = " + randomLevel);
+            Debug.Log("Player Prefs val = " + PlayerPrefs.GetInt("Level"));
+            LoadScene(randomLevel - 1);
         }
     }
 

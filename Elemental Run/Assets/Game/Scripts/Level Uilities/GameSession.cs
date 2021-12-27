@@ -24,6 +24,9 @@ public class GameSession : MonoBehaviour
     [SerializeField] float waitTimeForPlayerInput = 5f;
     [SerializeField] GameObject tutorial;
     [SerializeField] TextMeshProUGUI coinText;
+
+
+
    
     //[SerializeField] Transform coinTextImg;
     //[SerializeField] GameObject coinSpawnPrefab;
@@ -50,7 +53,7 @@ public class GameSession : MonoBehaviour
 
     public int currTerrainElementId;
 
-   
+    bool changeLevelNum = false;
 
     bool isPlayerAlive = true;
     bool isChoiceWaitTimerActive = false;
@@ -69,6 +72,8 @@ public class GameSession : MonoBehaviour
 
     int choice;
     int coinCount;
+
+    bool isRespawn = false;
 
     ProgressBar progressBar;
     private void Awake()
@@ -126,22 +131,29 @@ public class GameSession : MonoBehaviour
         //currLevelNum = levelLoader.GetCurrentSceneBuildIdx() + 1;
         //
         //PlayerPrefs.DeleteAll();
-        int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
+        
 
         
         int savedLevelNum = PlayerPrefs.GetInt("Level", 1);
-        
+
+        Debug.Log("Saved Level num = " + savedLevelNum);
+        Debug.Log("Curr Level Num = " + currLevelNum);
         if (currLevelNum != savedLevelNum && !isEditor)
         {
             levelLoader.LoadParticularScene(savedLevelNum-1);
             Destroy(gameObject);
         }
 
-        if (isRandomised == 1)
-        {
-            int currLevel = PlayerPrefs.GetInt("LevelCount", 1);
-            FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
-        }
+        //if (changeLevelNum)
+        //{
+            Debug.Log("Level number changed");
+            int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
+            if (isRandomised == 1)
+            {
+                int currLevel = PlayerPrefs.GetInt("LevelCount", 1);
+                FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
+            }
+        //}
 
         if (currLevelNum != 1)
         {
@@ -156,6 +168,9 @@ public class GameSession : MonoBehaviour
         }
         coinCount = PlayerPrefs.GetInt("Coins", 0);
         coinText.text = coinCount.ToString();
+
+       // changeLevelNum = true;
+
         //coinImg = 
 
         //PlayerPrefs.SetInt("Level", currLevelNum);
@@ -166,6 +181,9 @@ public class GameSession : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+
         coinText.text = coinCount.ToString();
         if (hasLevelLoaded)
         {
@@ -574,7 +592,7 @@ public class GameSession : MonoBehaviour
         int currLevel = PlayerPrefs.GetInt("LevelCount", currLevelNum);
         FindObjectOfType<Immortal>().LevelFail(currLevel);
         yield return new WaitForSeconds(timeAfterWhichSceneIsLoaded);
-        
+        isRespawn = true;
         levelLoader.LoadCurrentScene();
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
@@ -651,12 +669,23 @@ public class GameSession : MonoBehaviour
 
         choice = twoChoiceSystemChoiceCount;
 
-        int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
+        if (isRespawn)
+        {
+
+            Debug.Log("Level number changed");
+            int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
+            if (isRandomised == 1)
+            {
+                int currLevel = PlayerPrefs.GetInt("LevelCount", 1);
+                FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
+            }
+        }
+        /*int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
         if (isRandomised == 1)
         {
             int currLevel = PlayerPrefs.GetInt("LevelCount", 1);
             FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
-        }
+        }*?
 
         /*  if(isNewLevel)
           {
@@ -742,8 +771,8 @@ public class GameSession : MonoBehaviour
         if (currLevel > 10)
         {
             PlayerPrefs.SetInt("IsRandomized", 1);
-            int randomLevel = UnityEngine.Random.Range(3, 11);
-            Debug.Log("Random Level = " + randomLevel);
+           // int randomLevel = UnityEngine.Random.Range(3, 11);
+            //
 
             //PlayerPrefs.SetInt("Level", randomLevel);
             // levelLoader.LoadNextScene();
