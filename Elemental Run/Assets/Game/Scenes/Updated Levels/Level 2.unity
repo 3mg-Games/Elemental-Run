@@ -694,6 +694,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 16.45
       objectReference: {fileID: 0}
+    - target: {fileID: 4246614419200335688, guid: be1926a48b7c6824e9b66c7ce0d709a1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4246614420130684371, guid: be1926a48b7c6824e9b66c7ce0d709a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1297,6 +1302,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: EarthElementalOrb (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3306593488933772837, guid: 5d40da93bbc2b304684f366669947041,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d40da93bbc2b304684f366669947041, type: 3}
 --- !u!4 &426575403 stripped
@@ -1456,7 +1466,7 @@ PrefabInstance:
     - target: {fileID: 646080181579867558, guid: 19062b2af10cd0f4cbffa06d460e90fb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19062b2af10cd0f4cbffa06d460e90fb, type: 3}
@@ -2087,6 +2097,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FireElementalOrb (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 646080181579867558, guid: 19062b2af10cd0f4cbffa06d460e90fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19062b2af10cd0f4cbffa06d460e90fb, type: 3}
 --- !u!1001 &697832463
@@ -2234,7 +2249,7 @@ PrefabInstance:
     - target: {fileID: 3306593488933772837, guid: 5d40da93bbc2b304684f366669947041,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d40da93bbc2b304684f366669947041, type: 3}
@@ -3020,6 +3035,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinGold (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2214642594168602805, guid: 359a13ea9df92a541a0645e5a43bbbfc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 359a13ea9df92a541a0645e5a43bbbfc, type: 3}
 --- !u!1001 &925211793
@@ -3163,6 +3183,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FireElementalOrb (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 646080181579867558, guid: 19062b2af10cd0f4cbffa06d460e90fb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19062b2af10cd0f4cbffa06d460e90fb, type: 3}
@@ -3859,6 +3884,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 4.989994
       objectReference: {fileID: 0}
+    - target: {fileID: 4246614420130905015, guid: be1926a48b7c6824e9b66c7ce0d709a1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4246614421017077139, guid: be1926a48b7c6824e9b66c7ce0d709a1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4215,6 +4245,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CoinGold (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2214642594168602805, guid: 359a13ea9df92a541a0645e5a43bbbfc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 359a13ea9df92a541a0645e5a43bbbfc, type: 3}
 --- !u!1001 &1543074650
@@ -4531,6 +4566,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5263599040675105151}
     m_Modifications:
+    - target: {fileID: 467526227643552620, guid: 6c76a5193bbc96542af7b1340b9450bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 467526229111306592, guid: 6c76a5193bbc96542af7b1340b9450bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3023373187813873600, guid: 6c76a5193bbc96542af7b1340b9450bd,
         type: 3}
       propertyPath: m_IsActive
@@ -4629,7 +4674,7 @@ PrefabInstance:
     - target: {fileID: 7666468050421670454, guid: 6c76a5193bbc96542af7b1340b9450bd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7666468050421875794, guid: 6c76a5193bbc96542af7b1340b9450bd,
         type: 3}
@@ -5309,13 +5354,13 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2041325799}
   m_PrefabAsset: {fileID: 0}
---- !u!43 &2130518977
+--- !u!43 &2065878821
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WaterVolume--3496600
+  m_Name: WaterVolume--3564122
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5686,6 +5731,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 3023373187813873600, guid: 6c76a5193bbc96542af7b1340b9450bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5154270063725460527, guid: 6c76a5193bbc96542af7b1340b9450bd,
         type: 3}
@@ -8042,7 +8092,7 @@ PrefabInstance:
     - target: {fileID: 1816547257, guid: 5f84c8f17cd63154fa0938433366ab80, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 2130518977}
+      objectReference: {fileID: 2065878821}
     - target: {fileID: 8783633328317603562, guid: 5f84c8f17cd63154fa0938433366ab80,
         type: 3}
       propertyPath: m_Name
