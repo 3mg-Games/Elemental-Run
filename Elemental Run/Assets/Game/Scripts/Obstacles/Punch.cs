@@ -24,7 +24,7 @@ public class Punch : MonoBehaviour
         {
             
             StartCoroutine(gameSession.Kill(false, 4)); //4 for boxing glove
-
+            GetComponent<Collider>().enabled = false;
         }
     }
 }

@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject mainCam;
     [SerializeField] AudioClip sinkingSfx;
     [SerializeField] AudioClip lavaSinkingSfx;
+    [SerializeField] AudioClip iceFreezingSfx;
+    [SerializeField] AudioClip grassFallSfx;
+    [SerializeField] AudioClip punchSfx;
     [SerializeField] Material freezingMaterial;
     [SerializeField] SkinnedMeshRenderer renderer;
     [SerializeField] GameObject coldFumes;
@@ -462,6 +465,10 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Jump", false);
             animator.SetTrigger("Freeze");
+
+            audioSource.clip = iceFreezingSfx;
+            audioSource.loop = false;
+            audioSource.Play();
             StartCoroutine(Freeze());
         }
 
@@ -471,6 +478,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Knock");
             punchVfx.SetActive(true);
             confusedVfx.SetActive(true);
+            
 
             StartCoroutine(FloorHit());
         }
@@ -541,6 +549,21 @@ public class PlayerController : MonoBehaviour
         {
             timeAfterFallThroughHappens = 3f;
         }
+
+        else if (terrainId == 2)
+        {
+            StartCoroutine(PlayGrassFallSfx());
+        }
+
+
+        else if(terrainId == 4)
+        {
+            audioSource.clip = punchSfx;
+            audioSource.loop = false;
+            audioSource.Play();
+            //audioSource.PlayOneShot(punchSfx);
+            
+        }
         yield return new WaitForSeconds(timeAfterFallThroughHappens);
 
         if (terrainId == 1 || terrainId == 0 || terrainId == 3)   //if fire or water or ice then sink the player
@@ -563,7 +586,18 @@ public class PlayerController : MonoBehaviour
             
         }
 
+        
+
         characterController.enabled = false;
+    }
+
+    private IEnumerator PlayGrassFallSfx()
+    {
+        yield return new WaitForSeconds(0.3f);
+
+        audioSource.clip = grassFallSfx;
+        audioSource.loop = false;
+        audioSource.Play();
     }
 
     public void PlayerWin()
