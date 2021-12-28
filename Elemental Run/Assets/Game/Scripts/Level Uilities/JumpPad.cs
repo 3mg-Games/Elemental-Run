@@ -8,6 +8,7 @@ public class JumpPad : MonoBehaviour
     [SerializeField] float jumpDistance = 2f;
     [SerializeField] bool isJumpVfx = true;
     [SerializeField] bool isBonusLevel = false;
+    //[SerializeField] float bonusGrvity = -16f;
     PlayerController player;
     PickupSystem pickupSystem;
     // Start is called before the first frame update
@@ -42,7 +43,7 @@ public class JumpPad : MonoBehaviour
 
                 Debug.Log("Total Fuel = " + totalFuel);
 
-                var newJumpVals = map(totalFuel, 0f, 3f, 30f, 80f);
+                var newJumpVals = map(totalFuel, 0f, 3f, 12.5f, 52.5f);
 
                 //player.Jump(jumpHeight, jumpDistance, isJumpVfx, isBonusLevel);
                 player.Jump(newJumpVals, jumpDistance, isJumpVfx, isBonusLevel);

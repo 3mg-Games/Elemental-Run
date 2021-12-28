@@ -670,10 +670,13 @@ public class PlayerController : MonoBehaviour
         if(isBonusJump)
         {
             bonusLevelCam.Priority = 100;
+           // gravity = bonusGravity;
         }
 
         currHeight = transform.position.y;
         //isBonusMidAir = true;
+
+        
         isJump = true;
         // animator.SetBool("Jump", true);
        // animator.SetBool("Jump", true);
