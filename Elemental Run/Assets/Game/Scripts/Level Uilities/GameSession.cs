@@ -154,7 +154,7 @@ public class GameSession : MonoBehaviour
                 FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
             }
         //}
-
+        /*
         if (currLevelNum != 1)
         {
             hasLevelLoaded = false;
@@ -162,12 +162,15 @@ public class GameSession : MonoBehaviour
             hasGameStarted = true;
             player.SetIsPlayerMoving(true);
         }
+        */
         if(savedLevelNum == 1)
         {
            PlayerPrefs.DeleteKey("Coins");
         }
         coinCount = PlayerPrefs.GetInt("Coins", 0);
         coinText.text = coinCount.ToString();
+
+        player.SetIsPlayerMoving(false);
 
        // changeLevelNum = true;
 
@@ -217,6 +220,9 @@ public class GameSession : MonoBehaviour
                 tutorial.SetActive(true);
             }
         }
+
+
+
         if (hasGameStarted)
         {
             if (isChoiceWaitTimerActive)
@@ -663,8 +669,9 @@ public class GameSession : MonoBehaviour
         }
 
         hasLevelLoaded = false;
-        Destroy(tutorial);
-        hasGameStarted = true;
+        //Destroy(tutorial);
+        //hasGameStarted = true;
+        hasGameStarted = false;
         player.SetIsPlayerMoving(true);
 
         choice = twoChoiceSystemChoiceCount;
@@ -679,6 +686,11 @@ public class GameSession : MonoBehaviour
                 int currLevel = PlayerPrefs.GetInt("LevelCount", 1);
                 FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
             }
+        }
+
+        if(isRespawn)
+        {
+            hasGameStarted = true;
         }
         /*int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
         if (isRandomised == 1)
