@@ -130319,9 +130319,9 @@ MonoBehaviour:
   mainCam: {fileID: 1461321553}
   sinkingSfx: {fileID: 8300000, guid: add9799965bb3c54f8c82e10f33e4f0e, type: 3}
   lavaSinkingSfx: {fileID: 8300000, guid: 81c0e80506bd40041a4386453437d69d, type: 3}
-  iceFreezingSfx: {fileID: 0}
-  grassFallSfx: {fileID: 0}
-  punchSfx: {fileID: 0}
+  iceFreezingSfx: {fileID: 8300000, guid: 5ac289bee4e9d904386bc858c680dc28, type: 3}
+  grassFallSfx: {fileID: 8300000, guid: 08640956748186840aaf6af5f7f84230, type: 3}
+  punchSfx: {fileID: 8300000, guid: ea507a2b94c42024fb8c80ae56b46a5d, type: 3}
   freezingMaterial: {fileID: 2100000, guid: 1e93c8f4430ad154eaf2840edde9ee3c, type: 2}
   renderer: {fileID: 7739934941151659999}
   coldFumes: {fileID: 3480353707360621546}
