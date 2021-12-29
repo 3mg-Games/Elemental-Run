@@ -665,7 +665,9 @@ public class GameSession : MonoBehaviour
         //even i dont know how it works
         //touch it at your own risk
 
-        //
+        //when level is loaded again after failing
+        //below are lines of code to initialize stuffa and get refernces of 
+        //objects in case they are missing
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
