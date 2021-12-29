@@ -2262,6 +2262,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Coins
       objectReference: {fileID: 0}
+    - target: {fileID: 6155174998893325683, guid: 84c916f2ea3e4fe44aa52b0f7a87e6c2,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 149.7
+      objectReference: {fileID: 0}
     - target: {fileID: 8145727209069939959, guid: 84c916f2ea3e4fe44aa52b0f7a87e6c2,
         type: 3}
       propertyPath: m_Pivot.x

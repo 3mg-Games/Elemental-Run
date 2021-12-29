@@ -170,7 +170,7 @@ PlayerSettings:
   applicationIdentifier:
     Android: com.ThreeMGProduction.ElementalRun
   buildNumber: {}
-  AndroidBundleVersionCode: 5
+  AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 19
   AndroidTargetSdkVersion: 30
   AndroidPreferredInstallLocation: 1
