@@ -10,9 +10,17 @@ public class GameSession : MonoBehaviour
     // 1 - water
     // 2 - earth
     // 3 - ice
+    [Tooltip("Set it to true this to play a particular level in Unity Editor." +
+        "\nFor building, make it false for all levels")]
     [SerializeField] bool isEditor = false;
+
+    [Tooltip("Keep it true for all levels")]
     [SerializeField] bool test1 = true;
+
+    [Tooltip("The elmenet selection Canvas")]
     [SerializeField] GameObject elemntSelectionPanel;
+
+    //[Tooltip("North - ")]
     [SerializeField] float choiceWaitTime = 10f;
     [SerializeField] float startingCapacityOfContainers = 0.02f;
     [SerializeField] GameObject winScreen;
@@ -78,18 +86,20 @@ public class GameSession : MonoBehaviour
     ProgressBar progressBar;
     private void Awake()
     {
-        
+        //Gamesession gets destroyed whenever a new level is loaded, regardless of the singleton pattern
+        // it dosent get detroyed only when, player dies and same level is loaded
         if(instance == null)
         {
             instance = this;
             DontDestroyOnLoad(instance);
             for (int i = 0; i < 3; i++)
             {
-                lastElementsCapacity[i] = startingCapacityOfContainers;
+                lastElementsCapacity[i] = startingCapacityOfContainers;   //initializing the fluid level in player 
+                                                                           //backpack
             }
-            playerDir = 1;
-            clampLowerLimit = -1.5f;
-            clampUpperLimit = 1.5f;
+            playerDir = 1;         
+            clampLowerLimit = -1.5f;         //clamp left limit
+            clampUpperLimit = 1.5f;         //clamp right limit
             isClampZ = true;
             isClampX = false;
            
@@ -98,12 +108,14 @@ public class GameSession : MonoBehaviour
             choice = twoChoiceSystemChoiceCount;
 
        //     if (isEditor)
+            
+            //Deleting keys related to Player Progress whenever new level is loaded
        
-                PlayerPrefs.DeleteKey("Progress");
+            PlayerPrefs.DeleteKey("Progress");
 
-                PlayerPrefs.DeleteKey("PlayerDirection");
+            PlayerPrefs.DeleteKey("PlayerDirection");
 
-                PlayerPrefs.DeleteKey("Player Distance");
+            PlayerPrefs.DeleteKey("Player Distance");
 
             PlayerPrefs.DeleteKey("PrevPlayerPosX");
             PlayerPrefs.DeleteKey("PrevPlayerPosY");
@@ -138,6 +150,9 @@ public class GameSession : MonoBehaviour
 
         Debug.Log("Saved Level num = " + savedLevelNum);
         Debug.Log("Curr Level Num = " + currLevelNum);
+
+        //if the level which is supposed to load hasnt loaded, then destroy the current 
+        // gamesession object and load the particular scene
         if (currLevelNum != savedLevelNum && !isEditor)
         {
             levelLoader.LoadParticularScene(savedLevelNum-1);
@@ -150,7 +165,16 @@ public class GameSession : MonoBehaviour
             int isRandomised = PlayerPrefs.GetInt("IsRandomized", 0);
             if (isRandomised == 1)
             {
-                int currLevel = PlayerPrefs.GetInt("LevelCount", 1);
+                /*if levels are randomised i.e, once level 10 has been crossed
+                * then whichever random level is loaded
+                * update its number
+                * Btw, every level has an object with a fixed level  number
+                * In this script there are 2 variables for level number
+                * 1 - "currLevelNum" - the deafult number of a level
+                * 2 - "savedLevelNum" - the default level number which is supposed to load
+                * */
+                int currLevel = PlayerPrefs.GetInt("LevelCount", 1);  // "LevelCount" Player Prefs stores the true incremental count
+                                                                      // regardless of the actual level number or randomization
                 FindObjectOfType<LevelNumber>().SetLevelNumber(currLevel);
             }
         //}
@@ -165,12 +189,13 @@ public class GameSession : MonoBehaviour
         */
         if(savedLevelNum == 1)
         {
-           PlayerPrefs.DeleteKey("Coins");
+           PlayerPrefs.DeleteKey("Coins");  
         }
         coinCount = PlayerPrefs.GetInt("Coins", 0);
         coinText.text = coinCount.ToString();
 
-        player.SetIsPlayerMoving(false);
+        player.SetIsPlayerMoving(false);   //stop the player from moving at the beginning of every level
+
 
        // changeLevelNum = true;
 
@@ -190,6 +215,7 @@ public class GameSession : MonoBehaviour
         coinText.text = coinCount.ToString();
         if (hasLevelLoaded)
         {
+            
             hasLevelLoaded = false;
             if (isFirstTimeTutorial)
             {
@@ -198,6 +224,7 @@ public class GameSession : MonoBehaviour
 
             else
             {
+                
                 Destroy(tutorial);
                 hasGameStarted = true;
                 player.SetIsPlayerMoving(true);
@@ -209,6 +236,7 @@ public class GameSession : MonoBehaviour
             playerInputWaitTimer -= Time.deltaTime;
             if(playerInputWaitTimer <= 0f || Input.GetMouseButtonDown(0))
             {
+                //if there is player input, start the game
                 Destroy(tutorial);
                 isFirstTimeTutorial = false;
                 hasGameStarted = true;
@@ -231,7 +259,8 @@ public class GameSession : MonoBehaviour
 
                 if (choiceWaitTimer < 0f)
                 {
-
+                    //if choice panel is active and after a certian time
+                    //player hasnt chosen anything, choose randomly automatically
 
                     ChooseElementRandomly();
 
@@ -249,6 +278,8 @@ public class GameSession : MonoBehaviour
 
     public void ActivateElementSelectionPanel(int elementTerrainId)
     {
+        //choice panel gets activated the moment player touches a terrain
+
         player.ActivateSpeedVFx(false);
         currTerrainElementId = elementTerrainId;
         //Time.timeScale = 0; //stop the player
@@ -256,6 +287,9 @@ public class GameSession : MonoBehaviour
         elemntSelectionPanel.SetActive(true);
         if (is2Choices)
         {
+            //code for when there are 2 choices, bascially for level 1 and 2
+            // and for those 2 levels, which choices will appear at what poin
+            //have been hard coded down below
             choice++;
             GameObject leftSideChoice = elemntSelectionPanel.transform.GetChild(0).gameObject;
             GameObject rightSideChoice = elemntSelectionPanel.transform.GetChild(1).gameObject;
@@ -291,23 +325,23 @@ public class GameSession : MonoBehaviour
                 * 1 - water
                 * 2 - earth*/
 
-                case 1:
+                case 1: //level 1
                     switch (choice)
                     {
-                        case 1:
+                        case 1:  //first terrain
                             lFire.SetActive(true);
                             rEarth.SetActive(true);
                             lElementalTutorial.SetActive(true);
                             break;
 
-                        case 2:
+                        case 2: //second terrain
                             //lEarth.SetActive(true);
                             lFire.SetActive(true);
                             rWater.SetActive(true);
                             rElementalTutorial.SetActive(true);
                             break;
 
-                        case 3:
+                        case 3:  //third terrain
                             //lFire.SetActive(true);
                             lWater.SetActive(true);
                             rEarth.SetActive(true);
@@ -317,22 +351,23 @@ public class GameSession : MonoBehaviour
 
                     break;
 
-                case 2:
+                case 2:   //level 2
                     switch (choice)
                     {
-                        case 1:
+                        case 1:   //first terrain
                             lEarth.SetActive(true);
                             //rFire.SetActive(true);
                             rWater.SetActive(true);
                             break;
 
-                        case 2:
+                        case 2:   //second terrain
                             lFire.SetActive(true);
                             //rWater.SetActive(true);
                             rEarth.SetActive(true);
                             break;
 
-                        case 3:
+                        case 3:  //third terrain
+
                             lWater.SetActive(true);
                             //rEarth.SetActive(true);
                             rFire.SetActive(true);
@@ -451,6 +486,7 @@ public class GameSession : MonoBehaviour
 
     public void DeactivateElementSelectionPanel(int elementSelectedId)
     {
+        //when a choice has been made, deactivte choice pannel
         // 0 - fire
         // 1 - water
         // 2 - earth
@@ -466,10 +502,12 @@ public class GameSession : MonoBehaviour
         //Debug.Log("Terrain ID = " + currTerrainElementId + " , Selected Element ID" + elementSelectedId);
 
         if (test1)
-        {
+        { //code for test1, we are not doing test2 anymore, it was a previous thing
 
             switch (currTerrainElementId)
             {
+                //if at a particluar terrain wrong choice is made,
+                //kill player otherwise start consuming the fuel
 
                 case 0: //fire
                     if (elementSelectedId == 2)
@@ -574,6 +612,7 @@ public class GameSession : MonoBehaviour
                 //Debug.Log(elementSelectedId);
             }
             bool val = pickupSystem.ConsumeFuel(elementSelectedId, currTerrainElementId);
+            //if player is alive i.e, he didt make wronng choice, start consuming fuel
             if(val)
             player.SetIsPlayerMoving(true);
         }
@@ -587,6 +626,8 @@ public class GameSession : MonoBehaviour
 
     public IEnumerator Kill(bool isDeathByWater, int terrainID)
     {
+        //kill player
+
         isPlayerAlive = false;
         player.KillPlayer(isDeathByWater, terrainID);
         // isNewLevel = false;
@@ -594,9 +635,12 @@ public class GameSession : MonoBehaviour
         if (terrainID == 3)
             timeAfterWhichSceneIsLoaded = 4.5f;
 
-
+        //store the correct level count
         int currLevel = PlayerPrefs.GetInt("LevelCount", currLevelNum);
+        
+        //send the msg to game analytics sdk, of failing the level
         FindObjectOfType<Immortal>().LevelFail(currLevel);
+
         yield return new WaitForSeconds(timeAfterWhichSceneIsLoaded);
         isRespawn = true;
         levelLoader.LoadCurrentScene();
@@ -617,6 +661,11 @@ public class GameSession : MonoBehaviour
 
     private void OnLevelWasLoaded()
     {
+        //this is the part, that i dont recommend u to touch, coz honestly
+        //even i dont know how it works
+        //touch it at your own risk
+
+        //
         pickupSystem = FindObjectOfType<PickupSystem>();
         player = FindObjectOfType<PlayerController>();
         levelLoader = FindObjectOfType<LevelLoader>();
