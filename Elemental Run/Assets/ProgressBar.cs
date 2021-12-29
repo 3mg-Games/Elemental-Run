@@ -50,7 +50,7 @@ public class ProgressBar : MonoBehaviour
     {
         if(isProgressFill && progressBar.fillAmount < 1)
         {
-            
+            //Debug.Log("Player distance = " + playerDistance);
             // int playerDir = player.GetDir();
             var diff = Vector3.zero;
             switch (playerDir)
