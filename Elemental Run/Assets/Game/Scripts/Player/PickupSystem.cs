@@ -236,6 +236,7 @@ public class PickupSystem : MonoBehaviour
                 DeactivateSmokeVfx();
                 if (player.IsGrounded)
                 {
+                    StopSpraySfx();
                     isBonus = false;
                     gameSession.Win();
                 }
@@ -672,8 +673,25 @@ public class PickupSystem : MonoBehaviour
         audioSource.Stop();
     }
 
+    public void PlaySpraySfx()
+    {
+        audioSource.Play();
+    }
+
+    public void StopSpraySfx()
+    {
+        audioSource.Stop();
+    }
+
     public void SetBonus(bool val)
     {
         isBonus = val;
+
+        if (val)
+            PlaySpraySfx();
+
+        else
+            StopSpraySfx();
+
     }
 }
