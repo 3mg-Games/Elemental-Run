@@ -6,9 +6,17 @@ using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
+    //[Header("")]
+    
     [SerializeField] LayerMask groundLayer;
+
+    [Tooltip("Forward Running spped")]
     [SerializeField] float runSpeed = 8f;
+
+    [Tooltip("Mobile horizontal swerve speed")]
     [SerializeField] float mobileHorizontalRunSpeed = 2f;
+
+    [Tooltip("Unity Editor horizontal swerve speed")]
     [SerializeField] float horizontalSpeed = 4f;
     [SerializeField] GameObject confetti;
     [SerializeField] float currentAngleDelta = 2f;
@@ -26,6 +34,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject punchVfx;
     [SerializeField] GameObject confusedVfx;
     [SerializeField] GameObject floorHitVfx;
+
+    [Tooltip("Camera for bonus level jumping which zooms out and looks player from above.")]
     [SerializeField] CinemachineVirtualCamera bonusLevelCam;
 
     //[SerializeField] float wallRunMaxDistance = 1f;
@@ -134,6 +144,8 @@ public class PlayerController : MonoBehaviour
 
     private void ResetPlayer()
     {
+        //initialize player properties on spawning
+        //like player position and player clamp limist for left and right swerve
         
         gameSession = (GameSession)FindObjectOfType(typeof(GameSession));
         //if (!gameSession.GetIsNewLevel())
@@ -150,6 +162,15 @@ public class PlayerController : MonoBehaviour
        // }
         dir = gameSession.playerDir;
 
+        //set player direction based on direction that was saved on last checkpoint
+        //if its the level begining it sets that to north automatically
+
+        /* 1 - North
+         * 2 - West
+         * 3 - East
+         * 4 - South
+         * P.S. Code for south doesnt exist */
+         
         switch (dir)
         {
             case 1:
@@ -240,6 +261,8 @@ public class PlayerController : MonoBehaviour
 
         if (mobileInput)
         {
+            //if the game is being run on mobile then
+            //the code automatically swithces to the speed variables for mobile
             if (Input.touchCount > 0)
             {
                 if (!isTouchActive)
@@ -248,7 +271,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
+        // based on player direction, move player in a certain direction only
         if(isNorth)
             transform.forward = new Vector3(-verticalInput, 0, Mathf.Abs(verticalInput) - 1);
 
@@ -259,10 +282,12 @@ public class PlayerController : MonoBehaviour
         if(isEast)
             transform.forward = new Vector3(Mathf.Abs(verticalInput) - 1, 0, verticalInput);
 
+        
         isGrounded = Physics.CheckSphere(transform.position, 0.1f, groundLayer, QueryTriggerInteraction.Ignore);
 
         if (isGrounded && velocity.y < 0)
         {
+
             velocity.y = 0;
 
             if (!isJump)
@@ -272,6 +297,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //if player is not grounded, start making him fall using gravity
         else
         {
             velocity.y += gravity * Time.deltaTime;
@@ -283,6 +309,8 @@ public class PlayerController : MonoBehaviour
             isJump = false;
             if(isBonusJump)
             {
+                //if player is jumping in bonus area, then do so in a specific way,
+                //ohterwise do so, in a diffeerent way
                 velocity.y += Mathf.Sqrt(jumpHeight * -jumpDistance * gravity);
             }
 
@@ -293,6 +321,10 @@ public class PlayerController : MonoBehaviour
 
 
         var movement = Vector3.zero;
+
+
+        //if game is being run on mobile, use one set of speed variables
+        //otherweise use second set
         if (isTouchActive)
         {
             if(isNorth)
@@ -323,7 +355,7 @@ public class PlayerController : MonoBehaviour
         characterController.Move(movement * Time.deltaTime);
         characterController.Move(velocity * Time.deltaTime);
 
-        //code for clamping the left and right of player
+        //code for clamping the left and right i.e, horizontal swerve movement of player
 
         if (isClampZ)
         {
@@ -345,6 +377,8 @@ public class PlayerController : MonoBehaviour
 
     private void WallRunPlayerRoate()
     {
+        //This code is for a older implementaltion of wall running mechanic
+
         curRotation = transform.rotation;
         //= transform.rotation;
         //if (smooth)

@@ -774,6 +774,8 @@ public class GameSession : MonoBehaviour
 
     public void Win()
     {
+        //Delete Level progress related keys when new level is loaded
+        //and start activating stuff for wining and deactivating normal gameplay stuff
         PlayerPrefs.DeleteKey("Progress");
       
         PlayerPrefs.DeleteKey("PlayerDirection");
@@ -809,6 +811,10 @@ public class GameSession : MonoBehaviour
 
     public void Continue()
     {
+        //when conitnue button is pressed 
+        //save coins number and level number and 
+        //load next level
+
         //levelLoader.LoadScene(0);
         //isNewLevel = true;
         PlayerPrefs.SetInt("Coins", coinCount);
@@ -833,6 +839,9 @@ public class GameSession : MonoBehaviour
         }
         */
 
+
+        //if level number is 10, then activate randomization
+        //i.e, after level 10, any level from 3-10 will appear randomly
         if (currLevel > 10)
         {
             PlayerPrefs.SetInt("IsRandomized", 1);
@@ -856,6 +865,8 @@ public class GameSession : MonoBehaviour
 
     public void IncrementCoin(Transform coinTransform)
     {
+        //coin gets instantiated that travels to ui, whenever player touches a coin on level
+
         var pos = Vector3.zero;
         var dir = player.GetDir();
         if (dir == 1)
@@ -884,6 +895,7 @@ public class GameSession : MonoBehaviour
 
     public void RealCoinInc()
     {
+        //actual coin increment when the spawned coin reaches the coin ui
         coinCount++;
         coinText.text = coinCount.ToString();
     }
@@ -900,6 +912,7 @@ public class GameSession : MonoBehaviour
 
     public Transform GetCoinSpawnTarget()
     {
+        //target transofrm for spawned coin 
         //return coinTextImg;
         return coinTarget;
     }
