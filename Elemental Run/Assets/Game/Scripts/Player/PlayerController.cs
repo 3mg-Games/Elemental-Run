@@ -45,6 +45,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] CinemachineVirtualCamera eastCam;
     [SerializeField] CinemachineVirtualCamera southCam;*/
 
+    //direction of player
+    // forward - north
+    // backward - south
+    // left - west
+    // right - east
     [Tooltip("North - 1, West - 2, East - 3, South - 4")]
     public int dir;
 
@@ -419,6 +424,15 @@ public class PlayerController : MonoBehaviour
 
     private void WallRun()
     {
+       //code for wall running of player
+       /* the way it works is -
+        * waypoints are already place over the wall
+        * the momeent player touches the wall
+        * wall run anim is trigereed
+        * and player is moved from one waypoint to the other
+        * at the same height player touche the wall
+        * */
+
       // Debug.Log(Camera.main.transform.rotation.eulerAngles);
         if (wallRunWayPointsIdx <= wallRunWayPointsCount - 1)
         {
@@ -442,11 +456,15 @@ public class PlayerController : MonoBehaviour
                       (transform.position, targetPosition, movementThisFrame);
             //transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationThisFrame);
 
-
+            //if player has reached the target waypoint
+            //change target waypoint to the next one 
             if (transform.position == targetPosition)
                 wallRunWayPointsIdx++;
 
         }
+
+        //if player has reached the final waypoint
+        //switch to normal movement
 
         else
         {
@@ -464,6 +482,11 @@ public class PlayerController : MonoBehaviour
 
     private void Turn()
     {
+        //code for making player turn 
+        /* it also works on waypoint concepty
+         * the moment player touches the turn
+         * he is automatically moved throught the turn
+         * by waypoints */
         if (turnWayPointIdx <= turnWayPointsCount - 1)
         {
             Vector3 dir;
@@ -484,11 +507,15 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, rotation, rotationThisFrame);
 
 
+            // if player has reached the target waypoint
+            // make the next waypoint as the target one
             if (transform.position == targetPosition)
                 turnWayPointIdx++;
 
         }
 
+        //if plyaer has reached the final waypoint
+        //resume normal movement
         else
         {
             ActivateSpeedVFx(false);
@@ -499,12 +526,17 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer(bool isDeathByWater, int terrainID)
     {
+        //code for killing the player
+
         //animator.enabled = false;
         //isPlayerMoving = false;
+
+        //Deactivate speed vfx
         ActivateSpeedVFx(false);
+
         mainCam.GetComponent<CamerFollow>().SetParentNull();
         animator.enabled = true;   //enable animator for fuel empty condition
-        if (!isDeathByWater && terrainID != 3 && terrainID != 4)  //not ice and not death by water
+        if (!isDeathByWater && terrainID != 3 && terrainID != 4)  //not ice and not death by water and not death by boxing glove
         {
             animator.SetBool("Jump", false);
             animator.SetTrigger("Trip");
@@ -513,6 +545,7 @@ public class PlayerController : MonoBehaviour
 
         else if(terrainID == 3)
         {
+            //if death by ice terrain
             animator.SetBool("Jump", false);
             animator.SetTrigger("Freeze");
 
@@ -524,6 +557,7 @@ public class PlayerController : MonoBehaviour
 
         else if(terrainID == 4)
         {
+            //if death by boxing gloves
             animator.SetBool("Jump", false);
             animator.SetTrigger("Knock");
             punchVfx.SetActive(true);
@@ -539,11 +573,17 @@ public class PlayerController : MonoBehaviour
         isPlayerMoving = false;
 
         //SetIsPlayerMoving(false);
+
+        //deactivate backpack
         transform.GetChild(2).gameObject.SetActive(false);
+
         if(!isDeathByWater && terrainID == 0)
         {
+            //if death by fire terrain
             StartCoroutine(BurnPlayer());
         }
+
+        //activate falling thorugh of player
         StartCoroutine(FallThrough(terrainID, isDeathByWater));
         
         //characterController.
@@ -592,22 +632,26 @@ public class PlayerController : MonoBehaviour
 
         if(terrainId == 1)
         {
+            //if water terrain
             timeAfterFallThroughHappens = 1f;
         }
 
         else if(terrainId == 3)
         {
+            //if ice terrain
             timeAfterFallThroughHappens = 3f;
         }
 
         else if (terrainId == 2)
         {
+            //if earth terrain
             StartCoroutine(PlayGrassFallSfx());
         }
 
 
         else if(terrainId == 4)
         {
+            //if punching gloves
             audioSource.clip = punchSfx;
             audioSource.loop = false;
             audioSource.Play();
@@ -619,12 +663,13 @@ public class PlayerController : MonoBehaviour
         if (terrainId == 1 || terrainId == 0 || terrainId == 3)   //if fire or water or ice then sink the player
         {
             if(terrainId == 1 || terrainId == 3)
-            {
+            {//if water or ice
                 audioSource.clip = sinkingSfx;
             }
 
             else if(terrainId == 0)
-            {
+            { 
+                //if fire
                 audioSource.clip = lavaSinkingSfx;
                 audioSource.loop = false;
             }
@@ -652,6 +697,7 @@ public class PlayerController : MonoBehaviour
 
     public void PlayerWin()
     {
+        //acitvate wining stuff
         animator.SetTrigger("Win");
         isPlayerMoving = false;
         confetti.SetActive(true);
@@ -673,6 +719,8 @@ public class PlayerController : MonoBehaviour
 
     private void BonusMidAir()
     {
+        //something was used for an earlier implemntation fo bonus area
+        // currently not in use
         if(currHeight < transform.position.y)
         {
             currHeight = transform.position.y;
@@ -693,6 +741,8 @@ public class PlayerController : MonoBehaviour
 
     public void Jump(float jumpHeight, float jumpDistance, bool isJumpVfx, bool isBonusJump)
     {
+        //acitvate plyaer jump
+
         this.jumpHeight = jumpHeight;
         this.jumpDistance = jumpDistance;
 
@@ -733,6 +783,11 @@ public class PlayerController : MonoBehaviour
 
     public void SpeedTurn(float turnMovementSpeed, float turnRotateSpeed, GameObject path, int turnDirection)
     {
+
+        //activate turning and also set the
+        //new player direction after turning
+        // and also teh speed and rotation of turning
+        // and the path of waypoints to follow
         /* North - 1
          * West - 2
          * East - 3 
@@ -808,6 +863,8 @@ public class PlayerController : MonoBehaviour
     public void SetClamp(float clampLowerLimit, 
         float clampUpperLimit, bool isClampX, bool isClampZ)
     {
+        //set new clamps for player which will limit the
+        // horizontal swerve movemnet fo the player at any path
         this.clampLowerLimit = clampLowerLimit;
         this.clampUpperLimit = clampUpperLimit;
         this.isClampX = isClampX;
@@ -828,12 +885,15 @@ public class PlayerController : MonoBehaviour
 
     public Vector2 GetClampLimits()
     {
+        //return the current clamp limits
         var clampLimits = new Vector2(clampLowerLimit, clampUpperLimit);
         return clampLimits;
     }
 
     public void Slant(float percentageChangeInSpeed, bool isEntry)
     {
+        //eartlier implementation
+        //currently not in use
         if(isEntry)
         {
             runSpeed = runSpeed + initialRunSpeed * percentageChangeInSpeed / 100f;
@@ -848,6 +908,9 @@ public class PlayerController : MonoBehaviour
 
     public void ActivateWallRun(bool val, GameObject path, float wallRunSpeed, int wallPos)
     {
+        //activate wall run and initalizet things like - 
+        // wall run speed, path of waypoints to follow while wall running
+        // and also the the position of wall - left or right w.r.t. player's perspective
         if(val)
         {
 
