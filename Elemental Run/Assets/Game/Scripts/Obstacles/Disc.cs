@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for disc obstacle
 public class Disc : MonoBehaviour
 {
     [SerializeField] GameObject path;
@@ -35,6 +36,9 @@ public class Disc : MonoBehaviour
     {
         if (gameSession == null)
             gameSession = FindObjectOfType<GameSession>();
+
+        //the disc moves back and forth b/t point A and point B using waypoints
+       
         if (wayPointsIndex <= wayPointsCount - 1)
         {
             Vector3 dir;
@@ -74,7 +78,7 @@ public class Disc : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
-        {
+        {//kill player if disc touches him
             StartCoroutine(gameSession.Kill(false, 5)); //5 for other obstacle
 
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for when player enters touches the wall
 public class WallRunEnter : MonoBehaviour
 {
     /* 1 - Left

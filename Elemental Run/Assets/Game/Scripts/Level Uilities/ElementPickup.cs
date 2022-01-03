@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for adding a new pickup as more fuel to player's backpack
 public class ElementPickup : MonoBehaviour
 {
     [SerializeField] int elementId;  // 0 - fire

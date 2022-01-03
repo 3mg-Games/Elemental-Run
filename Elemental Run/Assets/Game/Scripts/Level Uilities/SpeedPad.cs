@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for turning player
 public class SpeedPad : MonoBehaviour
 {
+
     /* North - 1
         * West - 2
         * East - 3 

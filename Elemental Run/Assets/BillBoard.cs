@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for billboarding a gameobject
+//i.e., the gameobect that has this script will always face camera
 public class BillBoard : MonoBehaviour
 {
     [SerializeField] Transform cam;

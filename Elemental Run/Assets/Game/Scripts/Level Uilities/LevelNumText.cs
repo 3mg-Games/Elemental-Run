@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+//script for maintaing level number text
 public class LevelNumText : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI levelNumText;

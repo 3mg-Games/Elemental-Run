@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//code for punching gloves
 public class Punch : MonoBehaviour
 {
     GameSession gameSession;
@@ -22,7 +23,7 @@ public class Punch : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            
+            //if player touches punching gloves, kill that fucker   
             StartCoroutine(gameSession.Kill(false, 4)); //4 for boxing glove
             GetComponent<Collider>().enabled = false;
         }

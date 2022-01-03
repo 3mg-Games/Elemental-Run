@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//code for when player enters elemental terrain
 public class ElementalEntry : MonoBehaviour
 {
     // 0 - fire
@@ -31,6 +32,7 @@ public class ElementalEntry : MonoBehaviour
     {
         if (other.tag == "Player" && !hasPlayerEntered)
         {
+            //when player enters elemental terrain, acitvate choice selection canvas
             //pickupSystem.ResetAllTerrainSpray();
             hasPlayerEntered = true;
             gameSession.ActivateElementSelectionPanel(elementId);

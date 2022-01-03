@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//code for glass wall
 public class GlassWall : MonoBehaviour
 {
     [SerializeField] GameObject glassWallBrokenPrefab;
@@ -29,6 +30,9 @@ public class GlassWall : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            //if player touches glass wall
+            //replace it with a broken wall
+            //and add force to its individual pieces and destroy them after sometime
             Destroy(glassOriginal);
             GameObject glassWallBroken = Instantiate(glassWallBrokenPrefab,
                 transform.position,

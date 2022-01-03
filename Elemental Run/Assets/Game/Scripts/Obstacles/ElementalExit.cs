@@ -8,7 +8,7 @@ public class ElementalExit : MonoBehaviour
     // 1 - water
     // 2 - earth
    
-
+    //This script is for when playre is exiting the Elemental terrain
 
     PickupSystem pickupSystem;
     // Start is called before the first frame update

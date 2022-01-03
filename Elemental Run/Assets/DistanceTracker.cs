@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//code for tracking distance
 public class DistanceTracker : MonoBehaviour
 {
     [Tooltip("North - 1, West - 2, East - 3, South - 4")]

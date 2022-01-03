@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for maintaing the correct level number
 public class LevelNumber : MonoBehaviour
 {
     [SerializeField] int levelNumber = 2;

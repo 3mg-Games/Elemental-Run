@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script for when player encouters elemental enemy
+
 public class ElementalEnemy : MonoBehaviour
 {
     // 0 - fire
@@ -15,6 +17,8 @@ public class ElementalEnemy : MonoBehaviour
     [SerializeField] GameObject explosionVfxPrefab;
 
     PickupSystem pickupSystem;
+
+    
     // Start is called before the first frame update
     void Start()
     {

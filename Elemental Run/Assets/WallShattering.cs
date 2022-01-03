@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for shaterring the wall of wall run
 public class WallShattering : MonoBehaviour
 {
     Rigidbody rb;

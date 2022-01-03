@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//Script for when player just eneters the bonus area
 public class Bonus : MonoBehaviour
 {
     PickupSystem pickupSystem;

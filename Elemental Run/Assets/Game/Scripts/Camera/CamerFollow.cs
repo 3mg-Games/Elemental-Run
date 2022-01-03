@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+//i have no idea how this works anymore
+//touching the code isnt recommended
+//this basically manages camera movements and swithcing between various cameras
 public class CamerFollow : MonoBehaviour
 {
     /* North - 1

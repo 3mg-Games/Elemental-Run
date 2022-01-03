@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//Script for saving important info when checkpoint is encountered
 public class CheckPoint : MonoBehaviour
 {
     // Start is called before the first frame update
-
+    
     GameSession gameSession;
     PlayerController player;
     PickupSystem pickupSystem;

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for finish
+//it gets activated when either the fuel is empty in bonus round or player has reached the end
 public class Finish : MonoBehaviour
 {
     GameSession gameSession;
@@ -23,7 +25,7 @@ public class Finish : MonoBehaviour
         if(isWin)
         {
             if(player.IsGrounded)
-            {
+            {//if is player grounded, activate win stuff
                 // player.DeactivateBonusLevelCam();
                 player.ActivateSpeedVFx(false);
                 gameSession.Win();

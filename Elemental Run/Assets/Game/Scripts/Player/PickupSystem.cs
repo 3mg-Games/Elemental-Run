@@ -81,6 +81,7 @@ public class PickupSystem : MonoBehaviour
 
     private void ResetFuelTerrain()
     {
+        //initialize fuel capacity and terrain generator
         gameSession = FindObjectOfType<GameSession>();
         for (int i = 0; i < 3; i++)
         {
@@ -113,20 +114,22 @@ public class PickupSystem : MonoBehaviour
         int dir = player.GetDir();
         switch (dir)
         {
-            case 1:
+            case 1: // north
                 deltaTerrainSprayPos = deltaTerrainSprayPosN;
                 break;
 
-            case 2:
+            case 2: // west
                 deltaTerrainSprayPos = deltaTerrainSprayPosW;
                 break;
-
-            case 3:
+                 
+            case 3: //east
                 deltaTerrainSprayPos = deltaTerrainSprayPosE;
                 break;
 
         }
 
+        //the terrain spray code down below
+        //isnt in use in current implemntation
         if (isFireTerrainSpray)
         {
             
@@ -149,8 +152,10 @@ public class PickupSystem : MonoBehaviour
             //earthTerrainSpray.gameObject.transform.rotation = transform.rotation;
         }
 
+        
         if(isConsumeFire)
         {
+            //decrement fire fuel every frame by the percentage variable
             elements[0] = elements[0] - percentageConsumptionInElement;
 
             if (elements[0] < lowerLimitOfContainers)
@@ -163,11 +168,13 @@ public class PickupSystem : MonoBehaviour
                 isConsumeFire = false;
             }
 
+            //resize fire fuel fluid
             SetFire();
         }
 
         if(isConsumeWater)
         {
+            //decrement water fuel every frame by the percentage variable
             elements[1] = elements[1] - percentageConsumptionInElement;
 
             if (elements[1] < lowerLimitOfContainers)
@@ -180,11 +187,13 @@ public class PickupSystem : MonoBehaviour
                 isConsumeWater = false;
             }
 
+            //resize water fuel fluid
             SetWater();
         }
 
         if(isConsumeEarth)
         {
+            //decrement earth fuel every frame by the percentage variable
             elements[2] = elements[2] - percentageConsumptionInElement;
 
             if (elements[2] < lowerLimitOfContainers)
@@ -196,14 +205,22 @@ public class PickupSystem : MonoBehaviour
                 StartCoroutine(gameSession.Kill(false, currTeerrainID));
                 isConsumeEarth = false;
             }
-
+            //resize earth fuel fluid
             SetEarth();
         }
 
         if(isBonus)
         {
+            //code for when player is in bonus level
+            
+            /* if fire continer has fluid, then consume that
+             * otherwiese consume water
+             * otherwise consume earth
+             * if all 3 are empty
+             * then if player is grounded - enable win stuff */
             if(elements[0] > lowerLimitOfContainers)
             {
+                
                 elements[0] = elements[0] - percentageConsumptionInElementInBonusRound;
                 SetFire();
                 fireSmoke.SetActive(true);
@@ -247,6 +264,7 @@ public class PickupSystem : MonoBehaviour
 
     public void DeactivateSmokeVfx()
     {
+        
         fireSmoke.SetActive(false);
         waterSmoke.SetActive(false);
         earthSmoke.SetActive(false);
@@ -266,9 +284,11 @@ public class PickupSystem : MonoBehaviour
         audioSource.Play();
         this.currTeerrainID = currTeerrainID;
         //Debug.Log("consume");
+
+        //consume ther respective element and create a terrain using spray of the same element
         switch (elementId)
         {
-            case 0:
+            case 0: //fire
                 isFireTerrainSpray = true;
                 isWaterTerrainSpray = false;
                 isEarthTerrainSpray = false;
@@ -280,7 +300,7 @@ public class PickupSystem : MonoBehaviour
 
                 break;
 
-            case 1:
+            case 1: //water
                 isFireTerrainSpray = false;
                 isWaterTerrainSpray = true;
                 isEarthTerrainSpray = false;
@@ -291,7 +311,7 @@ public class PickupSystem : MonoBehaviour
 
                 break;
 
-            case 2:
+            case 2: //earth
                 isFireTerrainSpray = false;
                 isWaterTerrainSpray = false;
                 isEarthTerrainSpray = true;
@@ -308,6 +328,7 @@ public class PickupSystem : MonoBehaviour
 
     public void AddNewElementPickup(int elementId)
     {
+        //increment fuel based on the element pickup
         // 0 - fire
         // 1 - water
         // 2 - earth
@@ -321,17 +342,17 @@ public class PickupSystem : MonoBehaviour
         
         switch (elementId)
         {
-            case 0:
+            case 0: //fire
                 StartCoroutine(BlinkFireUiElement(fireElementUi));
                 SetFire();
                 break;
 
-            case 1:
+            case 1: //water
                 StartCoroutine(BlinkWaterUiElement(waterElementUi));
                 SetWater();
                 break;
 
-            case 2:
+            case 2: //earth
                 StartCoroutine(BlinkEarthUiElement(earthElementUi));
                 SetEarth();
                 break;
@@ -341,7 +362,7 @@ public class PickupSystem : MonoBehaviour
 
     private IEnumerator BlinkFireUiElement(SpriteRenderer sprite)
     {
-
+        //blink ui of fire fuel container
         sprite.color = elementUiColor2;
 
         yield return new WaitForSeconds(frequecyOfColorChange);
@@ -367,7 +388,7 @@ public class PickupSystem : MonoBehaviour
 
     private IEnumerator BlinkWaterUiElement(SpriteRenderer sprite)
     {
-
+        //blink ui of water fuel container
         sprite.color = elementUiColor2;
 
         yield return new WaitForSeconds(frequecyOfColorChange);
@@ -393,7 +414,7 @@ public class PickupSystem : MonoBehaviour
 
     private IEnumerator BlinkEarthUiElement(SpriteRenderer sprite)
     {
-
+        //blink ui of earth fuel container
         sprite.color = elementUiColor2;
 
         yield return new WaitForSeconds(frequecyOfColorChange);
@@ -421,6 +442,7 @@ public class PickupSystem : MonoBehaviour
 
     void SetFire()
     {
+        //resize fire fuel fluid
         // 0 - fire
         // 1 - water
         // 2 - earth
@@ -431,6 +453,7 @@ public class PickupSystem : MonoBehaviour
 
     void SetWater()
     {
+        //resize water fuel fluid
         // 0 - fire
         // 1 - water
         // 2 - earth
@@ -441,6 +464,7 @@ public class PickupSystem : MonoBehaviour
 
     void SetEarth()
     {
+        //resize earth fuel fluid
         // 0 - fire
         // 1 - water
         // 2 - earth
@@ -512,6 +536,7 @@ public class PickupSystem : MonoBehaviour
 
     void ActivateFireTerrainSpray(bool val)
     {
+
         fireTerrainSpray.gameObject.SetActive(val);
         
         if(!val)
@@ -568,6 +593,7 @@ public class PickupSystem : MonoBehaviour
 
     public float[] GetElements()
     {
+        //return fuel capacity
         return elements;
     }
 
@@ -651,15 +677,15 @@ public class PickupSystem : MonoBehaviour
 
         switch(spray)
         {
-            case 0:
+            case 0: //fire 
                 fireSpray.SetActive(activate);
                 break;
 
-            case 1:
+            case 1: //water
                 waterSpray.SetActive(activate);
                 break;
 
-            case 2:
+            case 2: //earth
                 earthSpray.SetActive(activate);
                 break;
         }

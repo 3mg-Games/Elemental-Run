@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//death by water boundary
+//if player falls and touches it, instant death :(
 public class DeathBoundary : MonoBehaviour
 {
     GameSession gameSession;

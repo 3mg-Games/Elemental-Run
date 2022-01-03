@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//code for elemental wall
+//not in use currently
 public class ElementalWall : MonoBehaviour
 {
     // 0 - fire

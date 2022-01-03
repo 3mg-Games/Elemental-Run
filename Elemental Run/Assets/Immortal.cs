@@ -5,6 +5,7 @@ using UnityEngine;
 using GameAnalyticsSDK;
 using Facebook.Unity;
 
+//this script lives and dosent get destroyed from level to level
 public class Immortal : MonoBehaviour
 {
     private static Immortal instance;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for player jump
 public class JumpPad : MonoBehaviour
 {
     [SerializeField] float jumpHeight = 2f;
@@ -24,6 +25,7 @@ public class JumpPad : MonoBehaviour
         
     }
 
+    // map a value from one range to another
     private float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)
     {
         return rightMin + (value - leftMin) * (rightMax - rightMin) / (leftMax - leftMin);
@@ -35,8 +37,13 @@ public class JumpPad : MonoBehaviour
         if (other.tag == "Player")
         {
             //Debug.Log("Jump");
-            if(isBonusLevel)
+
+            //if is bonus level then jump in a certain way otherwise do it another way
+
+
+            if (isBonusLevel)
             {
+                
                 var elements = pickupSystem.GetElements();
 
                 float totalFuel = elements[0] + elements[1] + elements[2];

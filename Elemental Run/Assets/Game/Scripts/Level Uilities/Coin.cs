@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for when coin pickup is touched
 public class Coin : MonoBehaviour
 {
     [SerializeField] AudioClip pickUpSfx;

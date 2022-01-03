@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//script for spawning coin and making it move to the target
 public class CoinSpawn : MonoBehaviour
 {
+    
     [SerializeField] float coinMoveSpeed = 10f;
     GameSession gameSession;
     //RectTransform target;
@@ -22,7 +24,8 @@ public class CoinSpawn : MonoBehaviour
     void Update()
     {
         //if ( <= turnWayPointsCount - 1)
-        
+
+        // move the coin towards the target position
         Vector3 dir;
 
         //var targetPosition = target.position;
@@ -34,6 +37,8 @@ public class CoinSpawn : MonoBehaviour
          
         transform.position = Vector3.MoveTowards        //try character controller here
         (transform.position, targetPosition, movementThisFrame);
+
+
         if (Vector3.Distance(transform.position, targetPosition) < 3f) 
               Destroy();
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Clamp : MonoBehaviour
 {
+    //This script clamps the horizontal swerve movement depending upon the direction player is facing
     [SerializeField] float clampLowerLimit = -1.5f;
     [SerializeField] float clampUpperLmit = 1.5f;
     [SerializeField] bool isClampX = false;

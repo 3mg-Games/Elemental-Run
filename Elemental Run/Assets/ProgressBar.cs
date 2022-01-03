@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//code for manging progress bar
 public class ProgressBar : MonoBehaviour
 {
     [SerializeField] float maxDistance;
@@ -25,6 +26,7 @@ public class ProgressBar : MonoBehaviour
         progressBar = GetComponent<Image>();
 
         //assuming player always starts from north
+        //get last checkpoint player position and if its level start then, initailaize to 0
         Vector3 lastPlayerPos = new Vector3(
             PlayerPrefs.GetFloat("PrevPlayerPosX", 0),
             PlayerPrefs.GetFloat("PrevPlayerPosY", 0),
@@ -34,6 +36,8 @@ public class ProgressBar : MonoBehaviour
         prevPlayerPos = lastPlayerPos;
         var initialPlayerDistance = prevPlayerPos.x;
       //  var initialPlayerDistance = PlayerPrefs.GetFloat("PrevPlayerPosX", 0);
+
+
         playerDistance = PlayerPrefs.GetFloat("Player Distance", initialPlayerDistance);
         basePlayerDist = playerDistance;
         var initialVal = playerDistance / maxDistance;
@@ -41,6 +45,7 @@ public class ProgressBar : MonoBehaviour
        // Debug.Log("Load Initial val of progress = " + progressBar.fillAmount);
         //playerDir = gameSession.playerDir;
        
+        //set player direction and other vairables
         ChangeDir(PlayerPrefs.GetInt("PlayerDirection", 1), lastPlayerPos);
         
     }
@@ -50,6 +55,9 @@ public class ProgressBar : MonoBehaviour
     {
         if(isProgressFill && progressBar.fillAmount < 1)
         {
+            //honestly even i dont remember how this calculation works 
+            //touching this code isnt recommended
+
             //Debug.Log("Player distance = " + playerDistance);
             // int playerDir = player.GetDir();
             var diff = Vector3.zero;

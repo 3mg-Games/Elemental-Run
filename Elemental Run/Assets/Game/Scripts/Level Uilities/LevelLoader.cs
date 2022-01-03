@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
 public class LevelLoader : MonoBehaviour
 {
     private void Awake()
@@ -26,8 +27,10 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextScene(bool isLevel10Finished)
     {
+
         if (!isLevel10Finished)
         {
+            //if level 10 isnt finished, load next scene from build indices
             int idx = SceneManager.GetActiveScene().buildIndex + 1;
             if (idx >= SceneManager.sceneCountInBuildSettings)
             {
@@ -38,6 +41,7 @@ public class LevelLoader : MonoBehaviour
 
         else
         {
+            //if level 10 is finished, then load random level beween 3 to 10
             int randomLevel = UnityEngine.Random.Range(3, 11);
            
             PlayerPrefs.SetInt("Level", randomLevel);
@@ -60,6 +64,7 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadCurrentScene()
     {
+        //load current scene again
         LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
