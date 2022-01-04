@@ -483,7 +483,10 @@ public class GameSession : MonoBehaviour
             }
         }*/
         isChoiceWaitTimerActive = true;
-
+        if(!test1)
+        {
+            DeactivateElementSelectionPanel(-1);
+        }
     }
 
     public void DeactivateElementSelectionPanel(int elementSelectedId)
@@ -565,41 +568,41 @@ public class GameSession : MonoBehaviour
             {
 
                 case 0: //fire
-                    if (elementSelectedId == 1 || elementSelectedId == 2)
+                    /*if (elementSelectedId == 1 || elementSelectedId == 2)
                     {
                         isPlayerAlive = false;
                         StartCoroutine(Kill(false, 0));
-                    }
-
+                    }*/
+                    elementSelectedId = 1;
                     break;
 
                 case 1: //water
-                    if (elementSelectedId == 0 || elementSelectedId == 2)
-                    {
-                        isPlayerAlive = false;
-                        StartCoroutine(Kill(false, 1));
-                    }
-
+                        /*  if (elementSelectedId == 0 || elementSelectedId == 2)
+                          {
+                              isPlayerAlive = false;
+                              StartCoroutine(Kill(false, 1));
+                          }*/
+                    elementSelectedId = 2;
 
                     break;
 
                 case 2:   //earth
-                    if (elementSelectedId == 0 || elementSelectedId == 1)
-                    {
-                        isPlayerAlive = false;
-                        StartCoroutine(Kill(false, 2));
+                          /* if (elementSelectedId == 0 || elementSelectedId == 1)
+                           {
+                               isPlayerAlive = false;
+                               StartCoroutine(Kill(false, 2));
 
-                    }
-
+                           }*/
+                    elementSelectedId = 0;
                     break;
 
                 case 3:   //ice
-                    if (elementSelectedId == 1 || elementSelectedId == 2)
-                    {
-                        isPlayerAlive = false;
-                        StartCoroutine(Kill(false, 3));
-                    }
-
+                          /*  if (elementSelectedId == 1 || elementSelectedId == 2)
+                            {
+                                isPlayerAlive = false;
+                                StartCoroutine(Kill(false, 3));
+                            }*/
+                    elementSelectedId = 0;
                     break;
 
             }
