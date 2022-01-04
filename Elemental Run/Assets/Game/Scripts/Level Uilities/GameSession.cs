@@ -284,6 +284,7 @@ public class GameSession : MonoBehaviour
         currTerrainElementId = elementTerrainId;
         //Time.timeScale = 0; //stop the player
         player.SetIsPlayerMoving(false);
+        if(test1)
         elemntSelectionPanel.SetActive(true);
         if (is2Choices)
         {
@@ -482,6 +483,7 @@ public class GameSession : MonoBehaviour
             }
         }*/
         isChoiceWaitTimerActive = true;
+
     }
 
     public void DeactivateElementSelectionPanel(int elementSelectedId)
