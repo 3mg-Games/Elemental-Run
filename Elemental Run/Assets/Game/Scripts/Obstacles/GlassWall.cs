@@ -33,6 +33,7 @@ public class GlassWall : MonoBehaviour
             //if player touches glass wall
             //replace it with a broken wall
             //and add force to its individual pieces and destroy them after sometime
+            player.Dash();
             Destroy(glassOriginal);
             GameObject glassWallBroken = Instantiate(glassWallBrokenPrefab,
                 transform.position,

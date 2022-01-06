@@ -40,6 +40,10 @@ public class PickupSystem : MonoBehaviour
     [SerializeField] GameObject fireSmoke;
     [SerializeField] GameObject waterSmoke;
     [SerializeField] GameObject earthSmoke;
+
+    [SerializeField] GameObject fireClearing;
+    [SerializeField] GameObject waterClearing;
+    [SerializeField] GameObject earthClearing;
     
 
     float[] elements = new float[3];     // 0 - fire
@@ -77,6 +81,7 @@ public class PickupSystem : MonoBehaviour
         */
 
         ResetFuelTerrain();
+        DeactivateAllClearings();
     }
 
     private void ResetFuelTerrain()
@@ -297,6 +302,8 @@ public class PickupSystem : MonoBehaviour
                 //ActivateFireTerrainSpray(true);
                 Spray(true, 0);
 
+                fireClearing.SetActive(true);
+
 
                 break;
 
@@ -308,6 +315,8 @@ public class PickupSystem : MonoBehaviour
                // SetWater();
                // ActivateWaterTerrainSpray(true);
                 Spray(true, 1);
+                waterClearing.SetActive(true);
+                waterClearing.GetComponent<WaterClearing>().StartWaterClearing(true);
 
                 break;
 
@@ -319,6 +328,7 @@ public class PickupSystem : MonoBehaviour
                // SetEarth();
                // ActivateEarthTerrainSpray(true);
                 Spray(true, 2);
+                earthClearing.SetActive(true);
 
                 break;
         }
@@ -586,6 +596,7 @@ public class PickupSystem : MonoBehaviour
         //ActivateEarthTerrainSpray(false);
 
         ResetAllSpray();
+        DeactivateAllClearings();
     }
 
 
@@ -719,5 +730,13 @@ public class PickupSystem : MonoBehaviour
         else
             StopSpraySfx();
 
+    }
+
+    public void DeactivateAllClearings()
+    {
+        fireClearing.SetActive(false);
+        waterClearing.SetActive(false);
+        waterClearing.GetComponent<WaterClearing>().StartWaterClearing(false);
+        earthClearing.SetActive(false);
     }
 }

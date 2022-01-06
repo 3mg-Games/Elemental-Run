@@ -9,15 +9,18 @@ public class ElementPickup : MonoBehaviour
                                      // 1 - water
                                      // 2 - earth
 
-    [SerializeField] AudioClip pickUpSfx;   
+    [SerializeField] AudioClip pickUpSfx;
+    [SerializeField] GameObject pickupVfxPrefab;
     [SerializeField] [Range(0, 1f)] float pickUpSfxVolume = 1f;
     PickupSystem pickupSystem;
-   // AudioSource audioSource;
+    PlayerController player;
+    // AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         pickupSystem = FindObjectOfType<PickupSystem>();
-       // audioSource = GetComponent<AudioSource>();
+        player = FindObjectOfType<PlayerController>();
+        // audioSource = GetComponent<AudioSource>();
     }
 
     
@@ -26,6 +29,11 @@ public class ElementPickup : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            var pos = player.transform.position + new Vector3(0, 0.7f, 0f);
+            GameObject pickupVfx = Instantiate(pickupVfxPrefab,
+             pos,
+              Quaternion.identity, player.transform);
+            Destroy(pickupVfx, 0.7f);
             AudioSource.PlayClipAtPoint(pickUpSfx,
                 Camera.main.transform.position,
                 pickUpSfxVolume);

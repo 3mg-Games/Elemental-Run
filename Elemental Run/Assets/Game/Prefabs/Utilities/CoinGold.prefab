@@ -58,6 +58,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -82,6 +83,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!135 &2260795040105489177
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -123,5 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c576e39918e0f3d41b2ee4d34b0b98d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickupVfxPrefab: {fileID: 7553821795696163945, guid: 63df43163f025de45b7091d610d75921,
+    type: 3}
   pickUpSfx: {fileID: 8300000, guid: 52f85419bd087c84fb664b98fe9abe04, type: 3}
   pickUpSfxVolume: 0.75

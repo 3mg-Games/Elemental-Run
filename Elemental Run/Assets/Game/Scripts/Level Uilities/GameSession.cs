@@ -635,6 +635,7 @@ public class GameSession : MonoBehaviour
 
         isPlayerAlive = false;
         player.KillPlayer(isDeathByWater, terrainID);
+        pickupSystem.DeactivateAllClearings();
         // isNewLevel = false;
         var timeAfterWhichSceneIsLoaded = 3.5f;
         if (terrainID == 3)
