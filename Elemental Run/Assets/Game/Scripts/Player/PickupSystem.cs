@@ -290,6 +290,8 @@ public class PickupSystem : MonoBehaviour
         this.currTeerrainID = currTeerrainID;
         //Debug.Log("consume");
 
+
+        
         //consume ther respective element and create a terrain using spray of the same element
         switch (elementId)
         {
@@ -302,7 +304,7 @@ public class PickupSystem : MonoBehaviour
                 //ActivateFireTerrainSpray(true);
                 Spray(true, 0);
 
-                fireClearing.SetActive(true);
+                
 
 
                 break;
@@ -315,8 +317,7 @@ public class PickupSystem : MonoBehaviour
                // SetWater();
                // ActivateWaterTerrainSpray(true);
                 Spray(true, 1);
-                waterClearing.SetActive(true);
-                waterClearing.GetComponent<WaterClearing>().StartWaterClearing(true);
+                
 
                 break;
 
@@ -328,8 +329,25 @@ public class PickupSystem : MonoBehaviour
                // SetEarth();
                // ActivateEarthTerrainSpray(true);
                 Spray(true, 2);
-                earthClearing.SetActive(true);
+               
 
+                break;
+        }
+
+        switch (currTeerrainID)
+        {
+            case 0:
+                fireClearing.SetActive(true);
+                break;
+
+            case 1:
+                waterClearing.SetActive(true);
+                waterClearing.GetComponent<WaterClearing>().StartWaterClearing(true);
+                break;
+
+
+            case 2:
+                earthClearing.SetActive(true);
                 break;
         }
 

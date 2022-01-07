@@ -19,9 +19,10 @@ public class EarthClearing : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //put Earth tage on the fire vfxs or gameobjects that needs to be cleared
-
+        
         if (other.tag == "Earth")
         {
+            Debug.Log("Wine Detected");
             DestroyClearing(other.gameObject);
         }
     }
