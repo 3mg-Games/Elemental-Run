@@ -6,33 +6,43 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 1.unity
-    guid: df02e44b67af78d498789449ca9be77f
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 1_Without
+      Turn.unity
+    guid: 8336b336b8b47f24db24f86af6055493
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 2.unity
-    guid: 51b19f1a3c2dfd74ab785edf4283dfd1
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 2_Without
+      Turn.unity
+    guid: 84de651fcfb34fd408aafb3ba02a2d37
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 3.unity
-    guid: d592399d71cff8d4389a143d1c516775
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 3_Without
+      Turn.unity
+    guid: c0a7a98c13f494c4db002c301849a89a
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 4.unity
-    guid: b597f3f71d532f249a7506c380a6ec09
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 4_Without
+      Turn.unity
+    guid: 89e3e7980f76a9040a864b21a7e95c5a
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 5.unity
-    guid: b1f5676fb54c475409a4e999582b0aa1
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 5_Without
+      Turn.unity
+    guid: 90350705d438b484081e4fdc7be3b793
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 6.unity
-    guid: 310fe811201004c41b71c14e315db54b
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 6_Without
+      Turn.unity
+    guid: be7f538f1adaae343bf21f8d68145ed8
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 7.unity
-    guid: 88f4ff84fad2d804db9c411e631ff600
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 7_Without
+      Turn.unity
+    guid: 599440503a94d574e860ef1d530d5b54
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 8.unity
-    guid: 0ed5cea3990d38848aa95086b4dcbb7d
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 8_Withhout
+      Turn.unity
+    guid: 75ffbf8a6ddbbc14eb005817f97fa683
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 9.unity
-    guid: 0876580fcd671dc4fa060173000ce700
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 9_Without
+      Turn.unity
+    guid: 025d6ddc3c0ec2947851d3a2e4607678
   - enabled: 1
-    path: Assets/Game/Scenes/Updated Levels/Level 10.unity
-    guid: e5fcc2b20d23d214e9c5af133aacc1e4
+    path: Assets/Game/Scenes/Updated Levels/Levels Without Turns/Level 10_Without
+      Turn.unity
+    guid: a460461c133e2bd4f989db3573d41902
   m_configObjects: {}

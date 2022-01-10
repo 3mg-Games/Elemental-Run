@@ -348,6 +348,7 @@ public class PickupSystem : MonoBehaviour
 
             case 2:
                 earthClearing.SetActive(true);
+                player.AcitvateVineBridge();
                 break;
         }
 

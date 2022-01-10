@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject punchVfx;
     [SerializeField] GameObject confusedVfx;
     [SerializeField] GameObject floorHitVfx;
+    [SerializeField] GameObject vineBridge;
 
     [Tooltip("Camera for bonus level jumping which zooms out and looks player from above.")]
     [SerializeField] CinemachineVirtualCamera bonusLevelCam;
@@ -118,6 +119,8 @@ public class PlayerController : MonoBehaviour
 
 
     float currHeight;
+
+    List<GameObject> vines = new List<GameObject>();
     private void Awake()
     {
        // ResetPlayer();
@@ -597,6 +600,7 @@ public class PlayerController : MonoBehaviour
         //Destroy(characterController);
     }
 
+
     private IEnumerator FloorHit()
     {
         yield return new WaitForSeconds(0.4f);
@@ -667,7 +671,7 @@ public class PlayerController : MonoBehaviour
         }
         yield return new WaitForSeconds(timeAfterFallThroughHappens);
 
-        if (terrainId == 1 || terrainId == 0 || terrainId == 3)   //if fire or water or ice then sink the player
+        if (terrainId == 1 || terrainId == 3)   //if  water or ice then sink the player
         {
             if(terrainId == 1 || terrainId == 3)
             {//if water or ice
@@ -1033,5 +1037,28 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("Jump", false);
         animator.SetTrigger("Dash");
+    }
+
+    public void AcitvateVineBridge()
+    {
+        int numOfChildren = vineBridge.transform.childCount;
+        for (int i = 0; i < numOfChildren; i++)
+        {
+            vines.Add(vineBridge.transform.GetChild(i).gameObject);
+
+        }
+
+       // StartCoroutine(BuildBridge());
+    }
+
+    private IEnumerator BuildBridge()
+    {
+        for(int i = 0; i < vines.Capacity; i++)
+        {
+            var vine = vines[i];
+            vine.SetActive(true);
+            vine.transform.parent = null;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }
