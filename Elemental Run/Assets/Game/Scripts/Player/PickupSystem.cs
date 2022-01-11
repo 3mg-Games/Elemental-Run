@@ -343,12 +343,13 @@ public class PickupSystem : MonoBehaviour
             case 1:
                 waterClearing.SetActive(true);
                 waterClearing.GetComponent<WaterClearing>().StartWaterClearing(true);
+                //player.AcitvateVineBridge();
                 break;
 
 
             case 2:
                 earthClearing.SetActive(true);
-                player.AcitvateVineBridge();
+               
                 break;
         }
 
@@ -754,8 +755,9 @@ public class PickupSystem : MonoBehaviour
     public void DeactivateAllClearings()
     {
         fireClearing.SetActive(false);
-        waterClearing.SetActive(false);
         waterClearing.GetComponent<WaterClearing>().StartWaterClearing(false);
+        waterClearing.SetActive(false);
+        
         earthClearing.SetActive(false);
     }
 }

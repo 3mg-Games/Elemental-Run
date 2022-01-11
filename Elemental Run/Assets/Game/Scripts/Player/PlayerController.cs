@@ -34,7 +34,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject punchVfx;
     [SerializeField] GameObject confusedVfx;
     [SerializeField] GameObject floorHitVfx;
-    [SerializeField] GameObject vineBridge;
+    //[SerializeField] GameObject vineBridge;
+    //[SerializeField] Transform vineBrigdgeTransform;
+   // [SerializeField] GameObject vineBridgePrefab;
 
     [Tooltip("Camera for bonus level jumping which zooms out and looks player from above.")]
     [SerializeField] CinemachineVirtualCamera bonusLevelCam;
@@ -1039,7 +1041,7 @@ public class PlayerController : MonoBehaviour
         animator.SetTrigger("Dash");
     }
 
-    public void AcitvateVineBridge()
+   /* public void AcitvateVineBridge()
     {
         int numOfChildren = vineBridge.transform.childCount;
         for (int i = 0; i < numOfChildren; i++)
@@ -1048,17 +1050,21 @@ public class PlayerController : MonoBehaviour
 
         }
 
-       // StartCoroutine(BuildBridge());
+        StartCoroutine(BuildBridge());
     }
 
     private IEnumerator BuildBridge()
     {
         for(int i = 0; i < vines.Capacity; i++)
         {
-            var vine = vines[i];
-            vine.SetActive(true);
-            vine.transform.parent = null;
-            yield return new WaitForSeconds(0.1f);
+            //var vine = vines[i];
+            //vine.SetActive(true);
+            //vine.transform.parent = null;
+
+            var vine = Instantiate(vineBridgePrefab,
+                vineBrigdgeTransform.position,
+                vineBrigdgeTransform.rotation);
+            yield return new WaitForSeconds(0.08f);
         }
-    }
+    }*/
 }

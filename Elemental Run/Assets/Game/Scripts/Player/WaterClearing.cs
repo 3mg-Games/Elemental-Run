@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class WaterClearing : MonoBehaviour
 {
+    [SerializeField] GameObject vineBridgePrefab;
+    [SerializeField] Transform spawnTransform;
     bool isWaterClearing = false;
+
+    Coroutine vineBridgeBuilding = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -57,5 +61,27 @@ public class WaterClearing : MonoBehaviour
     public void StartWaterClearing(bool val)
     {
         isWaterClearing = val;
+
+        if (isWaterClearing)
+            vineBridgeBuilding = StartCoroutine(BuildBridge());
+
+        else if(vineBridgeBuilding != null)
+            StopCoroutine(vineBridgeBuilding);
+    }
+
+    private IEnumerator BuildBridge()
+    {
+        while(isWaterClearing)
+        {
+            var vine = Instantiate(vineBridgePrefab,
+                spawnTransform.position,
+                spawnTransform.rotation);
+
+            Destroy(vine, 4f);
+
+            yield return new WaitForSeconds(0.06f);
+        
+
+        }
     }
 }
