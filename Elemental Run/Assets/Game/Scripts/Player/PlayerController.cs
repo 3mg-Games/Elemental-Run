@@ -541,18 +541,18 @@ public class PlayerController : MonoBehaviour
 
         mainCam.GetComponent<CamerFollow>().SetParentNull();
         animator.enabled = true;   //enable animator for fuel empty condition
-        if (!isDeathByWater && terrainID != 3 && terrainID != 4 &&
-            terrainID != 2)  //not ice and not death by water and not death by boxing glove and not earth terrain
-        {
+        if (!isDeathByWater && terrainID != 3 && terrainID != 4)  //not ice and not death by water and not death by boxing glove
+        { 
             animator.SetBool("Jump", false);
             animator.SetTrigger("Trip");
+
+            if(terrainID == 0)
+            {
+                animator.SetTrigger("Wriggle");
+            }
         }
 
-        else if(terrainID == 2)
-        {
-            animator.SetBool("Jump", false);
-            animator.SetTrigger("Swallow");
-        }
+       
 
 
         else if(terrainID == 3)
@@ -656,7 +656,7 @@ public class PlayerController : MonoBehaviour
         }
 
         else if (terrainId == 2)
-        {
+        { 
             //if earth terrain
             StartCoroutine(PlayGrassFallSfx());
         }
