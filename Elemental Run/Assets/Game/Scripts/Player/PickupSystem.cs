@@ -745,7 +745,10 @@ public class PickupSystem : MonoBehaviour
         isBonus = val;
 
         if (val)
+        {
+            audioSource.volume = 1f;
             PlaySpraySfx();
+        }
 
         else
             StopSpraySfx();

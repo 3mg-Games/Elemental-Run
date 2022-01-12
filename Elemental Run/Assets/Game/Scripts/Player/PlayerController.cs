@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject playerBurningVfx;
     [SerializeField] GameObject speedVfx;
     [SerializeField] GameObject mainCam;
+    [SerializeField] AudioClip waterSplash;
     [SerializeField] AudioClip sinkingSfx;
     [SerializeField] AudioClip lavaSinkingSfx;
     [SerializeField] AudioClip iceFreezingSfx;
@@ -646,6 +647,9 @@ public class PlayerController : MonoBehaviour
         if(terrainId == 1)
         {
             //if water terrain
+            audioSource.clip = waterSplash;
+            audioSource.loop = false;
+            audioSource.Play();
             timeAfterFallThroughHappens = 1f;
         }
 
